@@ -14,6 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ActivationRune: 0
   Steps:
-  - StepType: 0
-    ShakeDuration: 5
+  - StepType: 1
+    ShakeDuration: 0
     IngredientType: 0
+  - StepType: 0
+    ShakeDuration: 4
+    IngredientType: 0
+  - StepType: 1
+    ShakeDuration: 4
+    IngredientType: 1
+  - StepType: 1
+    ShakeDuration: 4
+    IngredientType: 1
+  - StepType: 1
+    ShakeDuration: 4
+    IngredientType: 2
+  - StepType: 1
+    ShakeDuration: 4
+    IngredientType: 3

@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,9 +19,14 @@ public enum StepType
 }
 
 [Serializable]
-public class Step
+public class Step 
 {
-    public StepType StepType; //TODO Modify to separate shake and ingredient
+    public StepType StepType;
+    [ShowIf("StepType", StepType.SHAKE)]
+    [AllowNesting]
     public float ShakeDuration;
+    
+    [ShowIf("StepType", StepType.INGREDIENT)]
+    [AllowNesting]
     public IngredientType IngredientType;
 }
