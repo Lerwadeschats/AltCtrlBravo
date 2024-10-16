@@ -36,6 +36,7 @@ public class Shaker : MonoBehaviour
     }
     public void RemoveRune()
     {
+        Debug.Log("oui");
         for (int i = 0; i < _runes.Length; i++)
         {
             _runes[i] = Rune.NONE;

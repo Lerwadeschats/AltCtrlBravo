@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Uduino/Uduino.unity
     guid: 56de34e9c5a6cf84ba6f02dfe4158953
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 8802ea156a9feff48b35a90ab4c0c9c7, type: 2}
