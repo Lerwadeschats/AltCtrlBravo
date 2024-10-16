@@ -10,7 +10,7 @@ public class Recipe : ScriptableObject
 {
     [Description("Used for debug")]
     public string Name;
-    public Rune ActivationRune;
+    public Rune[] ActivationRunes;
     public Step[] Steps;
 
     public string GetDebugString()
