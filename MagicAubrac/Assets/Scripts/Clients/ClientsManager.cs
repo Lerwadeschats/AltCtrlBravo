@@ -1,63 +1,145 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ClientsManager : MonoBehaviour
 {
-    [SerializeField] private List<Client> _clientsPossible;
+    private Coroutine _coroutineSpawnClient;
+
+    [SerializeField] private List<GameObject> _clientsPossible;
+    [SerializeField] private List<GameObject> _clientsPositions;
+    [SerializeField] private GameObject _remainingQueuePosition;
     [SerializeField] private int _nbClientsShown = 3;
-    
-    public List<Client> ClientsInQueue { get; private set; }
+    [SerializeField] private int _nbClientsMax = 8;
+    [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
+    public List<Client> ClientsInQueue { get; private set; } // TO SPLIT IN TWO LISTS ?
     public Client CurrentClient { get; private set; }
+
+    public event Action<Client> OnNewClientInList;
+    public event Action<Client> OnClientChange;
+
+    [Header("Debug")]
+    [SerializeField] private bool _activateAutoFill = true;
+
 
     private void OnValidate()
     {
-        //A TEST SI PAS CHIANT
         if (_nbClientsShown < 1) {
             _nbClientsShown = 1;
+        }
+        if (_nbClientsMax < _nbClientsShown)
+        {
+            _nbClientsMax = _nbClientsShown;
         }
     }
 
     private void Awake()
     {
-        InitClientsList();
-    }
-
-    void InitClientsList()
-    {
+        GameManager.ClientsManager = this;
         ClientsInQueue = new List<Client>(_nbClientsShown);
-        for (int i = 0; i < _nbClientsShown; i++)
-        {
-            Client client = GetRandomClient();
-            if (client != null)
-            {
-                ClientsInQueue.Add(client);
-            }
-        }
-        if (ClientsInQueue.Count > 0)
-        {
-            CurrentClient = ClientsInQueue[0];
-        }
     }
 
-    Client GetRandomClient()
+    private void Start()
     {
-        if (_clientsPossible.Count == 0)
+        //First client
+        AddNewClient();
+    }
+
+    GameObject GetRandomClient()
+    {
+        if (_clientsPossible == null && _clientsPossible.Count == 0)
             return null;
         
-        int index = Random.Range(0, _clientsPossible.Count);
+        int index = UnityEngine.Random.Range(0, _clientsPossible.Count);
         return _clientsPossible[index];
     }
 
     public void ChangeClient()
     {
-        ClientsInQueue.RemoveAt(0);
-        Client client = GetRandomClient();
-        if (client != null)
+        if (ClientsInQueue != null && ClientsInQueue.Count > 0)
         {
-            ClientsInQueue.Add(client);
+            Destroy(ClientsInQueue[0].gameObject);
+            ClientsInQueue.RemoveAt(0);
+            if (ClientsInQueue.Count > 0)
+            {
+                CurrentClient = ClientsInQueue[0];
+            } else
+            {
+                CurrentClient = null;
+            }
+
+            UpdatePositionsClients();
+            OnClientChange?.Invoke(CurrentClient);
+
+            //Start timer last client
+
+            if (ClientsInQueue.Count < _nbClientsMax 
+                && _coroutineSpawnClient == null 
+                && _activateAutoFill)
+                _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
         }
-        CurrentClient = ClientsInQueue[0];
+    }
+
+    public IEnumerator RoutineAddClient()
+    {
+        yield return new WaitForSeconds(_startingDurationBetweenClients);
+        AddNewClient();
+        if (ClientsInQueue.Count < _nbClientsMax)
+        {
+            _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
+        }
+    }
+    private void UpdatePositionsClients()
+    {
+        for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
+        {
+            ClientsInQueue[i].transform.position = _clientsPositions[i].transform.position;
+        }
+    }
+
+    public void AddNewClient()
+    {
+        if (ClientsInQueue.Count < _nbClientsMax)
+        {
+            GameObject newClientPrefab = GetRandomClient();
+            Vector3 position;
+            if (ClientsInQueue.Count < _nbClientsShown && 
+                ClientsInQueue.Count < _clientsPositions.Count)
+            {
+                position = _clientsPositions[ClientsInQueue.Count].transform.position;
+            } else
+            {
+                position = _remainingQueuePosition.transform.position;
+            }
+            GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity);
+            Client newClient = newClientGO.GetComponent<Client>();
+            newClient.LoadClient();
+            ClientsInQueue.Add(newClient);
+
+            OnNewClientInList?.Invoke(newClient);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Debug.Log("Client finished");
+            ChangeClient();
+        }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Debug.Log("Client added");
+            AddNewClient();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("Queue is filled automaticcaly");
+            if (ClientsInQueue.Count < _nbClientsMax && _coroutineSpawnClient == null) //On start pas le timer direct (peut-être à changer)
+                _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
+        }
     }
 
     private void OnGUI()

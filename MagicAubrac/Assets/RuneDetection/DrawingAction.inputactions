@@ -1,0 +1,45 @@
+{
+    "name": "DrawingAction",
+    "maps": [
+        {
+            "name": "DrawingMap",
+            "id": "c478f9f3-a8d5-460a-adb5-89beb479a994",
+            "actions": [
+                {
+                    "name": "Draw",
+                    "type": "Button",
+                    "id": "118c9ef3-f22f-40b3-938d-8af475edd903",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ee931497-82e0-4def-bb5a-3db56f5b5362",
+                    "path": "<Pen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Draw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "49591d21-a3f0-468d-8fdb-fca4ce633d3c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Draw",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

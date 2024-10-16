@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daae6712efec80c4583a266b96bc654f, type: 3}
+  m_Name: OeilHorus
+  m_EditorClassIdentifier: 
+  _runeDetectionMap: {fileID: 2800000, guid: 248a5e9e6315ac04b9a5ceb687cd6b0b, type: 3}
+  _runeSprite: {fileID: 21300000, guid: 74bd92de95569fd4eba8b7c402db9cff, type: 3}
+  _name: Oeil d'Horus
+  _description: "En translitt\xE9ration de l'\xE9criture hi\xE9roglyphique, irt signifie
+    \xAB \u0153il \xBB et w\u1E0F\u021D d\xE9signe soit le verbe signifiant \xAB
+    se pr\xE9server1 \xBB soit le nom \xAB protection2 \xBB. Irt oudjat, ou plus
+    commun\xE9ment oudjat, en transcription signifient donc \xAB \u0153il pr\xE9serv\xE9
+    \xBB, l'\u0152il d'Horus en l'occurrence."
+  _signification: 'Symbole protecteur '
+  _bravo: Bravo
