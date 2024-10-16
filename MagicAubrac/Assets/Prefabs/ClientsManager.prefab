@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _clientsPossible:
-  - {fileID: 7597178493887830715, guid: 9ce3272e97da60f479a1c8366b7913c4, type: 3}
+  - {fileID: 6815338229367540586, guid: 15c618c5a58d64342bdb842f29b2a3cc, type: 3}
+  - {fileID: 3415350296185290186, guid: 7df614e101b552d44a36f882f28731ff, type: 3}
   _clientsPositions:
   - {fileID: 0}
   - {fileID: 0}
@@ -53,4 +54,5 @@ MonoBehaviour:
   _remainingQueuePosition: {fileID: 0}
   _nbClientsShown: 3
   _nbClientsMax: 8
-  _startingDurationBetweenClients: 1
+  _startingDurationBetweenClients: 3
+  _activateAutoFill: 1

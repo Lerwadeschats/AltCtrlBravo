@@ -1,21 +1,28 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ClientsManager : MonoBehaviour
 {
+    private Coroutine _coroutineSpawnClient;
+
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
     [SerializeField] private GameObject _remainingQueuePosition;
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
-    
-    public List<Client> ClientsInQueue { get; private set; }
+    public List<Client> ClientsInQueue { get; private set; } // TO SPLIT IN TWO LISTS ?
     public Client CurrentClient { get; private set; }
 
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
+
+    [Header("Debug")]
+    [SerializeField] private bool _activateAutoFill = true;
+
 
     private void OnValidate()
     {
@@ -34,6 +41,11 @@ public class ClientsManager : MonoBehaviour
         ClientsInQueue = new List<Client>(_nbClientsShown);
     }
 
+    private void Start()
+    {
+        //First client
+        AddNewClient();
+    }
 
     GameObject GetRandomClient()
     {
@@ -62,9 +74,23 @@ public class ClientsManager : MonoBehaviour
             OnClientChange?.Invoke(CurrentClient);
 
             //Start timer last client
+
+            if (ClientsInQueue.Count < _nbClientsMax 
+                && _coroutineSpawnClient == null 
+                && _activateAutoFill)
+                _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
         }
     }
 
+    public IEnumerator RoutineAddClient()
+    {
+        yield return new WaitForSeconds(_startingDurationBetweenClients);
+        AddNewClient();
+        if (ClientsInQueue.Count < _nbClientsMax)
+        {
+            _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
+        }
+    }
     private void UpdatePositionsClients()
     {
         for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
@@ -100,11 +126,19 @@ public class ClientsManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            Debug.Log("Client finished");
             ChangeClient();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
+            Debug.Log("Client added");
             AddNewClient();
+        }
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("Queue is filled automaticcaly");
+            if (ClientsInQueue.Count < _nbClientsMax && _coroutineSpawnClient == null) //On start pas le timer direct (peut-être à changer)
+                _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
         }
     }
 
