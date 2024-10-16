@@ -5,16 +5,20 @@ using UnityEngine;
 public class Shaker : MonoBehaviour
 {
     [SerializeField] private IngredientType[] _cocktail = new IngredientType[5];
-    int currentLayer;
+    [SerializeField] private Rune[] _runes = new Rune[3];
+    int currentLayerCocktail;
+    int currentLayerRune;
     private void Start()
     {
-        currentLayer = 0;
+        currentLayerRune = 0;
+        currentLayerCocktail = 0;
     }
     // je n'ai fait que le remplissage pour des raisons de j'en avais besoins il faut completer le tout plus tard :)
 
     public void AddToShaker(IngredientType ingredient)
     {
-        _cocktail[currentLayer] = ingredient;
+        _cocktail[currentLayerCocktail] = ingredient;
+        currentLayerCocktail++;
     }
 
     public void EmptyShaker()
@@ -23,6 +27,20 @@ public class Shaker : MonoBehaviour
         {
             _cocktail[i] = IngredientType.INVALID;
         }
-        currentLayer = 0;
+        currentLayerCocktail = 0;
     }
+    public void AddToShaker(Rune rune)
+    {
+        _runes[currentLayerRune] = rune;
+        currentLayerRune++;
+    }
+    public void RemoveRune()
+    {
+        for (int i = 0; i < _runes.Length; i++)
+        {
+            _runes[i] = Rune.NONE;
+        }
+        currentLayerRune = 0;
+    }
+
 }
