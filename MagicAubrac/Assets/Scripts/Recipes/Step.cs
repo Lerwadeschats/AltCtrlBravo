@@ -24,7 +24,7 @@ public class Step
     public StepType StepType;
     [ShowIf("StepType", StepType.SHAKE)]
     [AllowNesting]
-    public float ShakeDuration;
+    public float ShakeDuration = 3f;
     
     [ShowIf("StepType", StepType.INGREDIENT)]
     [AllowNesting]

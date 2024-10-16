@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7438f5fa1f09624799737485ccc4adc, type: 3}
   m_Name: RecipeTest
   m_EditorClassIdentifier: 
+  Name: Aldente
   ActivationRune: 0
   Steps:
   - StepType: 1
