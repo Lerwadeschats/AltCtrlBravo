@@ -190,6 +190,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -160
       objectReference: {fileID: 0}
+    - target: {fileID: 2058619922564499798, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_Size.x
+      value: 19.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058619922564499798, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_Size.y
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2058619922564499798, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2222913757040847502, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
