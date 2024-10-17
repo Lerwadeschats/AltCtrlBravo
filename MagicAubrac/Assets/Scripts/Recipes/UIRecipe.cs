@@ -13,7 +13,7 @@ public class UIRecipe : MonoBehaviour
 
     public Client Client {
         get => _client;
-        set { 
+        set {
             _client = value;
             UpdateUIRecipe();
         }
@@ -44,9 +44,10 @@ public class UIRecipe : MonoBehaviour
 
     IEnumerator StartTimerRecipe()
     {
-        while (Client.CurrentWaitingDuration > 0f)
+        Debug.Log("DIMINUE DISPLAY");
+        while (Client.RemainingWaitingDuration > 0f)
         {
-            _slider.value = Client.CurrentWaitingDuration / Client.WaitingDuration;
+            _slider.value = Client.RemainingWaitingDuration / Client.WaitingDuration;
             yield return null;
         }
     }
