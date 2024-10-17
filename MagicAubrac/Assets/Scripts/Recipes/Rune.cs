@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Rune
 {
+    NONE,
     SQUARE,
     CIRCLE,
     TRIANGLE,
