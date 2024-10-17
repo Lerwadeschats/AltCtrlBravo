@@ -12,7 +12,7 @@ public class Recipe : ScriptableObject
     public string Name;
     public Rune[] ActivationRunes;
     public Step[] Steps;
-
+    public Sprite UIRecipeSprite;
     public string GetDebugString()
     {
         return Name;
