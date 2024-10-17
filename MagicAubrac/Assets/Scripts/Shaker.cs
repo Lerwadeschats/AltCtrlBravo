@@ -6,22 +6,22 @@ public class Shaker : MonoBehaviour
 {
     [SerializeField] private IngredientType[] _cocktail = new IngredientType[5];
     [SerializeField] private Rune[] _runes = new Rune[3];
-    ClientsManager clients;
-    private bool[] shakenAtStep=new bool[5];
-    int currentLayerCocktail;
-    int currentLayerRune;
+    ClientsManager _clients;
+    private bool[] _shakenAtStep=new bool[5];
+    int _currentLayerCocktail;
+    int _currentLayerRune;
     private void Start()
     {
-        currentLayerRune = 0;
-        currentLayerCocktail = 0;
-        clients = GameManager.ClientsManager;
+        _currentLayerRune = 0;
+        _currentLayerCocktail = 0;
+        _clients = GameManager.ClientsManager;
     }
     // je n'ai fait que le remplissage pour des raisons de j'en avais besoins il faut completer le tout plus tard :)
 
     public void AddToShaker(IngredientType ingredient)
     {
-        _cocktail[currentLayerCocktail] = ingredient;
-        currentLayerCocktail++;
+        _cocktail[_currentLayerCocktail] = ingredient;
+        _currentLayerCocktail++;
     }
 
     public void EmptyShaker()
@@ -30,16 +30,16 @@ public class Shaker : MonoBehaviour
         {
             _cocktail[i] = IngredientType.INVALID;
         }
-        currentLayerCocktail = 0;
-        for (int i =0;i< shakenAtStep.Length;i++) 
+        _currentLayerCocktail = 0;
+        for (int i =0;i< _shakenAtStep.Length;i++) 
         {
-            shakenAtStep[i] = false;
+            _shakenAtStep[i] = false;
         }
     }
     public void AddToShaker(Rune rune)
     {
-        _runes[currentLayerRune] = rune;
-        currentLayerRune++;
+        _runes[_currentLayerRune] = rune;
+        _currentLayerRune++;
     }
     public void RemoveRune()
     {
@@ -48,19 +48,41 @@ public class Shaker : MonoBehaviour
         {
             _runes[i] = Rune.NONE;
         }
-        currentLayerRune = 0;
+        _currentLayerRune = 0;
     }
     public void Shake()
     {
-        if (currentLayerCocktail != 0)
+        if (_currentLayerCocktail != 0)
         {
-            shakenAtStep[currentLayerCocktail - 1]=true;
+            _shakenAtStep[_currentLayerCocktail - 1]=true;
         }
     }
 
     public bool CompareReceipe()
     {
-        
-        return false;
+        Step[] steps = _clients.CurrentClient.Recipe.Steps;
+        bool result=true;
+        int j = 0;
+        for (int i = 0; i < steps.Length; i++)
+        {
+            if (steps[i].StepType == StepType.INGREDIENT)
+            {
+                if(_cocktail[j]!= steps[i].IngredientType)
+                {
+                    result = false;
+                    break;
+                }
+                j++;
+            }
+            if(steps[i].StepType == StepType.SHAKE)
+            {
+                if (_shakenAtStep[j - 1] == false) 
+                {
+                    result = false;
+                    break;
+                }
+            }
+        }
+        return result;
     }
 }
