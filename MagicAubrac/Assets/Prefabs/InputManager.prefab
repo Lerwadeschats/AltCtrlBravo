@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5473783871787305960}
   - component: {fileID: 6898192819716059260}
   - component: {fileID: 2598715183995938732}
+  - component: {fileID: 8562558801245228882}
+  - component: {fileID: 3602713124213415418}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -273,4 +275,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shaker: {fileID: 0}
   _tireuse: {fileID: 0}
-  _ingrNFC: {fileID: 0}
+  _timerPulled: 0
+  _joycon: {fileID: 3602713124213415418}
+--- !u!114 &8562558801245228882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b7436bdb4f61747bdfca3e85138952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableIMU: 1
+  EnableLocalize: 1
+--- !u!114 &3602713124213415418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e02e33e16526a4a9ab1a10862ba053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholdShaking: 1

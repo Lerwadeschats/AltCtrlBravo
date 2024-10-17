@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoyconDemo : MonoBehaviour {
-	
+public class InputJoycon : MonoBehaviour
+{
     [SerializeField] private float _thresholdShaking = 1f;
     private List<Joycon> joycons;
 
@@ -16,19 +16,20 @@ public class JoyconDemo : MonoBehaviour {
     public event Action OnStartShaking;
     public event Action<float> OnStopShaking;
 
-    void Start ()
+    void Start()
     {
         _gyro = new Vector3(0, 0, 0);
         // get the public Joycon array attached to the JoyconManager in scene
         joycons = JoyconManager.Instance.j;
-	}
+    }
 
     // Update is called once per frame
-    void Update () {
-		// make sure the Joycon only gets checked if attached
-		if (joycons.Count > 0)
+    void Update()
+    {
+        // make sure the Joycon only gets checked if attached
+        if (joycons.Count > 0)
         {
-			Joycon joycon = joycons [0];
+            Joycon joycon = joycons[0];
 
             // Accel values:  x, y, z axis values (in Gs)
             _gyro = joycon.GetGyro();
@@ -42,7 +43,8 @@ public class JoyconDemo : MonoBehaviour {
                     _timerShake = 0f;
                     _isShaking = true;
                 }
-            } else
+            }
+            else
             {
                 //Stopped shaking
                 if (_isShaking)

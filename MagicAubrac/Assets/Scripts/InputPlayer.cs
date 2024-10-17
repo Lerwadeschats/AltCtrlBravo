@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] private Shaker _shaker;
     [SerializeField] private Tireuse _tireuse;
     [SerializeField] private float _timerPulled;
+    [HorizontalLine]
+    [SerializeField] private InputJoycon _joycon;
 
 
 
@@ -28,6 +31,14 @@ public class InputPlayer : MonoBehaviour
         _inputActions.DrawingMap.EmptyDrink.Enable();
         _inputActions.DrawingMap.Validate.Enable();
 
+    }
+
+    private void Start()
+    {
+        if (_joycon != null)
+        {
+            _joycon.OnStopShaking += OnJoyconStopShaking;
+        }
     }
 
     public void OnValidation(InputAction.CallbackContext context)
@@ -149,6 +160,12 @@ public class InputPlayer : MonoBehaviour
     {
         _shaker.EmptyShaker();
     }
+
+    private void OnJoyconStopShaking(float shakeDuration)
+    {
+        _shaker?.Shake(shakeDuration);
+    }
+
     IEnumerator Pour(InputAction.CallbackContext context)
     {
         float timer = 0;
