@@ -8,12 +8,15 @@ public class Shaker : MonoBehaviour
     [SerializeField] private Rune[] _runes = new Rune[3];
     [SerializeField] private List<Step> stepsDone = new List<Step>(); 
     ClientsManager _clients;
-    [SerializeField]float ShakeDurationMin;
+    [SerializeField]float _shakeDurationMin;
+    ShakerUI[] _ui;
+
     private bool[] _shakenAtStep=new bool[5];
     int _currentLayerCocktail;
     int _currentLayerRune;
     private void Start()
     {
+        _ui= FindObjectsOfType<ShakerUI>();
         _currentLayerRune = 0;
         _currentLayerCocktail = 0;
         _clients = GameManager.ClientsManager;
@@ -25,6 +28,7 @@ public class Shaker : MonoBehaviour
         if (_currentLayerCocktail < 5)
         {
             _cocktail[_currentLayerCocktail] = ingredient;
+            _ui[_ui.Length-1-_currentLayerCocktail].Change(ingredient);
             Step step = new Step();
             step.StepType = StepType.INGREDIENT;
             step.IngredientType = ingredient;
@@ -44,6 +48,10 @@ public class Shaker : MonoBehaviour
         {
             _shakenAtStep[i] = false;
         }
+        for(int i = 0; i < _ui.Length; i++)
+        {
+            _ui[i].Change(IngredientType.INVALID);
+        }
     }
     public void AddToShaker(Rune rune)
     {
@@ -61,7 +69,7 @@ public class Shaker : MonoBehaviour
     }
     public void Shake(float duration)
     {
-        if (_currentLayerCocktail != 0&&duration == ShakeDurationMin)
+        if (_currentLayerCocktail != 0&&duration == _shakeDurationMin)
         {
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)

@@ -8,7 +8,7 @@ public class InputPlayer : MonoBehaviour
     private DrawingAction _inputActions;
     [SerializeField] private Shaker _shaker;
     [SerializeField] private Tireuse _tireuse;
-    [SerializeField] private NFCID _ingrNFC;
+    [SerializeField] private float _timerPulled;
 
 
 
@@ -88,11 +88,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            IngredientType ingredient = _ingrNFC.GetIngredient();
-            if (ingredient != IngredientType.INVALID)
-            {
-                _tireuse.ChangeLiquid(i, true);
-            }
+            _tireuse.ChangeLiquid(i, true);           
         }
         if (context.canceled)
         {
@@ -129,11 +125,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            IngredientType ingredient = _ingrNFC.GetIngredient();
-            if (ingredient != IngredientType.INVALID)
-            {
-                _tireuse.ChangeLiquid(i, false);
-            }
+            _tireuse.ChangeLiquid(i, false);           
         }
         if (context.canceled)
         {
@@ -163,7 +155,7 @@ public class InputPlayer : MonoBehaviour
         while (!context.canceled)
         {
             Debug.Log(timer);
-            if (timer >= 3)
+            if (timer >= _timerPulled)
             {
                 timer = 0;
                 int i;
