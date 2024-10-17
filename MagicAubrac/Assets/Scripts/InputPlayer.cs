@@ -8,7 +8,7 @@ public class InputPlayer : MonoBehaviour
     private DrawingAction _inputActions;
     [SerializeField] private Shaker _shaker;
     [SerializeField] private Tireuse _tireuse;
-    [SerializeField] private NFCID _ingrNFC;
+    [SerializeField] private float _timerPulled;
 
 
 
@@ -61,23 +61,15 @@ public class InputPlayer : MonoBehaviour
     }
     public void OnPour(InputAction.CallbackContext context)
     {
+        Debug.Log("ae");
         if (context.started)
         {
-            int i;
-            if (context.action.name == "DrinkPour1")
-            {
-                i = 0;
-            }
-            else if (context.action.name == "DrinkPour2")
-            {
-                i = 1;
-            }
-            else
-            {
-                i = 2;
-            }
-            _tireuse.AddLiquidToShaker(i);
-        }       
+            StartCoroutine(Pour(context));
+        }
+        if (context.canceled)
+        {
+            StopAllCoroutines();
+        }
     }
     public void OnChangeA(InputAction.CallbackContext context)
     {
@@ -96,7 +88,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            _tireuse.ChangeLiquid(i, true);
+            _tireuse.ChangeLiquid(i, true);           
         }
         if (context.canceled)
         {
@@ -133,8 +125,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            
-            _tireuse.ChangeLiquid(i, false);
+            _tireuse.ChangeLiquid(i, false);           
         }
         if (context.canceled)
         {
@@ -157,5 +148,34 @@ public class InputPlayer : MonoBehaviour
     public void OnEmpty(InputAction.CallbackContext context)
     {
         _shaker.EmptyShaker();
+    }
+    IEnumerator Pour(InputAction.CallbackContext context)
+    {
+        float timer = 0;
+        while (!context.canceled)
+        {
+            Debug.Log(timer);
+            if (timer >= _timerPulled)
+            {
+                timer = 0;
+                int i;
+                if (context.action.name == "DrinkPour1")
+                {
+                    i = 0;
+                }
+                else if (context.action.name == "DrinkPour2")
+                {
+                    i = 1;
+                }
+                else
+                {
+                    i = 2;
+                }
+                _tireuse.AddLiquidToShaker(i);
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        yield return null;
     }
 }
