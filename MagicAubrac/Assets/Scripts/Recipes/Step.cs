@@ -10,7 +10,9 @@ public enum IngredientType
     LEMON,
     ORANGE,
     WINE,
-    VODKA
+    VODKA,
+    RHUM,
+    GIN
 }
 
 public enum StepType
