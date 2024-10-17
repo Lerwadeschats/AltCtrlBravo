@@ -92,7 +92,7 @@
                     "id": "1ed7f9cc-8b71-4a6e-96ba-0419667063d8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -101,7 +101,7 @@
                     "id": "98b6e5a6-9192-4350-96b0-d579fc3f3ebf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {
@@ -110,7 +110,7 @@
                     "id": "6614277c-bc0b-423f-8106-d4fd46fed6a7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "initialStateCheck": false
                 },
                 {

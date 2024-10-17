@@ -61,23 +61,15 @@ public class InputPlayer : MonoBehaviour
     }
     public void OnPour(InputAction.CallbackContext context)
     {
+        Debug.Log("ae");
         if (context.started)
         {
-            int i;
-            if (context.action.name == "DrinkPour1")
-            {
-                i = 0;
-            }
-            else if (context.action.name == "DrinkPour2")
-            {
-                i = 1;
-            }
-            else
-            {
-                i = 2;
-            }
-            _tireuse.AddLiquidToShaker(i);
-        }       
+            StartCoroutine(Pour(context));
+        }
+        if (context.canceled)
+        {
+            StopAllCoroutines();
+        }
     }
     public void OnChangeA(InputAction.CallbackContext context)
     {
@@ -104,6 +96,7 @@ public class InputPlayer : MonoBehaviour
         }
         if (context.canceled)
         {
+            int i;
             if (context.action.name == "DrinkSelectA1")
             {
                 i = 0;
@@ -144,6 +137,7 @@ public class InputPlayer : MonoBehaviour
         }
         if (context.canceled)
         {
+            int i;
             if (context.action.name == "DrinkSelectA1")
             {
                 i = 0;
@@ -162,5 +156,34 @@ public class InputPlayer : MonoBehaviour
     public void OnEmpty(InputAction.CallbackContext context)
     {
         _shaker.EmptyShaker();
+    }
+    IEnumerator Pour(InputAction.CallbackContext context)
+    {
+        float timer = 0;
+        while (!context.canceled)
+        {
+            Debug.Log(timer);
+            if (timer >= 3)
+            {
+                timer = 0;
+                int i;
+                if (context.action.name == "DrinkPour1")
+                {
+                    i = 0;
+                }
+                else if (context.action.name == "DrinkPour2")
+                {
+                    i = 1;
+                }
+                else
+                {
+                    i = 2;
+                }
+                _tireuse.AddLiquidToShaker(i);
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        yield return null;
     }
 }
