@@ -6,6 +6,7 @@ public class Shaker : MonoBehaviour
 {
     [SerializeField] private IngredientType[] _cocktail = new IngredientType[5];
     [SerializeField] private Rune[] _runes = new Rune[3];
+    [SerializeField] private List<Step> stepsDone = new List<Step>(); 
     ClientsManager _clients;
     private bool[] _shakenAtStep=new bool[5];
     int _currentLayerCocktail;
@@ -20,8 +21,15 @@ public class Shaker : MonoBehaviour
 
     public void AddToShaker(IngredientType ingredient)
     {
-        _cocktail[_currentLayerCocktail] = ingredient;
-        _currentLayerCocktail++;
+        if (_currentLayerCocktail < 5)
+        {
+            _cocktail[_currentLayerCocktail] = ingredient;
+            Step step = new Step();
+            step.StepType = StepType.INGREDIENT;
+            step.IngredientType = ingredient;
+            stepsDone.Add(step);
+            _currentLayerCocktail++;
+        }
     }
 
     public void EmptyShaker()
@@ -55,33 +63,28 @@ public class Shaker : MonoBehaviour
         if (_currentLayerCocktail != 0)
         {
             _shakenAtStep[_currentLayerCocktail - 1]=true;
+            if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
+            {
+                Step step = new Step();
+                step.StepType = StepType.SHAKE;
+                stepsDone.Add(step);
+            }
         }
     }
 
-    public bool CompareReceipe()
+    public bool CompareRecipe()
     {
+        Debug.Log(_clients.CurrentClient.Recipe.Steps);
         Step[] steps = _clients.CurrentClient.Recipe.Steps;
         bool result=true;
         int j = 0;
+        if(steps.Length!= stepsDone.Count)
+        {
+            return false;
+        }
         for (int i = 0; i < steps.Length; i++)
         {
-            if (steps[i].StepType == StepType.INGREDIENT)
-            {
-                if(_cocktail[j]!= steps[i].IngredientType)
-                {
-                    result = false;
-                    break;
-                }
-                j++;
-            }
-            if(steps[i].StepType == StepType.SHAKE)
-            {
-                if (_shakenAtStep[j - 1] == false) 
-                {
-                    result = false;
-                    break;
-                }
-            }
+            
         }
         return result;
     }

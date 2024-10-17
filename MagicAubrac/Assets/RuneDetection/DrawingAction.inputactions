@@ -20,7 +20,7 @@
                     "id": "8ef8ec40-a7b8-4fb3-8111-57c43c091130",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -29,34 +29,61 @@
                     "id": "2bf2f155-4c43-45e0-b113-788a23059b4e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DrinkSelect1",
+                    "name": "DrinkSelectA1",
                     "type": "Button",
                     "id": "6dab8e1f-ae1c-4699-9cf8-960ea358a22a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DrinkSelect2",
+                    "name": "DrinkSelectB1",
+                    "type": "Button",
+                    "id": "4fb2a59d-6ef2-4db7-bec1-bceadc820686",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrinkSelectA2",
                     "type": "Button",
                     "id": "909ba24f-6b69-4f15-a97e-381b5fe69564",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DrinkSelect3",
+                    "name": "DrinkSelectB2",
+                    "type": "Button",
+                    "id": "20005daf-6aac-46b4-8c3f-c850601ca753",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrinkSelectA3",
+                    "type": "Button",
+                    "id": "4ca6f9df-4624-4b15-bcce-9377da54aa07",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DrinkSelectB3",
                     "type": "Button",
                     "id": "5568f2dc-47bf-495a-8461-ed40f5ede3d7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -65,7 +92,7 @@
                     "id": "1ed7f9cc-8b71-4a6e-96ba-0419667063d8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -74,7 +101,7 @@
                     "id": "98b6e5a6-9192-4350-96b0-d579fc3f3ebf",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -83,7 +110,7 @@
                     "id": "6614277c-bc0b-423f-8106-d4fd46fed6a7",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -92,7 +119,7 @@
                     "id": "e8796c66-bcbf-4115-9561-d21df9909c43",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -122,7 +149,7 @@
                 {
                     "name": "",
                     "id": "bb98524a-cc77-4068-ad30-1127e35bdb74",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -148,7 +175,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DrinkSelect1",
+                    "action": "DrinkSelectA1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -159,18 +186,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DrinkSelect2",
+                    "action": "DrinkSelectA2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "c4dfebfd-f727-41a9-990a-b70698193151",
-                    "path": "<Keyboard>/t",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DrinkSelect3",
+                    "action": "DrinkSelectB3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -215,6 +242,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "EmptyDrink",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "51bcc167-b659-45cf-b97b-c964ab3a5107",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrinkSelectB1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "73000d83-3f1c-4056-9cca-c28547520e71",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrinkSelectA3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3540a57-06a3-419e-8eca-767764e5d0ad",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DrinkSelectB2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

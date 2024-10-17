@@ -98,7 +98,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeA
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeA
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeB
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -206,6 +206,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e8796c66-bcbf-4115-9561-d21df9909c43
     m_ActionName: DrawingMap/EmptyDrink
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4fb2a59d-6ef2-4db7-bec1-bceadc820686
+    m_ActionName: DrawingMap/DrinkSelectB1[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20005daf-6aac-46b4-8c3f-c850601ca753
+    m_ActionName: DrawingMap/DrinkSelectB2[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeA
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ca6f9df-4624-4b15-bcce-9377da54aa07
+    m_ActionName: DrawingMap/DrinkSelectA3[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DrawingMap
