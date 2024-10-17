@@ -96,14 +96,11 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            IngredientType ingredient = _ingrNFC.GetIngredient();
-            if (ingredient != IngredientType.INVALID)
-            {
-                _tireuse.ChangeLiquid(i, true);
-            }
+            _tireuse.ChangeLiquid(i, true);
         }
         if (context.canceled)
         {
+            int i;
             if (context.action.name == "DrinkSelectA1")
             {
                 i = 0;
@@ -136,14 +133,12 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            IngredientType ingredient = _ingrNFC.GetIngredient();
-            if (ingredient != IngredientType.INVALID)
-            {
-                _tireuse.ChangeLiquid(i, false);
-            }
+            
+            _tireuse.ChangeLiquid(i, false);
         }
         if (context.canceled)
         {
+            int i;
             if (context.action.name == "DrinkSelectA1")
             {
                 i = 0;
