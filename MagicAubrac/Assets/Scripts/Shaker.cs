@@ -8,6 +8,7 @@ public class Shaker : MonoBehaviour
     [SerializeField] private Rune[] _runes = new Rune[3];
     [SerializeField] private List<Step> stepsDone = new List<Step>(); 
     ClientsManager _clients;
+    [SerializeField]float ShakeDurationMin;
     private bool[] _shakenAtStep=new bool[5];
     int _currentLayerCocktail;
     int _currentLayerRune;
@@ -58,9 +59,9 @@ public class Shaker : MonoBehaviour
         }
         _currentLayerRune = 0;
     }
-    public void Shake()
+    public void Shake(float duration)
     {
-        if (_currentLayerCocktail != 0)
+        if (_currentLayerCocktail != 0&&duration == ShakeDurationMin)
         {
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
