@@ -21,6 +21,7 @@ public class ClientsManager : MonoBehaviour
 
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
+    public event Action<Client> OnClientWalkInForeground;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -42,12 +43,7 @@ public class ClientsManager : MonoBehaviour
         GameManager.ClientsManager = this;
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
-    }
-
-    private void Start()
-    {
-        //First client
-        AddNewClient();
+        AddNewClient(true); //For it to be accessible in the start of UIRecipes
     }
 
     GameObject GetRandomClient()
@@ -63,13 +59,15 @@ public class ClientsManager : MonoBehaviour
     {
         if (ClientsInQueue != null && ClientsInQueue.Count > 0)
         {
-            Destroy(ClientsInQueue[0].gameObject);
             ClientsInQueue.RemoveAt(0);
 
             if (ClientsInBackgroundQueue.Count > 0)
             {
-                ClientsInQueue.Add(ClientsInBackgroundQueue[0]);
+                Client clientMovedToForeground = ClientsInBackgroundQueue[0];
+                ClientsInQueue.Add(clientMovedToForeground);
                 ClientsInBackgroundQueue.RemoveAt(0);
+                OnClientWalkInForeground?.Invoke(clientMovedToForeground);
+                clientMovedToForeground.ClientStartWaiting();
             }
 
             if (ClientsInQueue.Count > 0)
@@ -101,15 +99,18 @@ public class ClientsManager : MonoBehaviour
     }
     private void UpdatePositionsClients()
     {
-        for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
+        if (ClientsInQueue != null && _clientsPositions != null)
         {
-            ClientsInQueue[i].transform.position = _clientsPositions[i].transform.position;
+            for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
+            {
+                ClientsInQueue[i].transform.position = _clientsPositions[i].transform.position;
+            }
         }
     }
 
-    public void AddNewClient()
+    public void AddNewClient(bool waitEndlessly = false)
     {
-        if ((ClientsInQueue.Count < _nbClientsShown && ClientsInBackgroundQueue.Count == 0) && 
+        if ((ClientsInQueue.Count < _nbClientsShown && ClientsInBackgroundQueue.Count == 0) || 
             ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
         {
             GameObject newClientPrefab = GetRandomClient();
@@ -126,39 +127,50 @@ public class ClientsManager : MonoBehaviour
             }
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity);
             Client newClient = newClientGO.GetComponent<Client>();
-            newClient.LoadClient();
-
+            newClient.OnClientCompleted += OnClientCompleted;
+            newClient.LoadClient(waitEndlessly);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
             {
+                if (ClientsInQueue.Count == 0)
+                {
+                    CurrentClient = newClient;
+                }
                 ClientsInQueue.Add(newClient);
+                newClient.ClientStartWaiting();
+                OnClientWalkInForeground?.Invoke(newClient);
             } else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
             {
                 ClientsInBackgroundQueue.Add(newClient);
             }
-
             OnNewClientInList?.Invoke(newClient);
         }
     }
 
+    private void OnClientCompleted(Client client)
+    {
+        ChangeClient();
+        UpdatePositionsClients();
+        client.OnClientCompleted -= OnClientCompleted;
+    }
+
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("Client finished with success");
+            CurrentClient.DrinkSuceeded();
+        }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            Debug.Log("Client finished");
-            ChangeClient();
+            Debug.Log("Client finished with fail");
+            CurrentClient.DrinkFailed();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             Debug.Log("Client added");
             AddNewClient();
-        }
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log("Queue is filled automatically");
-            if (ClientsInQueue.Count < _nbClientsMax && _coroutineSpawnClient == null) //On start pas le timer direct (peut-être à changer)
-                _coroutineSpawnClient = StartCoroutine(RoutineAddClient());
         }
     }
 
@@ -173,7 +185,7 @@ public class ClientsManager : MonoBehaviour
                 guiOutput.AppendLine(client.GetDebugString());
             }
         }
-        guiOutput.AppendLine("Clients in background: \n");
+        guiOutput.Append("Clients in background: \n");
         if (ClientsInBackgroundQueue != null)
         {
             foreach (Client client in ClientsInBackgroundQueue)

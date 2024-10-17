@@ -33,3 +33,4 @@ MonoBehaviour:
   - StepType: 1
     ShakeDuration: 4
     IngredientType: 3
+  UIRecipeSprite: {fileID: 21300000, guid: 06429ca988f3e9f49bef1fa85b3835f3, type: 3}
