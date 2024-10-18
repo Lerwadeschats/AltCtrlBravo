@@ -1,28 +1,81 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
-    [SerializeField] float _waitingDuration = 10f;
-    private Recipe _recipe;
+    [SerializeField] private float _waitingDuration = 10f;
+    private float _remainingWaitingDuration;
+    private Coroutine _coroutineWait; // Will be stopped if go is destroyed
 
-    //Pas fini
-    public float CurrentWaitingDuration { get { return _waitingDuration; } }
-
-    //When client is instantiate in list
-    public void LoadClient()
-    {
-        _recipe = GameManager.RecipesManager.GetRandomRecipe();
+    public float RemainingWaitingDuration { 
+        get => _remainingWaitingDuration;
     }
-    //When client is visible
-    public void StartClient()
-    {
 
+    public Recipe Recipe { get; private set; }
+    public float WaitingDuration { get => _waitingDuration;}
+
+    public bool _waitEndlessly;
+
+    public event Action<Client> OnClientCompleted; 
+    
+    //When client is instantiate in list
+    public void LoadClient(bool waitEndlessly = false)
+    {
+        Recipe = GameManager.RecipesManager.GetRandomRecipe();
+        _waitEndlessly = waitEndlessly;
+    }
+
+    //When client is visible
+    public void ClientStartWaiting()
+    {
+        if (!_waitEndlessly)
+        {
+            if (_coroutineWait != null)
+            {
+                StopCoroutine(_coroutineWait);
+                _coroutineWait = null;
+            }
+            _coroutineWait = StartCoroutine(RoutineWaitRecipe());
+        }
+    }
+
+    IEnumerator RoutineWaitRecipe()
+    {
+        _remainingWaitingDuration = _waitingDuration;
+        while (_remainingWaitingDuration > 0f)
+        {
+            _remainingWaitingDuration -= Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log("Wait for too long");
+        DrinkFailed();
+    }
+
+    public void DrinkFailed()
+    {
+        // - vie
+        DrinkComplete();
+    }
+
+    public void DrinkSuceeded()
+    {
+        // + score
+        DrinkComplete();
+    }
+
+    //Use if drink is finished 
+    public void DrinkComplete()
+    {
+        OnClientCompleted?.Invoke(this);
+        Destroy(gameObject);
+        //StopCoroutine(_coroutineWait);
+        //_coroutineWait = null;
     }
 
     public string GetDebugString()
     {
-        return _recipe?.GetDebugString();
+        return Recipe?.GetDebugString();
     }
 }

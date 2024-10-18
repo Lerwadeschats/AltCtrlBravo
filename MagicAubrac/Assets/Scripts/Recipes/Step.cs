@@ -7,10 +7,12 @@ using UnityEngine;
 public enum IngredientType
 {
     INVALID,
-    LEMON,
-    ORANGE,
-    WINE,
-    VODKA
+    HIBISCUS,
+    MENTHE,
+    SUC_DE_CRANE,
+    JUS_DE_SCARABEE,
+    VENIN_DE_SCORPION,
+    EAU_DU_NIL
 }
 
 public enum StepType

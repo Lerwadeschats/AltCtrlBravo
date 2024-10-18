@@ -1,0 +1,306 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6779144159095017000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5473783871787305960}
+  - component: {fileID: 6898192819716059260}
+  - component: {fileID: 2598715183995938732}
+  - component: {fileID: 8562558801245228882}
+  - component: {fileID: 3602713124213415418}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5473783871787305960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6898192819716059260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7714821524fed58458840fcaabc35b59, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 118c9ef3-f22f-40b3-938d-8af475edd903
+    m_ActionName: DrawingMap/Draw
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnValidation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8ef8ec40-a7b8-4fb3-8111-57c43c091130
+    m_ActionName: DrawingMap/Validate
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnRuneActivation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2bf2f155-4c43-45e0-b113-788a23059b4e
+    m_ActionName: DrawingMap/RuneActivation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeA
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6dab8e1f-ae1c-4699-9cf8-960ea358a22a
+    m_ActionName: DrawingMap/DrinkSelect1
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeA
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 909ba24f-6b69-4f15-a97e-381b5fe69564
+    m_ActionName: DrawingMap/DrinkSelect2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5568f2dc-47bf-495a-8461-ed40f5ede3d7
+    m_ActionName: DrawingMap/DrinkSelect3
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnPour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1ed7f9cc-8b71-4a6e-96ba-0419667063d8
+    m_ActionName: DrawingMap/DrinkPour1
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnPour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 98b6e5a6-9192-4350-96b0-d579fc3f3ebf
+    m_ActionName: DrawingMap/DrinkPour2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnPour
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6614277c-bc0b-423f-8106-d4fd46fed6a7
+    m_ActionName: DrawingMap/DrinkPour3
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6779144159095017000}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e8796c66-bcbf-4115-9561-d21df9909c43
+    m_ActionName: DrawingMap/EmptyDrink
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4fb2a59d-6ef2-4db7-bec1-bceadc820686
+    m_ActionName: DrawingMap/DrinkSelectB1[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20005daf-6aac-46b4-8c3f-c850601ca753
+    m_ActionName: DrawingMap/DrinkSelectB2[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeA
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ca6f9df-4624-4b15-bcce-9377da54aa07
+    m_ActionName: DrawingMap/DrinkSelectA3[/Keyboard/t]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: DrawingMap
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &2598715183995938732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81c5ecf547a109240b14793c144f1765, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shaker: {fileID: 0}
+  _tireuse: {fileID: 0}
+  _timerPulled: 0
+  _joycon: {fileID: 3602713124213415418}
+--- !u!114 &8562558801245228882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b7436bdb4f61747bdfca3e85138952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableIMU: 1
+  EnableLocalize: 1
+--- !u!114 &3602713124213415418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e02e33e16526a4a9ab1a10862ba053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholdShaking: 1
