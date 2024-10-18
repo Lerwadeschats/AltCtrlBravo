@@ -17,7 +17,7 @@ MonoBehaviour:
   Steps:
   - StepType: 1
     ShakeDuration: 0
-    IngredientType: 0
+    IngredientType: 3
   - StepType: 0
     ShakeDuration: 4
     IngredientType: 0
