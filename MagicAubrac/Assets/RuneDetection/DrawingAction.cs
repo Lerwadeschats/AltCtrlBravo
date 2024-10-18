@@ -143,6 +143,15 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shake"",
+                    ""type"": ""Button"",
+                    ""id"": ""996a5ae4-7c0f-428b-b119-e565cb4572d8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -299,6 +308,17 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
                     ""action"": ""DrinkSelectB2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""25dd3a5e-4180-4f15-86cd-9f3b54905852"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -320,6 +340,7 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
         m_DrawingMap_DrinkPour2 = m_DrawingMap.FindAction("DrinkPour2", throwIfNotFound: true);
         m_DrawingMap_DrinkPour3 = m_DrawingMap.FindAction("DrinkPour3", throwIfNotFound: true);
         m_DrawingMap_EmptyDrink = m_DrawingMap.FindAction("EmptyDrink", throwIfNotFound: true);
+        m_DrawingMap_Shake = m_DrawingMap.FindAction("Shake", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -394,6 +415,7 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_DrawingMap_DrinkPour2;
     private readonly InputAction m_DrawingMap_DrinkPour3;
     private readonly InputAction m_DrawingMap_EmptyDrink;
+    private readonly InputAction m_DrawingMap_Shake;
     public struct DrawingMapActions
     {
         private @DrawingAction m_Wrapper;
@@ -411,6 +433,7 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
         public InputAction @DrinkPour2 => m_Wrapper.m_DrawingMap_DrinkPour2;
         public InputAction @DrinkPour3 => m_Wrapper.m_DrawingMap_DrinkPour3;
         public InputAction @EmptyDrink => m_Wrapper.m_DrawingMap_EmptyDrink;
+        public InputAction @Shake => m_Wrapper.m_DrawingMap_Shake;
         public InputActionMap Get() { return m_Wrapper.m_DrawingMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -459,6 +482,9 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
             @EmptyDrink.started += instance.OnEmptyDrink;
             @EmptyDrink.performed += instance.OnEmptyDrink;
             @EmptyDrink.canceled += instance.OnEmptyDrink;
+            @Shake.started += instance.OnShake;
+            @Shake.performed += instance.OnShake;
+            @Shake.canceled += instance.OnShake;
         }
 
         private void UnregisterCallbacks(IDrawingMapActions instance)
@@ -502,6 +528,9 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
             @EmptyDrink.started -= instance.OnEmptyDrink;
             @EmptyDrink.performed -= instance.OnEmptyDrink;
             @EmptyDrink.canceled -= instance.OnEmptyDrink;
+            @Shake.started -= instance.OnShake;
+            @Shake.performed -= instance.OnShake;
+            @Shake.canceled -= instance.OnShake;
         }
 
         public void RemoveCallbacks(IDrawingMapActions instance)
@@ -534,5 +563,6 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
         void OnDrinkPour2(InputAction.CallbackContext context);
         void OnDrinkPour3(InputAction.CallbackContext context);
         void OnEmptyDrink(InputAction.CallbackContext context);
+        void OnShake(InputAction.CallbackContext context);
     }
 }

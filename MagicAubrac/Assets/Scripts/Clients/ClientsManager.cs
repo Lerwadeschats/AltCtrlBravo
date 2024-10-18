@@ -158,7 +158,7 @@ public class ClientsManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+       /*(Input.GetKeyDown(KeyCode.V))
         {
             Debug.Log("Client finished with success");
             CurrentClient?.DrinkSuceeded();
@@ -172,7 +172,7 @@ public class ClientsManager : MonoBehaviour
         {
             Debug.Log("Client added");
             AddNewClient();
-        }
+        }*/
     }
 
     private void OnGUI()

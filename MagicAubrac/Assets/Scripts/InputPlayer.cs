@@ -48,11 +48,11 @@ public class InputPlayer : MonoBehaviour
         {
             if (_shaker.CompareRecipe())
             {
-                Debug.Log("le client est relativement content");
+                GameManager.ClientsManager?.CurrentClient.DrinkSuceeded();
             }
             else
             {
-                Debug.Log("le client ne l'est pas");
+                GameManager.ClientsManager?.CurrentClient.DrinkFailed();
             }
             _shaker.EmptyShaker();
             _shaker.RemoveRune();
@@ -166,12 +166,19 @@ public class InputPlayer : MonoBehaviour
         _shaker?.Shake(shakeDuration);
     }
 
+    public void OnShake(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("&&");
+            _shaker.Shake(6);
+        }
+    }
     IEnumerator Pour(InputAction.CallbackContext context)
     {
         float timer = 0;
         while (!context.canceled)
         {
-            Debug.Log(timer);
             if (timer >= _timerPulled)
             {
                 timer = 0;

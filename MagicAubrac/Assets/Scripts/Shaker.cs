@@ -8,7 +8,7 @@ public class Shaker : MonoBehaviour
     [SerializeField] private Rune[] _runes = new Rune[3];
     [SerializeField] private List<Step> stepsDone = new List<Step>(); 
     ClientsManager _clients;
-    [SerializeField]float _shakeDurationMin;
+    [SerializeField]float _shakeDurationMin=3;
     ShakerUI[] _ui;
 
     private bool[] _shakenAtStep=new bool[5];
@@ -52,6 +52,7 @@ public class Shaker : MonoBehaviour
         {
             _ui[i].Change(IngredientType.INVALID);
         }
+        stepsDone.Clear();
     }
     public void AddToShaker(Rune rune)
     {
@@ -69,8 +70,9 @@ public class Shaker : MonoBehaviour
     }
     public void Shake(float duration)
     {
-        if (_currentLayerCocktail != 0&&duration == _shakeDurationMin)
+        if (_currentLayerCocktail != 0&&duration >= _shakeDurationMin)
         {
+            Debug.Log("e");
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
             {
@@ -87,13 +89,31 @@ public class Shaker : MonoBehaviour
         Step[] steps = _clients.CurrentClient.Recipe.Steps;
         bool result=true;
         int j = 0;
+        Debug.Log(steps.Length);
+        Debug.Log(stepsDone.Count);
         if(steps.Length!= stepsDone.Count)
         {
             return false;
         }
         for (int i = 0; i < steps.Length; i++)
         {
-            
+            if (steps[i].StepType == StepType.INGREDIENT)
+            {
+                if (stepsDone[i].IngredientType != steps[i].IngredientType)
+                {
+                    result = false;
+                    break;
+                }
+                j++;
+            }
+            if (steps[i].StepType == StepType.SHAKE)
+            {
+                if (stepsDone[i].StepType != StepType.SHAKE) 
+                { 
+                    result = false;
+                    break;
+                }
+            }
         }
         return result;
     }
