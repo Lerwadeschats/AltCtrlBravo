@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,7 @@ public class Shaker : MonoBehaviour
     private bool[] _shakenAtStep=new bool[5];
     int _currentLayerCocktail;
     int _currentLayerRune;
+
     private void Start()
     {
         _ui= FindObjectsOfType<ShakerUI>();
@@ -61,7 +63,6 @@ public class Shaker : MonoBehaviour
     }
     public void RemoveRune()
     {
-        Debug.Log("oui");
         for (int i = 0; i < _runes.Length; i++)
         {
             _runes[i] = Rune.NONE;
@@ -72,7 +73,6 @@ public class Shaker : MonoBehaviour
     {
         if (_currentLayerCocktail != 0&&duration >= _shakeDurationMin)
         {
-            Debug.Log("e");
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
             {
@@ -85,7 +85,10 @@ public class Shaker : MonoBehaviour
 
     public bool CompareRecipe()
     {
-        Debug.Log(_clients.CurrentClient.Recipe.Steps);
+        Debug.Log(_clients.CurrentClient?.Recipe?.Steps);
+        if (_clients.CurrentClient == null)
+            return false;
+
         Step[] steps = _clients.CurrentClient.Recipe.Steps;
         bool result=true;
         int j = 0;

@@ -158,21 +158,21 @@ public class ClientsManager : MonoBehaviour
 
     private void Update()
     {
-       /*(Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log("Client finished with success");
-            CurrentClient?.DrinkSuceeded();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log("Client finished with fail");
-            CurrentClient?.DrinkFailed();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Debug.Log("Client added");
-            AddNewClient();
-        }*/
+        //if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    Debug.Log("Client finished with success");
+        //    CurrentClient?.DrinkSuceeded();
+        //}
+        //if (Input.GetKeyDown(KeyCode.C))
+        //{
+        //    Debug.Log("Client finished with fail");
+        //    CurrentClient?.DrinkFailed();
+        //}
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        //    Debug.Log("Client added");
+        //    AddNewClient();
+        //}
     }
 
     private void OnGUI()
