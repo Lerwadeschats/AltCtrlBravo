@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5473783871787305960}
   - component: {fileID: 6898192819716059260}
   - component: {fileID: 2598715183995938732}
+  - component: {fileID: 8562558801245228882}
+  - component: {fileID: 3602713124213415418}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -98,7 +100,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeA
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -114,7 +116,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeA
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -130,7 +132,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2598715183995938732}
         m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
-        m_MethodName: OnChange
+        m_MethodName: OnChangeB
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -206,6 +208,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e8796c66-bcbf-4115-9561-d21df9909c43
     m_ActionName: DrawingMap/EmptyDrink
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4fb2a59d-6ef2-4db7-bec1-bceadc820686
+    m_ActionName: DrawingMap/DrinkSelectB1[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeB
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 20005daf-6aac-46b4-8c3f-c850601ca753
+    m_ActionName: DrawingMap/DrinkSelectB2[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnChangeA
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4ca6f9df-4624-4b15-bcce-9377da54aa07
+    m_ActionName: DrawingMap/DrinkSelectA3[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DrawingMap
@@ -225,4 +275,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shaker: {fileID: 0}
   _tireuse: {fileID: 0}
-  _ingrNFC: {fileID: 0}
+  _timerPulled: 0
+  _joycon: {fileID: 3602713124213415418}
+--- !u!114 &8562558801245228882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b7436bdb4f61747bdfca3e85138952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableIMU: 1
+  EnableLocalize: 1
+--- !u!114 &3602713124213415418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6779144159095017000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e02e33e16526a4a9ab1a10862ba053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholdShaking: 1

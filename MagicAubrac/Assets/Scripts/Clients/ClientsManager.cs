@@ -9,6 +9,7 @@ public class ClientsManager : MonoBehaviour
 {
     private Coroutine _coroutineSpawnClient;
 
+    [SerializeField] private GameObject _parentObject;
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
     [SerializeField] private GameObject _remainingQueuePosition;
@@ -125,7 +126,7 @@ public class ClientsManager : MonoBehaviour
             {
                 position = _remainingQueuePosition.transform.position;
             }
-            GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity);
+            GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.LoadClient(waitEndlessly);
@@ -157,21 +158,21 @@ public class ClientsManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V))
+       /*(Input.GetKeyDown(KeyCode.V))
         {
             Debug.Log("Client finished with success");
-            CurrentClient.DrinkSuceeded();
+            CurrentClient?.DrinkSuceeded();
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
             Debug.Log("Client finished with fail");
-            CurrentClient.DrinkFailed();
+            CurrentClient?.DrinkFailed();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
             Debug.Log("Client added");
             AddNewClient();
-        }
+        }*/
     }
 
     private void OnGUI()

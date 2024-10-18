@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NFCID : MonoBehaviour
 {
-    private int _ID;
+    /*private int _ID;
     
     public IngredientType GetIngredient()//temporaire
     {
@@ -28,5 +28,5 @@ public class NFCID : MonoBehaviour
         }
         return card;
     }
-    // ici avec le nfc L'id sera disponible pendant 5 à 10secondes avant d'être reset a rien.
+    // ici avec le nfc L'id sera disponible pendant 5 à 10secondes avant d'être reset a rien.*/
 }

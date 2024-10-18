@@ -44,7 +44,6 @@ public class UIRecipe : MonoBehaviour
 
     IEnumerator StartTimerRecipe()
     {
-        Debug.Log("DIMINUE DISPLAY");
         while (Client.RemainingWaitingDuration > 0f)
         {
             _slider.value = Client.RemainingWaitingDuration / Client.WaitingDuration;
