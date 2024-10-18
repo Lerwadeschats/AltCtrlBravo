@@ -1,21 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using UnityEngine;
 
-public class GridDetection : MonoBehaviour
+public static class GridDetection
 {
-    GridSquare[,] grid;
-    [SerializeField] int _unitSize;
-    [SerializeField] float marginErrorPos = 10f;
-    [SerializeField] Texture2D _texture;
     
-    private void Start()
-    {
-        grid = SetTextureGrid(_texture);
-        
-    }
-    
-
     /*public GridSquare[,] NewGrid(int width,  int height, Vector2 beginningPos)
     {
         for (int x = 0; x < width; x++)
@@ -47,7 +37,7 @@ public class GridDetection : MonoBehaviour
     
 
     //Set a grid on the texture
-    public GridSquare[,] SetTextureGrid(Texture2D texture)
+    public static GridSquare[,] SetTextureGrid(Texture2D texture, int _unitSize)
     {
         GridSquare[,] textureGrid = new GridSquare[texture.width/_unitSize, texture.height/ _unitSize];
         for (int x = 0; x < texture.width/ _unitSize; x ++)
@@ -55,14 +45,18 @@ public class GridDetection : MonoBehaviour
             for (int y = 0; y < texture.height/_unitSize; y ++)
             {
                 textureGrid[x, y] = new GridSquare(x, y, _unitSize);
+
             }
         }
         return textureGrid;
     }
 
+
+
     //Get black cases on texture
-    public List<GridSquare> GetAllBlackCases(Texture2D runeTexture, GridSquare[,] textureGrid)
+    public static List<GridSquare> GetAllBlackCases(Texture2D runeTexture, int _unitSize)
     {
+        GridSquare[,] textureGrid = SetTextureGrid(runeTexture, _unitSize);
         List<GridSquare> blackCases = new List<GridSquare>();
         Color[] pixels = runeTexture.GetPixels();
 
@@ -72,28 +66,50 @@ public class GridDetection : MonoBehaviour
             {
                 GridSquare square = textureGrid[x, y];
 
-                if (runeTexture.GetPixel(square._posX * _unitSize, square._posY * _unitSize) == Color.black)
+                if (runeTexture.GetPixel(square._posX * _unitSize,square._posY * _unitSize) == Color.black)
                 {
+
                     blackCases.Add(square);
                 }
             }
-
         }
-
         return blackCases;
     }
 
-    public bool DoesBlackCasesContainPoint(Vector2 point)
+    public static bool IsDrawingInBlackCases(List<Vector2> points, Texture2D texture, float newSquareSize, Vector2 originPoint)
     {
-        List<GridSquare> blackCases = GetAllBlackCases(_texture, grid);
+        List<GridSquare> blackCases = GetAllBlackCases(texture, 50);
+        foreach (Vector2 point in points)
+        {
+            for (int i = 0; i < blackCases.Count; i++)
+            {
+                GridSquare square = blackCases[i];
+                if (square.DoesContainPoint(point, 0.1f, newSquareSize, originPoint))
+                {
+                    square.isOccupied = true;
+                    break;
+                }
+                else
+                {
+                    if (i == blackCases.Count - 1)
+                    {
+                        //Debug.Log(point + " est hors du chemin");
+                        return false;
+                    }
+                }
+            }
+            
+        }
         foreach (GridSquare square in blackCases)
         {
-            if (square.DoesContainPoint(point, marginErrorPos))
+            if (!square.isOccupied)
             {
-                return true;
+                //Debug.Log("Dessin pas fini");
+                return false;
             }
         }
-        return false;
+
+        return true;
     }
 
     
@@ -101,10 +117,11 @@ public class GridDetection : MonoBehaviour
 
 public class GridSquare
 {
+    //PosX & posY sont égaux à 1, 2, 3... pas à 50, 100, 150
     public int _posX;
     public int _posY;
     int _size;
-    public bool _hasBeenChecked = false;
+    public bool isOccupied;
     public GridSquare(float x, float y, int size)
     {
         _posX = (int)x;
@@ -112,12 +129,21 @@ public class GridSquare
         _size = size;
     }
 
-    public bool DoesContainPoint(Vector2 point, float margin)
+    public bool DoesContainPoint(Vector2 point, float margin, float newSquareSize, Vector2 originPoint)
     {
-        if((point.x > _posX - margin && point.y < _posX + _size + margin) && point.y > _posY - margin && point.y < _posY + _size + margin)
+        float minX = (_posX - margin) * newSquareSize + originPoint.x;
+        float maxX = (_posX + 1 + margin) * newSquareSize + originPoint.x;
+        
+        float minY = (_posY - margin) * newSquareSize + originPoint.y;
+        float maxY = ((_posY + 1 + margin) * newSquareSize + +originPoint.y);
+
+        //Debug.Log(minX + " < " + point.x + " < " + maxX + " || " + "(" + _posY  + "-" + margin + ") * " + newSquareSize + " + " + originPoint.y + " = " + minY + " < " + point.y + " < " + maxY);
+
+        if (point.x > minX && 
+            point.x < maxX && 
+            point.y > minY && 
+            point.y < maxY)
         {
-            _hasBeenChecked = true;
-            Debug.Log("caaaaaaaa");
             return true;
         }
         return false;
