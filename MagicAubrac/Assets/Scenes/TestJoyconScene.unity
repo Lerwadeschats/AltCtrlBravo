@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 195250749}
   - component: {fileID: 195250748}
   - component: {fileID: 195250747}
-  - component: {fileID: 195250746}
+  - component: {fileID: 195250751}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -188,23 +188,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &195250746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 195250745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e0ebe985e772342b4feb8e0e0ddd67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stick: []
-  gyro: {x: 0, y: 0, z: 0}
-  accel: {x: 0, y: 0, z: 0}
-  jc_ind: 0
-  orientation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!23 &195250747
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -291,6 +274,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &195250751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195250745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e02e33e16526a4a9ab1a10862ba053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholdShaking: 1
+  _shakeExtensionDuration: 0.05
 --- !u!1 &868689641
 GameObject:
   m_ObjectHideFlags: 0
