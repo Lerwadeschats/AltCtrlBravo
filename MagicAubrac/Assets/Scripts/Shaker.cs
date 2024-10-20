@@ -85,7 +85,6 @@ public class Shaker : MonoBehaviour
 
     public bool CompareRecipe()
     {
-        Debug.Log(_clients.CurrentClient?.Recipe?.Steps);
         if (_clients.CurrentClient == null)
             return false;
 

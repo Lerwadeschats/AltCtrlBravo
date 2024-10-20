@@ -50,9 +50,7 @@ public class InputJoycon : MonoBehaviour
                         {
                             StopCoroutine(_coroutineShakeExtension);
                             _coroutineShakeExtension = null;
-                            Debug.Log("STOP EXTENSION");
                         }
-                        Debug.Log("START");
                         OnStartShaking?.Invoke();
                         _isInShakeExtension = false;
                     } else

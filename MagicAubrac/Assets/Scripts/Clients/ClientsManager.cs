@@ -16,6 +16,7 @@ public class ClientsManager : MonoBehaviour
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
+    private MenuManager _menuManager;
     public List<Client> ClientsInQueue { get; private set; }
     public List<Client> ClientsInBackgroundQueue { get; private set; }
     public Client CurrentClient { get; private set; }
@@ -45,6 +46,11 @@ public class ClientsManager : MonoBehaviour
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
         AddNewClient(true); //For it to be accessible in the start of UIRecipes
+    }
+
+    void Start()
+    {
+        _menuManager = GameManager.MenuManager;
     }
 
     GameObject GetRandomClient()
@@ -91,7 +97,13 @@ public class ClientsManager : MonoBehaviour
 
     public IEnumerator RoutineAddClient()
     {
-        yield return new WaitForSeconds(_startingDurationBetweenClients);
+        float timer = 0f;
+        while (timer < _startingDurationBetweenClients)
+        {
+            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+            timer += Time.deltaTime;
+            yield return null;
+        }
         AddNewClient();
         if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
         {
