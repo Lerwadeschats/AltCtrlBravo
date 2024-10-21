@@ -249,6 +249,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2222913757040847502}
     m_Modifications:
+    - target: {fileID: 228278480162774328, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: ShapeModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 228278480162774328, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: EmissionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 432038799283313473, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
       propertyPath: _playerHealth
       value: 

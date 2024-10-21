@@ -17,7 +17,7 @@ public class Client : MonoBehaviour
     public Recipe Recipe { get; private set; }
     public float WaitingDuration { get => _waitingDuration;}
 
-    public bool _waitEndlessly;
+    private bool _waitEndlessly;
 
     public event Action<Client> OnClientCompleted;
     public event Action<Client> OnDrinkFailed;
