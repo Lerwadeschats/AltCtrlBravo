@@ -9,7 +9,7 @@ public class UIMenu : MonoBehaviour
     [Scene, SerializeField]
     private string _mainScene;
 
-    public void Restart()
+    public void PlayGame()
     {
         SceneManager.LoadScene(_mainScene);
     }

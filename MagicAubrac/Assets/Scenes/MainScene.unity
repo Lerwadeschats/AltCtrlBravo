@@ -230,30 +230,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 7166578965771286976, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7166578965771286976, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7930571190507600086, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7930571190507600086, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785267833985153283, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785267833985153283, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6391409893671746929, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
