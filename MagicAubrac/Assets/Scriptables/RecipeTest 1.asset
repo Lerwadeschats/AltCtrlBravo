@@ -13,24 +13,12 @@ MonoBehaviour:
   m_Name: RecipeTest 1
   m_EditorClassIdentifier: 
   Name: ADHDAHDFI
-  ActivationRunes: 02000000
+  ActivationRunes: []
   Steps:
   - StepType: 1
     ShakeDuration: 0
-    IngredientType: 0
+    IngredientType: 2
   - StepType: 0
     ShakeDuration: 4
     IngredientType: 0
-  - StepType: 1
-    ShakeDuration: 4
-    IngredientType: 1
-  - StepType: 1
-    ShakeDuration: 4
-    IngredientType: 1
-  - StepType: 1
-    ShakeDuration: 4
-    IngredientType: 2
-  - StepType: 1
-    ShakeDuration: 4
-    IngredientType: 3
   UIRecipeSprite: {fileID: 21300000, guid: 06429ca988f3e9f49bef1fa85b3835f3, type: 3}
