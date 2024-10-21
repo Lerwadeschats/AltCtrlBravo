@@ -153,11 +153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1151818693 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1975519244780746697, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-  m_PrefabInstance: {fileID: 16674694288021686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1499407254
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +212,58 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 118c9ef3-f22f-40b3-938d-8af475edd903
     m_ActionName: DrawingMap/Draw[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8ef8ec40-a7b8-4fb3-8111-57c43c091130
+    m_ActionName: DrawingMap/Validate[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2bf2f155-4c43-45e0-b113-788a23059b4e
+    m_ActionName: DrawingMap/RuneActivation[/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6dab8e1f-ae1c-4699-9cf8-960ea358a22a
+    m_ActionName: DrawingMap/DrinkSelectA1[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4fb2a59d-6ef2-4db7-bec1-bceadc820686
+    m_ActionName: DrawingMap/DrinkSelectB1[/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 909ba24f-6b69-4f15-a97e-381b5fe69564
+    m_ActionName: DrawingMap/DrinkSelectA2[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 20005daf-6aac-46b4-8c3f-c850601ca753
+    m_ActionName: DrawingMap/DrinkSelectB2[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4ca6f9df-4624-4b15-bcce-9377da54aa07
+    m_ActionName: DrawingMap/DrinkSelectA3[/Keyboard/t]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5568f2dc-47bf-495a-8461-ed40f5ede3d7
+    m_ActionName: DrawingMap/DrinkSelectB3[/Keyboard/v]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1ed7f9cc-8b71-4a6e-96ba-0419667063d8
+    m_ActionName: DrawingMap/DrinkPour1[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98b6e5a6-9192-4350-96b0-d579fc3f3ebf
+    m_ActionName: DrawingMap/DrinkPour2[/Keyboard/f]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6614277c-bc0b-423f-8106-d4fd46fed6a7
+    m_ActionName: DrawingMap/DrinkPour3[/Keyboard/g]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8796c66-bcbf-4115-9561-d21df9909c43
+    m_ActionName: DrawingMap/EmptyDrink[/Keyboard/u]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 996a5ae4-7c0f-428b-b119-e565cb4572d8
+    m_ActionName: DrawingMap/Shake[/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: DrawingMap
@@ -249,7 +296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a678197a41b09469863f1ac066c5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grid: {fileID: 1151818693}
   _allRunes:
   - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
   - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
@@ -261,6 +307,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da0d8cb3913e5c645b25c18cd91a8511, type: 2}
   _drawnRunes: []
   _drawingPrefab: {fileID: 4918965520205203197, guid: e3805a06ab031514b8365c38566df8f9, type: 3}
+  shaker: {fileID: 0}
 --- !u!1 &1668561523
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,63 +445,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &16674694288021686
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 620776619755658118, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6778770189129599431, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
-      propertyPath: m_Name
-      value: BGGrid
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -462,4 +452,3 @@ SceneRoots:
   - {fileID: 1668561527}
   - {fileID: 1499407256}
   - {fileID: 1118481742}
-  - {fileID: 16674694288021686}

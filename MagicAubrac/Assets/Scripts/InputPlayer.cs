@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Unity.Collections.Unicode;
 
 public class InputPlayer : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] private float _timerPulled;
     [HorizontalLine]
     [SerializeField] private InputJoycon _joycon;
-
-
+    [HorizontalLine]
+    [Header("Rune drawing")]
+    [SerializeField] DrawTablet _tablet;
 
     private void Awake()
 
@@ -30,7 +32,7 @@ public class InputPlayer : MonoBehaviour
         _inputActions.DrawingMap.DrinkSelectB3.Enable();
         _inputActions.DrawingMap.EmptyDrink.Enable();
         _inputActions.DrawingMap.Validate.Enable();
-
+        _tablet._inputActions = _inputActions;
     }
 
     private void Start()
@@ -46,9 +48,17 @@ public class InputPlayer : MonoBehaviour
         Debug.Log("aefzr");
         if (context.performed)
         {
-            if (_shaker.CompareRecipe())
+            if (_shaker.CompareRecipe() && _shaker.CompareRunes())
             {
                 GameManager.ClientsManager?.CurrentClient.DrinkSuceeded();
+            }
+            else if(_shaker.CompareRecipe() && !_shaker.CompareRunes())
+            {
+                GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+            }
+            else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
+            {
+                GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
             }
             else
             {
@@ -63,11 +73,13 @@ public class InputPlayer : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("pareil");
+            _tablet.enabled = true;
+            
         }
         if (context.canceled)
         {
             _shaker.RemoveRune();
+            _tablet.enabled = false;
         }
     }
     public void OnPour(InputAction.CallbackContext context)
@@ -99,7 +111,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            _tireuse.ChangeLiquid(i, true);           
+            _tireuse.ChangeLiquid(i, true);
         }
         if (context.canceled)
         {
@@ -202,4 +214,11 @@ public class InputPlayer : MonoBehaviour
         }
         yield return null;
     }
+
+    void EnableDrawing()
+    {
+        _inputActions.DrawingMap.Draw.Enable();
+    }
+
+    
 }

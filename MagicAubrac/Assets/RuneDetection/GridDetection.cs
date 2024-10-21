@@ -6,33 +6,7 @@ using UnityEngine;
 public static class GridDetection
 {
     
-    /*public GridSquare[,] NewGrid(int width,  int height, Vector2 beginningPos)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            for(int y = 0; y < height; y++)
-            {
-                this.grid[x, y] = new GridSquare(beginningPos.x - ((x - (width / 2)) * _unitSize), beginningPos.y - ((y - (height / 2))) * _unitSize, _unitSize);
-            }
-        }
-        return grid;
-    }*/
-
-    /*public List<Vector2> GetAllBlackCases(Texture2D runeTexture)
-    {
-        List<Vector2> blackCases = new List<Vector2>();
-        Color[] pixels = runeTexture.GetPixels();
-        
-        for (int i = 0; i < pixels.Length; i++)
-        {
-            if (pixels[i] == Color.black)
-            {
-                Vector2 pos = new Vector2(i % runeTexture.width - 1, (int)Mathf.Floor(i / runeTexture.width - 1));
-                blackCases.Add(pos);
-            }
-        }
-        return blackCases;
-    }*/
+    
 
     
 
@@ -76,7 +50,7 @@ public static class GridDetection
         return blackCases;
     }
 
-    public static bool IsDrawingInBlackCases(List<Vector2> points, Texture2D texture, float newSquareSize, Vector2 originPoint)
+    public static bool IsDrawingInBlackCases(List<Vector2> points, Texture2D texture, float newSquareSize, Vector2 originPoint, float margin = 0.1f)
     {
         List<GridSquare> blackCases = GetAllBlackCases(texture, 50);
         foreach (Vector2 point in points)
@@ -84,7 +58,7 @@ public static class GridDetection
             for (int i = 0; i < blackCases.Count; i++)
             {
                 GridSquare square = blackCases[i];
-                if (square.DoesContainPoint(point, 0.1f, newSquareSize, originPoint))
+                if (square.DoesContainPoint(point, margin, newSquareSize, originPoint))
                 {
                     square.isOccupied = true;
                     break;
@@ -131,11 +105,11 @@ public class GridSquare
 
     public bool DoesContainPoint(Vector2 point, float margin, float newSquareSize, Vector2 originPoint)
     {
-        float minX = (_posX - margin) * newSquareSize + originPoint.x;
-        float maxX = (_posX + 1 + margin) * newSquareSize + originPoint.x;
+        float minX = (_posX /*- margin*/) * newSquareSize + originPoint.x;
+        float maxX = (_posX + 1/* + margin*/) * newSquareSize + originPoint.x;
         
-        float minY = (_posY - margin) * newSquareSize + originPoint.y;
-        float maxY = ((_posY + 1 + margin) * newSquareSize + +originPoint.y);
+        float minY = (_posY/* - margin*/) * newSquareSize + originPoint.y;
+        float maxY = ((_posY + 1 /*+ margin*/) * newSquareSize + +originPoint.y);
 
         //Debug.Log(minX + " < " + point.x + " < " + maxX + " || " + "(" + _posY  + "-" + margin + ") * " + newSquareSize + " + " + originPoint.y + " = " + minY + " < " + point.y + " < " + maxY);
 

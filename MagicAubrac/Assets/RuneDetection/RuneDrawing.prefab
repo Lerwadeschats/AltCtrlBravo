@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 126
   m_Sprite: {fileID: 21300000, guid: 92ff6c51c474ca648a1dc69db21f9615, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -94,8 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 620776619755658118}
   - component: {fileID: 3967387251844597624}
+  - component: {fileID: 4936300943266095095}
   m_Layer: 0
-  m_Name: BGGrid
+  m_Name: RuneDrawing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6778770189129599431}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2, y: 2, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
@@ -157,7 +158,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 125
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -169,3 +170,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4936300943266095095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6778770189129599431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a678197a41b09469863f1ac066c5b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allRunes:
+  - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
+  - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
+  - {fileID: 11400000, guid: cbf9371ed2df60840a71d2785490a78f, type: 2}
+  - {fileID: 11400000, guid: 59db035394bebaa4693744d724f16812, type: 2}
+  - {fileID: 11400000, guid: 443d730dc40b4154991c0ce2292c0dbf, type: 2}
+  - {fileID: 11400000, guid: 9abae93bae8faf047971e83f7e50d32b, type: 2}
+  - {fileID: 11400000, guid: f537b45a20f84274489acfc3326aae4f, type: 2}
+  - {fileID: 11400000, guid: da0d8cb3913e5c645b25c18cd91a8511, type: 2}
+  _drawnRunes: []
+  _drawingPrefab: {fileID: 4918965520205203197, guid: e3805a06ab031514b8365c38566df8f9, type: 3}
+  shaker: {fileID: 0}

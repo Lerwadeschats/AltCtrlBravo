@@ -56,12 +56,26 @@ public class Client : MonoBehaviour
     public void DrinkFailed()
     {
         // - vie
+        Debug.Log("Flop");
         DrinkComplete();
     }
 
     public void DrinkSuceeded()
     {
         // + score
+        Debug.Log("Yes");
+        DrinkComplete();
+    }
+    public void DrinkRunesOnly()
+    {
+        // jsp
+        Debug.Log("FlopDrink");
+        DrinkComplete();
+    }
+    public void DrinkTasteOnly()
+    {
+        // jsp
+        Debug.Log("FlopRunes");
         DrinkComplete();
     }
 
