@@ -28,13 +28,16 @@ public class PlayerHealth : MonoBehaviour
 
     public void LoseHealth()
     {
-        _currentHealth -= _healthStep;
-        OnLoseHealth?.Invoke(CurrentHealth);
-
-        if (_currentHealth == 0f)
+        if (_currentHealth > 0f)
         {
-            OnLose?.Invoke();
-            GameManager.LoseWinManager?.Lose();
+            _currentHealth -= _healthStep;
+            OnLoseHealth?.Invoke(CurrentHealth);
+
+            if (_currentHealth == 0f)
+            {
+                OnLose?.Invoke();
+                GameManager.LoseWinManager?.Lose();
+            }
         }
     }
 }

@@ -587,6 +587,7 @@ GameObject:
   - component: {fileID: 5562734960232079790}
   - component: {fileID: 5713861620563052260}
   - component: {fileID: 2643271583713538472}
+  - component: {fileID: 9179464291834869911}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -634,7 +635,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -679,6 +680,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9179464291834869911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6954024013006983068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1668ccc7d6809b4fa8445a8140a6e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _uiMenu: {fileID: 1398543759845728992}
 --- !u!1001 &2549244252207765730
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -788,6 +802,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
+--- !u!1 &1398543759845728992 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3461047133698619906, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
+  m_PrefabInstance: {fileID: 2549244252207765730}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6365448377551868343 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8878320785112697173, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
