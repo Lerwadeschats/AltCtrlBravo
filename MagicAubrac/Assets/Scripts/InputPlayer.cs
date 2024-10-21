@@ -53,36 +53,39 @@ public class InputPlayer : MonoBehaviour
         {
             Client currentClient = GameManager.ClientsManager?.CurrentClient;
             if (currentClient != null)
-            if (_shaker.CompareRecipe() && _shaker.CompareRunes())
             {
-                if (_shaker.CompareRecipe())
+                if (_shaker.CompareRecipe() && _shaker.CompareRunes())
                 {
-                    OnDrinkSucceeded?.Invoke();
-                    currentClient.DrinkSuceeded();
+                    if (_shaker.CompareRecipe())
+                    {
+                        OnDrinkSucceeded?.Invoke();
+                        currentClient.DrinkSuceeded();
+                    }
+                    else
+                    {
+                        OnDrinkFailed?.Invoke();
+                        currentClient.DrinkFailed();
+
+                    }
+                    _shaker.EmptyShaker();
+                    _shaker.RemoveRune();
+                }
+                else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
+                {
+                    GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+                }
+                else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
+                {
+                    GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
                 }
                 else
                 {
-                    OnDrinkFailed?.Invoke();
-                    currentClient.DrinkFailed();
-
+                    GameManager.ClientsManager?.CurrentClient.DrinkFailed();
                 }
                 _shaker.EmptyShaker();
                 _shaker.RemoveRune();
             }
-            else if(_shaker.CompareRecipe() && !_shaker.CompareRunes())
-            {
-                GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
-            }
-            else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
-            {
-                GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
-            }
-            else
-            {
-                GameManager.ClientsManager?.CurrentClient.DrinkFailed();
-            }
-            _shaker.EmptyShaker();
-            _shaker.RemoveRune();
+            
         }
     }
 
