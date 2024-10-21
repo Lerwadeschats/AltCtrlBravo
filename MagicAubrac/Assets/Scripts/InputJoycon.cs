@@ -97,28 +97,27 @@ public class InputJoycon : MonoBehaviour
         }
         _isInShakeExtension = false;
         OnStopShaking?.Invoke(_timerShake);
-        Debug.Log("COUOCU");
     }
 
-    private void OnGUI()
-    {
-        string debug;
-        if (_isShaking && !_isInShakeExtension)
-        {
-            debug = $"SHAKING {_timerShake}";
-        }
-        else if (!_isShaking && _isInShakeExtension)
-        {
-            debug = $"SHAKING EXTENSION {_timerShake}";
-        } else if (!_isShaking && !_isInShakeExtension)
-        {
-            debug = "NOT SHAKING";
-        } else
-        {
-            debug = "??? ";
-        }
-        debug += $" {_gyro}";
-        GUI.skin.label.fontSize = 30;
-        GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
-    }
+    //private void OnGUI()
+    //{
+    //    string debug;
+    //    if (_isShaking && !_isInShakeExtension)
+    //    {
+    //        debug = $"SHAKING {_timerShake}";
+    //    }
+    //    else if (!_isShaking && _isInShakeExtension)
+    //    {
+    //        debug = $"SHAKING EXTENSION {_timerShake}";
+    //    } else if (!_isShaking && !_isInShakeExtension)
+    //    {
+    //        debug = "NOT SHAKING";
+    //    } else
+    //    {
+    //        debug = "??? ";
+    //    }
+    //    debug += $" {_gyro}";
+    //    GUI.skin.label.fontSize = 30;
+    //    GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+    //}
 }

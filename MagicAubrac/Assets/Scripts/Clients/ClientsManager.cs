@@ -9,6 +9,7 @@ public class ClientsManager : MonoBehaviour
 {
     private Coroutine _coroutineSpawnClient;
 
+    [SerializeField] private RecipesManager _recipesManager;
     [SerializeField] private GameObject _parentObject;
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
@@ -141,7 +142,8 @@ public class ClientsManager : MonoBehaviour
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
             newClient.OnClientCompleted += OnClientCompleted;
-            newClient.LoadClient(waitEndlessly);
+            Recipe recipe = _recipesManager?.GetRandomRecipe();
+            newClient.LoadClient(recipe,waitEndlessly);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
@@ -168,44 +170,44 @@ public class ClientsManager : MonoBehaviour
         client.OnClientCompleted -= OnClientCompleted;
     }
 
-    private void Update()
-    {
-        //if(Input.GetKeyDown(KeyCode.V))
-        //{
-        //    Debug.Log("Client finished with success");
-        //    CurrentClient?.DrinkSuceeded();
-        //}
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    Debug.Log("Client finished with fail");
-        //    CurrentClient?.DrinkFailed();
-        //}
-        //if (Input.GetKeyDown(KeyCode.X))
-        //{
-        //    Debug.Log("Client added");
-        //    AddNewClient();
-        //}
-    }
+    //private void Update()
+    //{
+    //    //if(Input.GetKeyDown(KeyCode.V))
+    //    //{
+    //    //    Debug.Log("Client finished with success");
+    //    //    CurrentClient?.DrinkSuceeded();
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.C))
+    //    //{
+    //    //    Debug.Log("Client finished with fail");
+    //    //    CurrentClient?.DrinkFailed();
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.X))
+    //    //{
+    //    //    Debug.Log("Client added");
+    //    //    AddNewClient();
+    //    //}
+    //}
 
-    private void OnGUI()
-    {
+    //private void OnGUI()
+    //{
 
-        StringBuilder guiOutput = new StringBuilder("Clients visible: \n");
-        if (ClientsInQueue != null)
-        {
-            foreach (Client client in ClientsInQueue)
-            {
-                guiOutput.AppendLine(client.GetDebugString());
-            }
-        }
-        guiOutput.Append("Clients in background: \n");
-        if (ClientsInBackgroundQueue != null)
-        {
-            foreach (Client client in ClientsInBackgroundQueue)
-            {
-                guiOutput.AppendLine(client.GetDebugString());
-            }
-        }
-        GUILayout.Label(guiOutput.ToString());
-    }
+    //    StringBuilder guiOutput = new StringBuilder("Clients visible: \n");
+    //    if (ClientsInQueue != null)
+    //    {
+    //        foreach (Client client in ClientsInQueue)
+    //        {
+    //            guiOutput.AppendLine(client.GetDebugString());
+    //        }
+    //    }
+    //    guiOutput.Append("Clients in background: \n");
+    //    if (ClientsInBackgroundQueue != null)
+    //    {
+    //        foreach (Client client in ClientsInBackgroundQueue)
+    //        {
+    //            guiOutput.AppendLine(client.GetDebugString());
+    //        }
+    //    }
+    //    GUILayout.Label(guiOutput.ToString());
+    //}
 }

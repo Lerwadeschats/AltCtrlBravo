@@ -106,6 +106,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8374278055072173122}
     m_Modifications:
+    - target: {fileID: 321090223778776507, guid: ece5d79c721610c49a09161d9e0a1825, type: 3}
+      propertyPath: _recipesManager
+      value: 
+      objectReference: {fileID: 1626666110128440133}
     - target: {fileID: 1415618511963100328, guid: ece5d79c721610c49a09161d9e0a1825, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -302,6 +306,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57140490bfdbf8f4db90df39fb67c9e9, type: 3}
+--- !u!114 &1626666110128440133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5790689208094551272, guid: 57140490bfdbf8f4db90df39fb67c9e9, type: 3}
+  m_PrefabInstance: {fileID: 5102504791791546285}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0187ba75fc709974889123aef47cbe95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5730999721466153360 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 668543695895455293, guid: 57140490bfdbf8f4db90df39fb67c9e9, type: 3}
