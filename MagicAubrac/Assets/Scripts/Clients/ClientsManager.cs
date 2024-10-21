@@ -25,6 +25,7 @@ public class ClientsManager : MonoBehaviour
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
     public event Action<Client> OnClientWalkInForeground;
+    public event Action OnClientFailed;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -142,6 +143,7 @@ public class ClientsManager : MonoBehaviour
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
             newClient.OnClientCompleted += OnClientCompleted;
+            newClient.OnDrinkFailed += OnDrinkFailed;
             Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.LoadClient(recipe,waitEndlessly);
             
@@ -163,11 +165,17 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
+    private void OnDrinkFailed(Client obj)
+    {
+        OnClientFailed?.Invoke();
+    }
+
     private void OnClientCompleted(Client client)
     {
         ChangeClient();
         UpdatePositionsClients();
         client.OnClientCompleted -= OnClientCompleted;
+        client.OnDrinkFailed -= OnDrinkFailed;
     }
 
     //private void Update()

@@ -72,7 +72,7 @@ public class InputPlayer : MonoBehaviour
                 else
                 {
                     OnDrinkFailed?.Invoke();
-                    GameManager.ClientsManager?.CurrentClient.DrinkFailed();
+                    GameManager.ClientsManager?.CurrentClient.DrinkComplete();
                 }
                 _shaker.EmptyShaker();
                 _shaker.RemoveRune();

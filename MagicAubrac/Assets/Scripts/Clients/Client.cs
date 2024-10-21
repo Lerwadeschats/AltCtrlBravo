@@ -20,6 +20,7 @@ public class Client : MonoBehaviour
     public bool _waitEndlessly;
 
     public event Action<Client> OnClientCompleted;
+    public event Action<Client> OnDrinkFailed;
 
     private void Start()
     {
@@ -57,13 +58,12 @@ public class Client : MonoBehaviour
             yield return null;
         }
         Debug.Log("Wait for too long");
-        DrinkFailed();
+        DrinkTooLateFailed();
     }
 
-    public void DrinkFailed()
+    public void DrinkTooLateFailed()
     {
-        // - vie
-        Debug.Log("Flop");
+        OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
 

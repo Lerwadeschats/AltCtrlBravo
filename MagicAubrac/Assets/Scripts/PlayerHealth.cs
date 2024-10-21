@@ -21,6 +21,11 @@ public class PlayerHealth : MonoBehaviour
         _inputs.OnDrinkFailed += OnDrinkFailed;
     }
 
+    private void Start()
+    {
+        GameManager.ClientsManager.OnClientFailed += OnDrinkFailed;
+    } 
+
     private void OnDrinkFailed()
     {
         LoseHealth();
