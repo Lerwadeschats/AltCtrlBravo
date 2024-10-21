@@ -191,7 +191,7 @@ public partial class @DrawingAction: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2be9d33a-203f-4bbc-9c94-e45d5516c870"",
-                    ""path"": ""<Keyboard>/p"",
+                    ""path"": ""<Keyboard>/o"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
