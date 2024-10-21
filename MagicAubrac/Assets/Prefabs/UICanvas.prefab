@@ -1142,14 +1142,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5754239374052452137, guid: 49b3a43ab15b7044fa866c206d7ebd36, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5754239374052452137, guid: 49b3a43ab15b7044fa866c206d7ebd36, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7815560364041043076, guid: 49b3a43ab15b7044fa866c206d7ebd36, type: 3}
       propertyPath: m_Name
       value: UIRecipe (2)
