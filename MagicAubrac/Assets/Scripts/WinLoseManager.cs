@@ -1,3 +1,4 @@
+using IIMEngine.Music;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,11 @@ public class WinLoseManager : MonoBehaviour
     private void Awake()
     {
         GameManager.LoseWinManager = this;
+    }
+
+    private void Start()
+    {
+        MusicsGlobals.PlaylistManager.PlayMusic("Main");
     }
 
     public void Lose()
