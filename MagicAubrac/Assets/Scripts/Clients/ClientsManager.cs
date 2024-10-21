@@ -45,12 +45,14 @@ public class ClientsManager : MonoBehaviour
         GameManager.ClientsManager = this;
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
-        AddNewClient(true); //For it to be accessible in the start of UIRecipes
+        
     }
 
     void Start()
     {
+        AddNewClient(true); //For it to be accessible in the start of UIRecipes => grand respect mais ca floppe dans l'Awake
         _menuManager = GameManager.MenuManager;
+        
     }
 
     GameObject GetRandomClient()

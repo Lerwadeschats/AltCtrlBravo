@@ -11,6 +11,7 @@ public class RecipesManager : MonoBehaviour
     private void Awake()
     {
         GameManager.RecipesManager = this;
+        
     }
 
     public Recipe GetRandomRecipe()

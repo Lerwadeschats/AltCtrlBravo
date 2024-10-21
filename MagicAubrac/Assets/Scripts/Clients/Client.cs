@@ -29,7 +29,9 @@ public class Client : MonoBehaviour
     //When client is instantiate in list
     public void LoadClient(bool waitEndlessly = false)
     {
+        
         Recipe = GameManager.RecipesManager.GetRandomRecipe();
+        
         _waitEndlessly = waitEndlessly;
     }
 
