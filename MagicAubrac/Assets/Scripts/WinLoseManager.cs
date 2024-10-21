@@ -13,11 +13,6 @@ public class WinLoseManager : MonoBehaviour
         GameManager.LoseWinManager = this;
     }
 
-    private void Start()
-    {
-        MusicsGlobals.PlaylistManager.PlayMusic("Main");
-    }
-
     public void Lose()
     {
         OnLose?.Invoke();
