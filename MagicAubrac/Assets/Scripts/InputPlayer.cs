@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,9 @@ public class InputPlayer : MonoBehaviour
     [HorizontalLine]
     [Header("Rune drawing")]
     [SerializeField] DrawTablet _tablet;
+
+    public event Action OnDrinkSucceeded;
+    public event Action OnDrinkFailed;
 
     private void Awake()
 
@@ -45,12 +49,25 @@ public class InputPlayer : MonoBehaviour
 
     public void OnValidation(InputAction.CallbackContext context)
     {
-        Debug.Log("aefzr");
         if (context.performed)
         {
+            Client currentClient = GameManager.ClientsManager?.CurrentClient;
+            if (currentClient != null)
             if (_shaker.CompareRecipe() && _shaker.CompareRunes())
             {
-                GameManager.ClientsManager?.CurrentClient.DrinkSuceeded();
+                if (_shaker.CompareRecipe())
+                {
+                    OnDrinkSucceeded?.Invoke();
+                    currentClient.DrinkSuceeded();
+                }
+                else
+                {
+                    OnDrinkFailed?.Invoke();
+                    currentClient.DrinkFailed();
+
+                }
+                _shaker.EmptyShaker();
+                _shaker.RemoveRune();
             }
             else if(_shaker.CompareRecipe() && !_shaker.CompareRunes())
             {

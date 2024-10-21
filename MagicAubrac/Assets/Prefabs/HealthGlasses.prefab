@@ -1,0 +1,321 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7980661503125503327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815902358578870714}
+  - component: {fileID: 26210963758831824}
+  m_Layer: 0
+  m_Name: HealthGlasses
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1815902358578870714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7980661503125503327}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1261666456359179136}
+  - {fileID: 8168681760439183177}
+  - {fileID: 6528477645481541161}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26210963758831824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7980661503125503327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7513435ccf7e1944d8f8af8f728d9506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthSprites:
+  - {fileID: 2686398235023119027}
+  - {fileID: 5014383024543508090}
+  - {fileID: 7949866917825347354}
+  _playerHealth: {fileID: 0}
+--- !u!1001 &2482377159535385188
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1815902358578870714}
+    m_Modifications:
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _noHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 11a7f582585c56546bde957ed1b03fce, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _midHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d7b94f1023c79e041a7a60bd3e32bab2, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _fullHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7dc1b5d748c753347aa758c9c9b27f80, type: 3}
+    - target: {fileID: 3561734397084915239, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7dc1b5d748c753347aa758c9c9b27f80, type: 3}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135925357922015795, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Name
+      value: HealthGlass
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+--- !u!4 &1261666456359179136 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 2482377159535385188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2686398235023119027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 2482377159535385188}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d48c7fd81b014429719d5037e23574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &4804644686231137965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1815902358578870714}
+    m_Modifications:
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _noHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 28d97251e3033d3408b92f90bfbc88eb, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _midHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b9f16173f3a6b8841bfc1a46074f9e85, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _fullHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 651f112408ff02547b8b231961762244, type: 3}
+    - target: {fileID: 3561734397084915239, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 651f112408ff02547b8b231961762244, type: 3}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135925357922015795, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Name
+      value: HealthGlass (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+--- !u!114 &5014383024543508090 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 4804644686231137965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d48c7fd81b014429719d5037e23574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &8168681760439183177 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 4804644686231137965}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7595520876300711885
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1815902358578870714}
+    m_Modifications:
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _noHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 68270dd7c60ba1e43b43bc00f970e908, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _midHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e688c023a82abdc4fa19349dbba3c987, type: 3}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: _fullHeartSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 23e0be63f66d9174482d2412526279fa, type: 3}
+    - target: {fileID: 3561734397084915239, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 23e0be63f66d9174482d2412526279fa, type: 3}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135925357922015795, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: m_Name
+      value: HealthGlass (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+--- !u!4 &6528477645481541161 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3742907089433315812, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 7595520876300711885}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7949866917825347354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+  m_PrefabInstance: {fileID: 7595520876300711885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d48c7fd81b014429719d5037e23574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

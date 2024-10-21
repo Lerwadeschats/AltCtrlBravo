@@ -23,16 +23,15 @@ public class JoyconDemo : MonoBehaviour {
         joycons = JoyconManager.Instance.j;
 	}
 
-    // Update is called once per frame
     void Update () {
 		// make sure the Joycon only gets checked if attached
 		if (joycons.Count > 0)
         {
 			Joycon joycon = joycons [0];
 
-            // Accel values:  x, y, z axis values (in Gs)
             _gyro = joycon.GetGyro();
             float magnitude = _gyro.magnitude;
+
             if (magnitude > _thresholdShaking)
             {
                 //Started shaking

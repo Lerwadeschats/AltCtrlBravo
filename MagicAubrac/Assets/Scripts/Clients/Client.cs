@@ -8,6 +8,7 @@ public class Client : MonoBehaviour
     [SerializeField] private float _waitingDuration = 10f;
     private float _remainingWaitingDuration;
     private Coroutine _coroutineWait; // Will be stopped if go is destroyed
+    private MenuManager _menuManager;
 
     public float RemainingWaitingDuration { 
         get => _remainingWaitingDuration;
@@ -18,8 +19,13 @@ public class Client : MonoBehaviour
 
     public bool _waitEndlessly;
 
-    public event Action<Client> OnClientCompleted; 
-    
+    public event Action<Client> OnClientCompleted;
+
+    private void Start()
+    {
+        _menuManager = GameManager.MenuManager;
+    }
+
     //When client is instantiate in list
     public void LoadClient(bool waitEndlessly = false)
     {
@@ -37,15 +43,16 @@ public class Client : MonoBehaviour
                 StopCoroutine(_coroutineWait);
                 _coroutineWait = null;
             }
+            _remainingWaitingDuration = _waitingDuration;
             _coroutineWait = StartCoroutine(RoutineWaitRecipe());
         }
     }
 
     IEnumerator RoutineWaitRecipe()
     {
-        _remainingWaitingDuration = _waitingDuration;
         while (_remainingWaitingDuration > 0f)
         {
+            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
             _remainingWaitingDuration -= Time.deltaTime;
             yield return null;
         }
