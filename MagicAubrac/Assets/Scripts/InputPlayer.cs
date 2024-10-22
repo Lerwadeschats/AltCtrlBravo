@@ -61,28 +61,38 @@ public class InputPlayer : MonoBehaviour
             {
                 if (_shaker.IsDrawnRunesFull())
                 {
-                    _shaker.CompletedFull++;
-                    OnDrinkSucceeded?.Invoke();
-                    _scoreUI.changeScoreP(_shaker.CompletedFull);
-                    currentClient.DrinkSuceeded();
-                }
-                else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
-                {
-                    _shaker.CompletedCocktail++;
-                    OnDrinkTasteOnly?.Invoke();
-                    _scoreUI.changeScoreD(_shaker.CompletedCocktail);
-                    GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
-                }
-                else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
-                {
-                    _shaker.CompletedRune++;
-                    OnDrinkRunesOnly?.Invoke();
-                    _scoreUI.changeScoreR(_shaker.CompletedRune);
-                    GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
+                    if (_shaker.CompareRecipe() && _shaker.CompareRunes())
+                    {
+                        _shaker.CompletedFull++;
+                        OnDrinkSucceeded?.Invoke();
+                        _scoreUI.changeScoreP(_shaker.CompletedFull);
+                        currentClient.DrinkSuceeded();
+
+                    }
+
+                    else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
+                    {
+                        _shaker.CompletedCocktail++;
+                        OnDrinkTasteOnly?.Invoke();
+                        _scoreUI.changeScoreD(_shaker.CompletedCocktail);
+                        GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+                    }
+                    else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
+                    {
+                        _shaker.CompletedRune++;
+                        OnDrinkRunesOnly?.Invoke();
+                        _scoreUI.changeScoreR(_shaker.CompletedRune);
+                        GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
+                    }
+                    else
+                    {
+                        OnDrinkFailed?.Invoke();
+                        GameManager.ClientsManager?.CurrentClient.DrinkComplete();
+                    }
                 }
                 else
                 {
-                    
+
                     _tablet.ResetRuneDrawing();
                 }
                 
