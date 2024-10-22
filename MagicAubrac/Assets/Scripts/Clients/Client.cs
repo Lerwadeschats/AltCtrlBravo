@@ -1,19 +1,28 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Client : MonoBehaviour
 {
+    [SerializeField] private float _speed = 30f; 
     [SerializeField] private float _waitingDuration = 10f;
+
+    [SerializeField] private float _floatingPointMovement = 0.001f;
+    [SerializeField] private float _heightPeriodMovement = 0.2f;
+    [SerializeField] private float _widthPeriodMovement = 0.2f;
+    private float _timerMovement = 0f;
+    
     private float _remainingWaitingDuration;
     private Coroutine _coroutineWait; // Will be stopped if go is destroyed
+    private Coroutine _coroutineMovement; // Will be stopped if go is destroyed
     private MenuManager _menuManager;
+    private bool _isComplete = false;
 
     public float RemainingWaitingDuration { 
         get => _remainingWaitingDuration;
     }
 
+    public GameObject EndPosition { get; set; }
     public Recipe Recipe { get; private set; }
     public float WaitingDuration { get => _waitingDuration;}
 
@@ -21,10 +30,12 @@ public class Client : MonoBehaviour
 
     public event Action<Client> OnClientCompleted;
     public event Action<Client> OnDrinkFailed;
+    public event Action OnPositionReached;
 
     private void Start()
     {
         _menuManager = GameManager.MenuManager;
+        OnPositionReached += PositionReached;
     }
 
     //When client is instantiate in list
@@ -90,9 +101,41 @@ public class Client : MonoBehaviour
     public void DrinkComplete()
     {
         OnClientCompleted?.Invoke(this);
-        Destroy(gameObject);
-        //StopCoroutine(_coroutineWait);
-        //_coroutineWait = null;
+        MoveTo(EndPosition == null ? Vector3.zero:EndPosition.transform.position);
+        _isComplete = true;
+    }
+
+    public void MoveTo(Vector3 destination)
+    {
+        if (_coroutineMovement != null)
+        {
+            StopCoroutine(_coroutineMovement);
+            _coroutineMovement = null;
+        }
+        _coroutineMovement = StartCoroutine(MoveToRoutine(destination));
+    }
+
+    IEnumerator MoveToRoutine(Vector3 destination)
+    {
+        while (Mathf.Abs(transform.position.x - destination.x) > _floatingPointMovement)
+        {
+            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+
+            _timerMovement += Time.deltaTime;
+            transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * _speed);
+
+            yield return null;
+        }
+
+        OnPositionReached?.Invoke();
+    }
+
+    private void PositionReached()
+    {
+        if (_isComplete)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public string GetDebugString()

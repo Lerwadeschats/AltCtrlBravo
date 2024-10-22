@@ -400,6 +400,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba7e361397587b4b9d433b0cdcb1115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8814560021993816352 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8976614272056616109, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+  m_PrefabInstance: {fileID: 486613874996405645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8938914113235797746 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8848917663385822079, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
@@ -551,6 +556,10 @@ PrefabInstance:
       propertyPath: _timerPulled
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2512340926353586414, guid: 85f5d2f6ed2fc674aab15ba355b961e6, type: 3}
+      propertyPath: _endPosition
+      value: 
+      objectReference: {fileID: 8814560021993816352}
     - target: {fileID: 2512340926353586414, guid: 85f5d2f6ed2fc674aab15ba355b961e6, type: 3}
       propertyPath: _parentObject
       value: 

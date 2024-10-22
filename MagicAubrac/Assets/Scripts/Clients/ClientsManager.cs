@@ -14,6 +14,7 @@ public class ClientsManager : MonoBehaviour
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
     [SerializeField] private GameObject _remainingQueuePosition;
+    [SerializeField] private GameObject _endPosition;
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
@@ -118,7 +119,7 @@ public class ClientsManager : MonoBehaviour
         {
             for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
             {
-                ClientsInQueue[i].transform.position = _clientsPositions[i].transform.position;
+                ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
     }
@@ -130,21 +131,22 @@ public class ClientsManager : MonoBehaviour
         {
             GameObject newClientPrefab = GetRandomClient();
             Vector3 position;
-            
-            if (ClientsInQueue.Count < _nbClientsShown &&
-                ClientsInBackgroundQueue.Count == 0 && 
-                ClientsInQueue.Count < _clientsPositions.Count)
-            {
-                position = _clientsPositions[ClientsInQueue.Count].transform.position;
-            } else
-            {
-                position = _remainingQueuePosition.transform.position;
-            }
+
+            position = _remainingQueuePosition.transform.position;
+
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
+
+            if (ClientsInQueue.Count < _nbClientsShown &&
+                ClientsInBackgroundQueue.Count == 0 &&
+                ClientsInQueue.Count < _clientsPositions.Count)
+            {
+                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
+            }
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkFailed += OnDrinkFailed;
             Recipe recipe = _recipesManager?.GetRandomRecipe();
+            newClient.EndPosition = _endPosition;
             newClient.LoadClient(recipe,waitEndlessly);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
