@@ -93,7 +93,7 @@ public class InputPlayer : MonoBehaviour
                 else
                 {
 
-                    _tablet.ResetRuneDrawing();
+                    _tablet.ValidateRuneDrawing();
                 }
                 
             }
@@ -105,13 +105,16 @@ public class InputPlayer : MonoBehaviour
     {
         if (context.started)
         {
+            _tablet.gameObject.SetActive(true);
             _tablet.enabled = true;
             
         }
         if (context.canceled)
         {
             _shaker.RemoveRune();
+            _tablet.ResetDrawing();
             _tablet.enabled = false;
+            _tablet.gameObject.SetActive(false);
         }
     }
     public void OnPour(InputAction.CallbackContext context)

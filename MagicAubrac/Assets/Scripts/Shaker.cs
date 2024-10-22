@@ -79,6 +79,7 @@ public class Shaker : MonoBehaviour
     public void RemoveRune()
     {
         _runes.Clear();
+        
     }
     public void Shake(float duration)
     {

@@ -93,13 +93,18 @@ public class DrawTablet : MonoBehaviour
         
     }
 
-    public void ResetRuneDrawing()
+    public void ValidateRuneDrawing()
     {
         GetDrawnRune();
-        
+        ResetDrawing();
+    }
+
+    public void ResetDrawing()
+    {
+
         _blackCasesPos.Clear();
         _drawPos.Clear();
-        
+
         if (_drawingTrail.Count > 0)
         {
             foreach (var trail in _drawingTrail)
