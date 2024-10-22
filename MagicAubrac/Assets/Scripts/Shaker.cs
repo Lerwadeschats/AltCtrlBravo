@@ -12,6 +12,7 @@ public class Shaker : MonoBehaviour
     ClientsManager _clients;
     [SerializeField] float _shakeDurationMin = 3;
     [SerializeField] GameObject[] _ui;
+     
 
     private bool[] _shakenAtStep = new bool[5];
     int _currentLayerCocktail;
@@ -20,8 +21,8 @@ public class Shaker : MonoBehaviour
     int _completedRune;
 
     public int CompletedFull { get => _completedFull; set => _completedFull = value; }
-    public int CompletedCocktail { get => _completedFull; set => _completedFull = value; }
-    public int CompletedRune{ get => _completedFull; set => _completedFull = value; }
+    public int CompletedCocktail { get => _completedCocktail; set => _completedCocktail = value; }
+    public int CompletedRune{ get => _completedRune; set => _completedRune = value; }
 
     private void Start()
     {

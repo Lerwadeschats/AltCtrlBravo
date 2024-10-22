@@ -17,6 +17,7 @@ public class InputPlayer : MonoBehaviour
     [HorizontalLine]
     [Header("Rune drawing")]
     [SerializeField] DrawTablet _tablet;
+    ScoreDisplay _scoreUI;
 
     public event Action OnDrinkSucceeded;
     public event Action OnDrinkFailed;
@@ -26,6 +27,7 @@ public class InputPlayer : MonoBehaviour
     private void Awake()
 
     {
+        _scoreUI = FindObjectOfType<ScoreDisplay>();
         _inputActions = new DrawingAction();
         _inputActions.DrawingMap.DrinkPour1.Enable();
         _inputActions.DrawingMap.DrinkPour2.Enable();
@@ -59,31 +61,24 @@ public class InputPlayer : MonoBehaviour
             {
                 if (_shaker.IsDrawnRunesFull())
                 {
-                    if (_shaker.CompareRecipe() && _shaker.CompareRunes())
-                    {
-                        _shaker.CompletedFull++;
-                        OnDrinkSucceeded?.Invoke();
-                        currentClient.DrinkSuceeded();
-                    }
-                    else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
-                    {
-                        _shaker.CompletedCocktail++;
-                        OnDrinkTasteOnly?.Invoke();
-                        GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
-                    }
-                    else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
-                    {
-                        _shaker.CompletedRune++;
-                        OnDrinkRunesOnly?.Invoke();
-                        GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
-                    }
-                    else
-                    {
-                        OnDrinkFailed?.Invoke();
-                        GameManager.ClientsManager?.CurrentClient.DrinkComplete();
-                    }
-                    _shaker.EmptyShaker();
-                    _shaker.RemoveRune();
+                    _shaker.CompletedFull++;
+                    OnDrinkSucceeded?.Invoke();
+                    _scoreUI.changeScoreP(_shaker.CompletedFull);
+                    currentClient.DrinkSuceeded();
+                }
+                else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
+                {
+                    _shaker.CompletedCocktail++;
+                    OnDrinkTasteOnly?.Invoke();
+                    _scoreUI.changeScoreD(_shaker.CompletedCocktail);
+                    GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+                }
+                else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
+                {
+                    _shaker.CompletedRune++;
+                    OnDrinkRunesOnly?.Invoke();
+                    _scoreUI.changeScoreR(_shaker.CompletedRune);
+                    GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
                 }
                 else
                 {
