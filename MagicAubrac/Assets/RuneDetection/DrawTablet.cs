@@ -15,11 +15,12 @@ public class DrawTablet : MonoBehaviour
     Vector2 _beginningPos;
     Vector2 _currentPos;
 
-    List<Vector2> _drawPos = new List<Vector2>();
+    [SerializeField] List<Vector2> _drawPos = new List<Vector2>();
 
     SpriteRenderer _gridSprite;
 
     [SerializeField] List<RuneObject> _allRunes = new List<RuneObject>();
+    [SerializeField] UIRunes _uiRunes;
     public List<RuneObject> _drawnRunes = new List<RuneObject>();
 
     List<TrailRenderer> _drawingTrail = new List<TrailRenderer>();
@@ -41,7 +42,10 @@ public class DrawTablet : MonoBehaviour
     private void Awake()
     {
         _gridSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
+
     }
+
+    
 
     private void OnEnable()
     {
@@ -51,9 +55,9 @@ public class DrawTablet : MonoBehaviour
         _inputActions.DrawingMap.Draw.Enable();
 
         //Debug => afficher une rune en grisé
-        /*rune = _runes[Random.Range(0, _runes.Count)];
-        float squareSizeGrid = _grid.GetComponent<SpriteRenderer>().bounds.size.x / 8;
-        Vector2 originPos = new Vector2(_grid.GetComponent<SpriteRenderer>().bounds.min.x, _grid.GetComponent<SpriteRenderer>().bounds.min.y);
+        /*rune = _allRunes[Random.Range(0, _allRunes.Count)];
+        float squareSizeGrid = _gridSprite.bounds.size.x / 8;
+        Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
         foreach (GridSquare blackCase in GridDetection.GetAllBlackCases(rune._runeDetectionMap, 50))
         {
             Instantiate(tile, new Vector2(blackCase._posX * squareSizeGrid + originPos.x + squareSizeGrid / 2, blackCase._posY * squareSizeGrid + originPos.y + squareSizeGrid / 2), Quaternion.identity);
@@ -78,6 +82,7 @@ public class DrawTablet : MonoBehaviour
         {
             if (context.started)
             {
+/*                _blackCasesPos.Clear();*/
                 _isDrawing = true;
                 _beginningPos = NewPosOnGrid(Pointer.current.position.ReadValue());
                 //Trail
@@ -102,7 +107,7 @@ public class DrawTablet : MonoBehaviour
     public void ResetDrawing()
     {
 
-        _blackCasesPos.Clear();
+        
         _drawPos.Clear();
 
         if (_drawingTrail.Count > 0)
@@ -114,22 +119,22 @@ public class DrawTablet : MonoBehaviour
             _drawingTrail.Clear();
         }
     }
-    //Add runes
     void GetDrawnRune()
     {
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
-
+        
         foreach (var rune in _allRunes)
         {
             if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
             {
                 
-                if(_drawnRunes.Count < 3)
+                if (_drawnRunes.Count < 3)
                 {
+                    
                     shaker.AddToShaker(rune);
                     _drawnRunes.Add(rune);
-                    
+                    _uiRunes.UpdateUIRunes(_drawnRunes);
                 }
             }
         }
@@ -141,8 +146,11 @@ public class DrawTablet : MonoBehaviour
         _cursor.transform.position = _currentPos;
         if (_isDrawing)
         {
+            if (!_drawPos.Contains(_currentPos))
+            {
+                _drawPos.Add(_currentPos);
+            }
             
-            _drawPos.Add(_currentPos);
             _currentTrail.transform.position = _currentPos;
         }
     }
@@ -168,6 +176,13 @@ public class DrawTablet : MonoBehaviour
         return new Vector2(newPosX, newPosY);
     }
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        foreach(Vector2 pos in _drawPos)
+        {
+            Gizmos.DrawSphere(pos, 0.08f);
+        }
+    }
 
 }

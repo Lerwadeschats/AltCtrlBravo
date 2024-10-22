@@ -52,6 +52,7 @@ public static class GridDetection
 
     public static bool IsDrawingInBlackCases(List<Vector2> points, Texture2D texture, float newSquareSize, Vector2 originPoint, float margin = 0.1f)
     {
+        
         List<GridSquare> blackCases = GetAllBlackCases(texture, 50);
         foreach (Vector2 point in points)
         {
@@ -67,7 +68,7 @@ public static class GridDetection
                 {
                     if (i == blackCases.Count - 1)
                     {
-                        //Debug.Log(point + " est hors du chemin");
+                        Debug.Log(point + " est hors du chemin");
                         return false;
                     }
                 }
@@ -78,7 +79,7 @@ public static class GridDetection
         {
             if (!square.isOccupied)
             {
-                //Debug.Log("Dessin pas fini");
+                Debug.Log("Dessin pas fini");
                 return false;
             }
         }

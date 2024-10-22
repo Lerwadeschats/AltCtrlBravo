@@ -94,6 +94,7 @@ public class InputPlayer : MonoBehaviour
                 {
 
                     _tablet.ValidateRuneDrawing();
+                    
                 }
                 
             }

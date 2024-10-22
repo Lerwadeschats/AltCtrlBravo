@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &620776619755658118
 Transform:
   m_ObjectHideFlags: 0
@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a678197a41b09469863f1ac066c5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gridSprite: {fileID: 4756958087202824027}
   _allRunes:
   - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
   - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
