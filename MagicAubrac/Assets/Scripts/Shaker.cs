@@ -67,6 +67,15 @@ public class Shaker : MonoBehaviour
         _runes.Add(rune);
 
     }
+
+    public bool IsDrawnRunesFull()
+    {
+        if(_runes.Count == 3)
+        {
+            return true;
+        }
+        return false;
+    }
     public void RemoveRune()
     {
         _runes.Clear();

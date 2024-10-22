@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -9,7 +10,7 @@ public class DrawTablet : MonoBehaviour
 {
     public DrawingAction _inputActions;
 
-    bool isDrawing = false;
+    bool _isDrawing;
 
     Vector2 _beginningPos;
     Vector2 _currentPos;
@@ -21,26 +22,32 @@ public class DrawTablet : MonoBehaviour
     [SerializeField] List<RuneObject> _allRunes = new List<RuneObject>();
     public List<RuneObject> _drawnRunes = new List<RuneObject>();
 
-    TrailRenderer _drawingTrail;
+    List<TrailRenderer> _drawingTrail = new List<TrailRenderer>();
+    TrailRenderer _currentTrail;
     [SerializeField] TrailRenderer _drawingPrefab;
 
     public Shaker shaker;
 
+    [SerializeField] GameObject _cursorPrefab;
+
+    GameObject _cursor;
     //Debug
     [Header("Debug variables")]
     
     List<Vector2> _blackCasesPos = new List<Vector2>();
     RuneObject rune;
     GameObject tile;
+    
     private void Awake()
     {
-        _gridSprite = GetComponent<SpriteRenderer>();
+        _gridSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
     {
-        print("Activated");
-
+        
+        _cursor = Instantiate(_cursorPrefab, NewPosOnGrid(Pointer.current.position.ReadValue()), Quaternion.identity);
+        Cursor.visible = false;
         _inputActions.DrawingMap.Draw.Enable();
 
         //Debug => afficher une rune en grisé
@@ -57,7 +64,9 @@ public class DrawTablet : MonoBehaviour
 
     private void OnDisable()
     {
-        print("Deactivated");
+
+        Destroy(_cursor);
+        Cursor.visible = true;
         shaker.RemoveRune();
         _drawnRunes.Clear();
         _inputActions.DrawingMap.Draw.Disable();
@@ -65,47 +74,57 @@ public class DrawTablet : MonoBehaviour
 
     public void OnDraw(InputAction.CallbackContext context)
     {
-        print("fjeajfkleajfkleafjeabkjceazbncezkljvszjvezkbvkjezv");
-        if (context.started)
+        if (enabled)
         {
-            _blackCasesPos.Clear();
-            _drawPos.Clear();
-            if(_drawingTrail != null)
+            if (context.started)
             {
-                Destroy(_drawingTrail.gameObject);
+                _isDrawing = true;
+                _beginningPos = NewPosOnGrid(Pointer.current.position.ReadValue());
+                //Trail
+                _currentTrail = Instantiate(_drawingPrefab, _beginningPos, Quaternion.identity);
+                _drawingTrail.Add(_currentTrail);
+                _currentTrail.AddPosition(_beginningPos);
             }
-
-            //Start drawing
-            isDrawing = true;
-            _beginningPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
-
-            //Trail
-            _drawingTrail = Instantiate(_drawingPrefab, _beginningPos, Quaternion.identity);
-            _drawingTrail.AddPosition(_beginningPos);
+            else if (context.canceled)
+            {
+                _isDrawing = false;
+            }
         }
-        else if (context.canceled)
-        {
-            isDrawing = false;
-            GetDrawnRune(_drawPos);
-        }
+        
     }
 
+    public void ResetRuneDrawing()
+    {
+        GetDrawnRune();
+        
+        _blackCasesPos.Clear();
+        _drawPos.Clear();
+        
+        if (_drawingTrail.Count > 0)
+        {
+            foreach (var trail in _drawingTrail)
+            {
+                Destroy(trail.gameObject);
+            }
+            _drawingTrail.Clear();
+        }
+    }
     //Add runes
-    void GetDrawnRune(List<Vector2> drawPosList)
+    void GetDrawnRune()
     {
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
 
         foreach (var rune in _allRunes)
         {
-            if (GridDetection.IsDrawingInBlackCases(drawPosList, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
+            if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
             {
                 
                 if(_drawnRunes.Count < 3)
                 {
                     shaker.AddToShaker(rune);
                     _drawnRunes.Add(rune);
-
+                    
                 }
             }
         }
@@ -113,17 +132,37 @@ public class DrawTablet : MonoBehaviour
 
     private void Update()
     {
-        if (isDrawing)
+        _currentPos = NewPosOnGrid(Pointer.current.position.ReadValue());
+        _cursor.transform.position = _currentPos;
+        if (_isDrawing)
         {
-            _currentPos = Camera.main.ScreenToWorldPoint(Pointer.current.position.ReadValue());
+            
             _drawPos.Add(_currentPos);
-            _drawingTrail.transform.position = _currentPos;
+            _currentTrail.transform.position = _currentPos;
         }
     }
 
-    void LockMouseInRange()
+    Vector2 NewPosOnGrid(Vector2 position)
     {
-        //A faire
+        Vector2 screenSize = new Vector2(Camera.main.pixelWidth, Camera.main.pixelHeight);
+        float newPosX = position.x / screenSize.x;
+        float newPosY = position.y / screenSize.y;
+
+        Vector2 newPos = new Vector2(newPosX, newPosY);
+        newPos = Camera.main.ScreenToWorldPoint(newPos);
+
+        Vector2 gridSize = new Vector2(_gridSprite.bounds.size.x, _gridSprite.bounds.size.y);
+
+        
+        newPosX *= gridSize.x;
+        newPosY *= gridSize.y;
+
+        newPosX += _gridSprite.bounds.min.x;
+        newPosY += _gridSprite.bounds.min.y;
+
+        return new Vector2(newPosX, newPosY);
     }
+
+
 
 }
