@@ -22,7 +22,8 @@ public class DrawTablet : MonoBehaviour
     [SerializeField] List<RuneObject> _allRunes = new List<RuneObject>();
     public List<RuneObject> _drawnRunes = new List<RuneObject>();
 
-    TrailRenderer _drawingTrail;
+    List<TrailRenderer> _drawingTrail = new List<TrailRenderer>();
+    TrailRenderer _currentTrail;
     [SerializeField] TrailRenderer _drawingPrefab;
 
     public Shaker shaker;
@@ -73,49 +74,57 @@ public class DrawTablet : MonoBehaviour
 
     public void OnDraw(InputAction.CallbackContext context)
     {
-        
-        if (context.started)
+        if (enabled)
         {
-            _blackCasesPos.Clear();
-            _drawPos.Clear();
-            if(_drawingTrail != null)
+            if (context.started)
             {
-                Destroy(_drawingTrail.gameObject);
+                _isDrawing = true;
+                _beginningPos = NewPosOnGrid(Pointer.current.position.ReadValue());
+                //Trail
+                _currentTrail = Instantiate(_drawingPrefab, _beginningPos, Quaternion.identity);
+                _drawingTrail.Add(_currentTrail);
+                _currentTrail.AddPosition(_beginningPos);
             }
-
-            //Start drawing
-            _isDrawing = true;
-            
-            _beginningPos = NewPosOnGrid(Pointer.current.position.ReadValue());
-            
-            //Trail
-            _drawingTrail = Instantiate(_drawingPrefab, _beginningPos, Quaternion.identity);
-            
-            _drawingTrail.AddPosition(_beginningPos);
+            else if (context.canceled)
+            {
+                _isDrawing = false;
+            }
         }
-        else if (context.canceled)
-        {
-            _isDrawing = false;
-            GetDrawnRune(_drawPos);
-        }
+        
     }
 
+    public void ResetRuneDrawing()
+    {
+        GetDrawnRune();
+        
+        _blackCasesPos.Clear();
+        _drawPos.Clear();
+        
+        if (_drawingTrail.Count > 0)
+        {
+            foreach (var trail in _drawingTrail)
+            {
+                Destroy(trail.gameObject);
+            }
+            _drawingTrail.Clear();
+        }
+    }
     //Add runes
-    void GetDrawnRune(List<Vector2> drawPosList)
+    void GetDrawnRune()
     {
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
 
         foreach (var rune in _allRunes)
         {
-            if (GridDetection.IsDrawingInBlackCases(drawPosList, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
+            if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
             {
                 
                 if(_drawnRunes.Count < 3)
                 {
                     shaker.AddToShaker(rune);
                     _drawnRunes.Add(rune);
-
+                    
                 }
             }
         }
@@ -129,7 +138,7 @@ public class DrawTablet : MonoBehaviour
         {
             
             _drawPos.Add(_currentPos);
-            _drawingTrail.transform.position = _currentPos;
+            _currentTrail.transform.position = _currentPos;
         }
     }
 
