@@ -20,6 +20,8 @@ public class InputPlayer : MonoBehaviour
 
     public event Action OnDrinkSucceeded;
     public event Action OnDrinkFailed;
+    public event Action OnDrinkRunesOnly;
+    public event Action OnDrinkTasteOnly;
 
     private void Awake()
 
@@ -61,12 +63,14 @@ public class InputPlayer : MonoBehaviour
                 }
                 else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
                 {
-                    OnDrinkFailed?.Invoke();
+                    //OnDrinkFailed?.Invoke();
+                    OnDrinkTasteOnly?.Invoke();
                     GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
                 }
                 else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
                 {
-                    OnDrinkFailed?.Invoke();
+                    //OnDrinkFailed?.Invoke();
+                    OnDrinkRunesOnly?.Invoke();
                     GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
                 }
                 else
