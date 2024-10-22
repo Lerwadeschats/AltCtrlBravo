@@ -58,18 +58,19 @@ public class InputPlayer : MonoBehaviour
             {
                 if (_shaker.CompareRecipe() && _shaker.CompareRunes())
                 {
+                    _shaker.CompletedFull++;
                     OnDrinkSucceeded?.Invoke();
                     currentClient.DrinkSuceeded();
                 }
                 else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
                 {
-                    //OnDrinkFailed?.Invoke();
+                    _shaker.CompletedCocktail++;
                     OnDrinkTasteOnly?.Invoke();
                     GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
                 }
                 else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
                 {
-                    //OnDrinkFailed?.Invoke();
+                    _shaker.CompletedRune++;
                     OnDrinkRunesOnly?.Invoke();
                     GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
                 }
