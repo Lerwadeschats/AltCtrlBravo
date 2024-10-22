@@ -49,7 +49,7 @@ public class DrawTablet : MonoBehaviour
         Cursor.visible = false;
         _inputActions.DrawingMap.Draw.Enable();
 
-        //Debug => afficher une rune en grisé
+        //Debug => afficher une rune en grisï¿½
         /*rune = _runes[Random.Range(0, _runes.Count)];
         float squareSizeGrid = _grid.GetComponent<SpriteRenderer>().bounds.size.x / 8;
         Vector2 originPos = new Vector2(_grid.GetComponent<SpriteRenderer>().bounds.min.x, _grid.GetComponent<SpriteRenderer>().bounds.min.y);
