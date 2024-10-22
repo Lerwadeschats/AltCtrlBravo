@@ -138,10 +138,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _recipesManager
-      value: 
-      objectReference: {fileID: 154186930}
     - target: {fileID: 767166151383848838, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_Name
       value: ---ScenePrefab---
@@ -262,9 +258,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[13].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 6391409893671746929, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
     - target: {fileID: 6391409893671746929, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -392,19 +385,6 @@ Transform:
   m_PrefabInstance: {fileID: 913345243}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &913345245 stripped
-  m_SourcePrefab: {fileID: 100100000, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
---- !u!114 &154186930 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4492001493441837125, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-  m_PrefabInstance: {fileID: 154186929}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0187ba75fc709974889123aef47cbe95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &158857135 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4936300943266095095, guid: 060357c88f574c2449fbd860b42ed325, type: 3}
   m_PrefabInstance: {fileID: 913345243}

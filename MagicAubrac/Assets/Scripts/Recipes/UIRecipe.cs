@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class UIRecipe : MonoBehaviour
 {
     [SerializeField] Image _image;
 
     [SerializeField] Slider _slider;
-    [SerializeField] Gradient _gradient;
-    [SerializeField] Image _fillAreaImage;
-
     private Client _client;
     private Coroutine _coroutineTimer;
 
@@ -42,23 +38,16 @@ public class UIRecipe : MonoBehaviour
                 StopCoroutine(_coroutineTimer);
                 _coroutineTimer = null;
             }
+            _slider.value = 1f;
         }
-        UpdateSliderValueAndColor(1f);
     }
 
     IEnumerator StartTimerRecipe()
     {
         while (Client.RemainingWaitingDuration > 0f)
         {
-            UpdateSliderValueAndColor(Client.RemainingWaitingDuration / Client.WaitingDuration);
+            _slider.value = Client.RemainingWaitingDuration / Client.WaitingDuration;
             yield return null;
         }
-        UpdateSliderValueAndColor(0f);
-    }
-
-    void UpdateSliderValueAndColor(float value)
-    {
-        _slider.value = value;
-        _fillAreaImage.color = _gradient.Evaluate(value);
     }
 }

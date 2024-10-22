@@ -19,42 +19,22 @@ public class PlayerHealth : MonoBehaviour
     {
         _currentHealth = _health;
         _inputs.OnDrinkFailed += OnDrinkFailed;
-        _inputs.OnDrinkRunesOnly += OnDrinkRunesOnly; ;
-        _inputs.OnDrinkTasteOnly += OnDrinkTasteOnly; ;
     }
-
-    private void OnDrinkTasteOnly()
-    {
-        LoseHealth(0.5f);
-    }
-
-    private void OnDrinkRunesOnly()
-    {
-        LoseHealth(0.5f);
-    }
-
-    private void Start()
-    {
-        GameManager.ClientsManager.OnClientFailed += OnDrinkFailed;
-    } 
 
     private void OnDrinkFailed()
     {
-        LoseHealth(1f);
+        LoseHealth();
     }
 
-    public void LoseHealth(float healthLost)
+    public void LoseHealth()
     {
-        if (_currentHealth > 0f)
-        {
-            _currentHealth -= healthLost;
-            OnLoseHealth?.Invoke(CurrentHealth);
+        _currentHealth -= _healthStep;
+        OnLoseHealth?.Invoke(CurrentHealth);
 
-            if (_currentHealth <= 0f)
-            {
-                OnLose?.Invoke();
-                GameManager.LoseWinManager?.Lose();
-            }
+        if (_currentHealth == 0f)
+        {
+            OnLose?.Invoke();
+            GameManager.LoseWinManager?.Lose();
         }
     }
 }

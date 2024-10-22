@@ -178,33 +178,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: ---GameScene----
       objectReference: {fileID: 0}
-    - target: {fileID: 497846452233354815, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 700836025306803146, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _startingDurationBetweenClients
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 767166151383848838, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_Name
       value: ---ScenePrefab---
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678126974759885634, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: VelocityModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678126974759885634, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: InitialModule.startSpeed.scalar
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1678126974759885634, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: InitialModule.startSpeed.minScalar
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1900841402851577901, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AnchoredPosition.y

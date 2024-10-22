@@ -44,13 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3519560fcaa43ce40b843fb5b46b0737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _recipesManager: {fileID: 0}
-  _parentObject: {fileID: 0}
   _clientsPossible:
   - {fileID: 6815338229367540586, guid: 15c618c5a58d64342bdb842f29b2a3cc, type: 3}
   - {fileID: 3415350296185290186, guid: 7df614e101b552d44a36f882f28731ff, type: 3}
-  - {fileID: 3819360354273340160, guid: 2598e259d317b144eab39b028b675b4b, type: 3}
-  - {fileID: 2377829727566470761, guid: bd8192cea4e0fc940b20de614d48dd84, type: 3}
   _clientsPositions:
   - {fileID: 0}
   - {fileID: 0}

@@ -17,10 +17,9 @@ public class Client : MonoBehaviour
     public Recipe Recipe { get; private set; }
     public float WaitingDuration { get => _waitingDuration;}
 
-    private bool _waitEndlessly;
+    public bool _waitEndlessly;
 
     public event Action<Client> OnClientCompleted;
-    public event Action<Client> OnDrinkFailed;
 
     private void Start()
     {
@@ -28,9 +27,11 @@ public class Client : MonoBehaviour
     }
 
     //When client is instantiate in list
-    public void LoadClient(Recipe recipe, bool waitEndlessly = false)
+    public void LoadClient(bool waitEndlessly = false)
     {
-        Recipe = recipe;
+        
+        Recipe = GameManager.RecipesManager.GetRandomRecipe();
+        
         _waitEndlessly = waitEndlessly;
     }
 
@@ -58,12 +59,13 @@ public class Client : MonoBehaviour
             yield return null;
         }
         Debug.Log("Wait for too long");
-        DrinkTooLateFailed();
+        DrinkFailed();
     }
 
-    public void DrinkTooLateFailed()
+    public void DrinkFailed()
     {
-        OnDrinkFailed?.Invoke(this);
+        // - vie
+        Debug.Log("Flop");
         DrinkComplete();
     }
 

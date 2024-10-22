@@ -24,7 +24,7 @@ public class UIRecipes : MonoBehaviour
         int nbClientsWaiting = _clientsManager.ClientsInQueue.Count;
         for (int i = 0; i < _uiRecipes.Length; i++)
         {
-            if (i < nbClientsWaiting && _clientsManager.ClientsInQueue[i] != null)
+            if (i < nbClientsWaiting)
             {
                 _uiRecipes[i].gameObject.SetActive(true);
                 _uiRecipes[i].Client = _clientsManager.ClientsInQueue[i];
