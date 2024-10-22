@@ -63,3 +63,8 @@ MonoBehaviour:
     _sizeMax: 0
     _isLooping: 0
     _overflowOperation: 0
+  - _name: TraceRuneInSand
+    _clip: {fileID: 8300000, guid: 908406f9f1a54074a892ed98d9f7507d, type: 3}
+    _sizeMax: 0
+    _isLooping: 0
+    _overflowOperation: 0

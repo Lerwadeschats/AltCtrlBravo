@@ -13,8 +13,36 @@ MonoBehaviour:
   m_Name: MusicsBank
   m_EditorClassIdentifier: 
   _musicDatas:
+  - _name: Menu
+    _mainClip: {fileID: 8300000, guid: 5dd323db9b2e1924186f5a90adebd8e9, type: 3}
+    _isLooping: 1
+    _hasIntro: 0
+    _introClip: {fileID: 0}
+    _hasOutro: 0
+    _outroClip: {fileID: 0}
   - _name: Main
-    _mainClip: {fileID: 8300000, guid: de916b3c27e458748aa910e1e88f14a6, type: 3}
+    _mainClip: {fileID: 8300000, guid: b8e6f545d112cde4c9bfe45eccbb33eb, type: 3}
+    _isLooping: 1
+    _hasIntro: 0
+    _introClip: {fileID: 0}
+    _hasOutro: 0
+    _outroClip: {fileID: 0}
+  - _name: OneGlassLeft
+    _mainClip: {fileID: 8300000, guid: 6762f67a49c386f44b800c20cc70c64e, type: 3}
+    _isLooping: 1
+    _hasIntro: 0
+    _introClip: {fileID: 0}
+    _hasOutro: 0
+    _outroClip: {fileID: 0}
+  - _name: Ambiance_bar
+    _mainClip: {fileID: 8300000, guid: ae7604970d077a641984b8f69815a3d2, type: 3}
+    _isLooping: 1
+    _hasIntro: 0
+    _introClip: {fileID: 0}
+    _hasOutro: 0
+    _outroClip: {fileID: 0}
+  - _name: Ambiance_vent
+    _mainClip: {fileID: 8300000, guid: 8194a0cfbf611174fb391c9b90fe34c8, type: 3}
     _isLooping: 1
     _hasIntro: 0
     _introClip: {fileID: 0}
