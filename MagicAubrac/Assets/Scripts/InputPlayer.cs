@@ -1,8 +1,10 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Unity.Collections.Unicode;
 
 public class InputPlayer : MonoBehaviour
 {
@@ -12,12 +14,20 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] private float _timerPulled;
     [HorizontalLine]
     [SerializeField] private InputJoycon _joycon;
+    [HorizontalLine]
+    [Header("Rune drawing")]
+    [SerializeField] DrawTablet _tablet;
+    ScoreDisplay _scoreUI;
 
-
+    public event Action OnDrinkSucceeded;
+    public event Action OnDrinkFailed;
+    public event Action OnDrinkRunesOnly;
+    public event Action OnDrinkTasteOnly;
 
     private void Awake()
 
     {
+        _scoreUI = FindObjectOfType<ScoreDisplay>();
         _inputActions = new DrawingAction();
         _inputActions.DrawingMap.DrinkPour1.Enable();
         _inputActions.DrawingMap.DrinkPour2.Enable();
@@ -30,7 +40,7 @@ public class InputPlayer : MonoBehaviour
         _inputActions.DrawingMap.DrinkSelectB3.Enable();
         _inputActions.DrawingMap.EmptyDrink.Enable();
         _inputActions.DrawingMap.Validate.Enable();
-
+        _tablet._inputActions = _inputActions;
     }
 
     private void Start()
@@ -43,19 +53,51 @@ public class InputPlayer : MonoBehaviour
 
     public void OnValidation(InputAction.CallbackContext context)
     {
-        Debug.Log("aefzr");
         if (context.performed)
         {
-            if (_shaker.CompareRecipe())
+            Client currentClient = GameManager.ClientsManager?.CurrentClient;
+            
+            if (currentClient != null)
             {
-                Debug.Log("le client est relativement content");
+                if (_shaker.IsDrawnRunesFull())
+                {
+                    if (_shaker.CompareRecipe() && _shaker.CompareRunes())
+                    {
+                        _shaker.CompletedFull++;
+                        OnDrinkSucceeded?.Invoke();
+                        _scoreUI.changeScoreP(_shaker.CompletedFull);
+                        currentClient.DrinkSuceeded();
+
+                    }
+
+                    else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
+                    {
+                        _shaker.CompletedCocktail++;
+                        OnDrinkTasteOnly?.Invoke();
+                        _scoreUI.changeScoreD(_shaker.CompletedCocktail);
+                        GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+                    }
+                    else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
+                    {
+                        _shaker.CompletedRune++;
+                        OnDrinkRunesOnly?.Invoke();
+                        _scoreUI.changeScoreR(_shaker.CompletedRune);
+                        GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
+                    }
+                    else
+                    {
+                        OnDrinkFailed?.Invoke();
+                        GameManager.ClientsManager?.CurrentClient.DrinkComplete();
+                    }
+                }
+                else
+                {
+
+                    _tablet.ResetRuneDrawing();
+                }
+                
             }
-            else
-            {
-                Debug.Log("le client ne l'est pas");
-            }
-            _shaker.EmptyShaker();
-            _shaker.RemoveRune();
+            
         }
     }
 
@@ -63,11 +105,13 @@ public class InputPlayer : MonoBehaviour
     {
         if (context.started)
         {
-            Debug.Log("pareil");
+            _tablet.enabled = true;
+            
         }
         if (context.canceled)
         {
             _shaker.RemoveRune();
+            _tablet.enabled = false;
         }
     }
     public void OnPour(InputAction.CallbackContext context)
@@ -99,7 +143,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
-            _tireuse.ChangeLiquid(i, true);           
+            _tireuse.ChangeLiquid(i, true);
         }
         if (context.canceled)
         {
@@ -166,12 +210,19 @@ public class InputPlayer : MonoBehaviour
         _shaker?.Shake(shakeDuration);
     }
 
+    public void OnShake(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("&&");
+            _shaker.Shake(6);
+        }
+    }
     IEnumerator Pour(InputAction.CallbackContext context)
     {
         float timer = 0;
         while (!context.canceled)
         {
-            Debug.Log(timer);
             if (timer >= _timerPulled)
             {
                 timer = 0;
@@ -195,4 +246,11 @@ public class InputPlayer : MonoBehaviour
         }
         yield return null;
     }
+
+    void EnableDrawing()
+    {
+        _inputActions.DrawingMap.Draw.Enable();
+    }
+
+    
 }

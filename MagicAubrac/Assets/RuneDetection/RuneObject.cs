@@ -6,12 +6,11 @@ using UnityEngine;
 public class RuneObject : ScriptableObject
 {
     [Header("Useful informations")]
-    [SerializeField] Texture2D _runeDetectionMap;
-    [SerializeField] Sprite _runeSprite;
+    public Texture2D _runeDetectionMap;
+    public Sprite _runeSprite;
 
     [Header("Semi garbage informations")]
-    [SerializeField] string _name;
+    public string _name;
     [SerializeField] string _description;
     [SerializeField] string _signification;
-    [SerializeField] string _bravo = "Bravo";
 }

@@ -8,10 +8,17 @@ public class ShakerUI : MonoBehaviour
     private IngredientType _ingredient;
     private Image _image;
 
+    public IngredientType Ingredient { get => _ingredient; }
+    public Image Image { get => _image;}
+
     private void Awake()
     {
         _image = GetComponent<Image>();
         Change(IngredientType.INVALID);
+    }
+    public void ChangeColor(Color color)
+    {
+        _image.color =color;
     }
     public void Change(IngredientType ingredient )
     {

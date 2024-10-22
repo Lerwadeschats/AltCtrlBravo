@@ -6,12 +6,15 @@ using UnityEngine;
 public class InputJoycon : MonoBehaviour
 {
     [SerializeField] private float _thresholdShaking = 1f;
+    [SerializeField] private float _shakeExtensionDuration = 0.05f;
     private List<Joycon> joycons;
-
     private Vector3 _gyro;
 
     private bool _isShaking = false;
+    private bool _isInShakeExtension = false;
     private float _timerShake = 0f;
+    private float _timerShakeExtension = 0f;
+    private Coroutine _coroutineShakeExtension;
 
     public event Action OnStartShaking;
     public event Action<float> OnStopShaking;
@@ -39,40 +42,82 @@ public class InputJoycon : MonoBehaviour
                 //Started shaking
                 if (!_isShaking)
                 {
-                    OnStartShaking?.Invoke();
-                    _timerShake = 0f;
                     _isShaking = true;
+
+                    if (_isInShakeExtension)
+                    {
+                        if (_coroutineShakeExtension != null)
+                        {
+                            StopCoroutine(_coroutineShakeExtension);
+                            _coroutineShakeExtension = null;
+                        }
+                        OnStartShaking?.Invoke();
+                        _isInShakeExtension = false;
+                    } else
+                    {
+                        _timerShake = 0f;
+                    }
                 }
             }
             else
             {
                 //Stopped shaking
-                if (_isShaking)
+                if (_isShaking && !_isInShakeExtension)
                 {
-                    OnStopShaking?.Invoke(_timerShake);
                     _isShaking = false;
+                    _isInShakeExtension = true;
+                    StartRoutineShakeExtension();
                 }
             }
         }
 
-        if (_isShaking)
+        if (_isShaking || _isInShakeExtension)
         {
             _timerShake += Time.deltaTime;
         }
     }
 
-    private void OnGUI()
+    private void StartRoutineShakeExtension()
     {
-        //string debug;
-        //if (_isShaking)
-        //{
-        //    debug = "SHAKING "+_timerShake;
-        //} else
-        //{
-        //    debug = "NOT SHAKING";
-        //}
-        //debug += $" {_gyro}";
-        //GUI.skin.label.fontSize = 30;
-        //GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+        if (_coroutineShakeExtension != null)
+        {
+            StopCoroutine(_coroutineShakeExtension);
+            _coroutineShakeExtension = null;
+        }
+        _coroutineShakeExtension = StartCoroutine(RoutineShakeExtension());
     }
+
+    IEnumerator RoutineShakeExtension()
+    {
+        _timerShakeExtension = 0f;
+        while (_timerShakeExtension < _shakeExtensionDuration)
+        {
+            _timerShakeExtension += Time.deltaTime; 
+            yield return null;
+        }
+        _isInShakeExtension = false;
+        OnStopShaking?.Invoke(_timerShake);
+    }
+
+    //private void OnGUI()
+    //{
+    //    string debug;
+    //    if (_isShaking && !_isInShakeExtension)
+    //    {
+    //        debug = $"SHAKING {_timerShake}";
+    //    }
+    //    else if (!_isShaking && _isInShakeExtension)
+    //    {
+    //        debug = $"SHAKING EXTENSION {_timerShake}";
+    //    } else if (!_isShaking && !_isInShakeExtension)
+    //    {
+    //        debug = "NOT SHAKING";
+    //    } else
+    //    {
+    //        debug = "??? ";
+    //    }
+    //    debug += $" {_gyro}";
+    //    GUI.skin.label.fontSize = 30;
+    //    GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+    //}
 }

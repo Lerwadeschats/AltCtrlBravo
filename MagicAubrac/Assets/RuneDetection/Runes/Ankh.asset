@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daae6712efec80c4583a266b96bc654f, type: 3}
   m_Name: Ankh
   m_EditorClassIdentifier: 
-  _runeDetectionMap: {fileID: 2800000, guid: d94170b27480e474aab64304e4f8fb71, type: 3}
-  _runeSprite: {fileID: 21300000, guid: d94170b27480e474aab64304e4f8fb71, type: 3}
+  _runeDetectionMap: {fileID: 2800000, guid: fdb64a5ad31df644c9f6127cac67afea, type: 3}
+  _runeSprite: {fileID: 21300000, guid: 37ea29a29e89b8648b2e7680dc695388, type: 3}
   _name: Ankh
   _description: The ankh is said to be the first--or original--cross
   _signification: Eternal life

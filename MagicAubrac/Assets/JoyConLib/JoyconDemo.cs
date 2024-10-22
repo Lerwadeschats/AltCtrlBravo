@@ -12,7 +12,6 @@ public class JoyconDemo : MonoBehaviour {
 
     private bool _isShaking = false;
     private float _timerShake = 0f;
-    private float _magnitude;
 
     public event Action OnStartShaking;
     public event Action<float> OnStopShaking;
@@ -24,17 +23,16 @@ public class JoyconDemo : MonoBehaviour {
         joycons = JoyconManager.Instance.j;
 	}
 
-    // Update is called once per frame
     void Update () {
 		// make sure the Joycon only gets checked if attached
 		if (joycons.Count > 0)
         {
 			Joycon joycon = joycons [0];
 
-            // Accel values:  x, y, z axis values (in Gs)
             _gyro = joycon.GetGyro();
-            _magnitude = _gyro.magnitude;
-            if (_magnitude > _thresholdShaking)
+            float magnitude = _gyro.magnitude;
+
+            if (magnitude > _thresholdShaking)
             {
                 //Started shaking
                 if (!_isShaking)
@@ -62,17 +60,16 @@ public class JoyconDemo : MonoBehaviour {
 
     private void OnGUI()
     {
-        string debug;
-        if (_isShaking)
-        {
-            debug = "SHAKING " + _timerShake;
-        }
-        else
-        {
-            debug = "NOT SHAKING";
-        }
-        debug += $" {_gyro} {_magnitude}";
-        GUI.skin.label.fontSize = 30;
-        GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+        //string debug;
+        //if (_isShaking)
+        //{
+        //    debug = "SHAKING "+_timerShake;
+        //} else
+        //{
+        //    debug = "NOT SHAKING";
+        //}
+        //debug += $" {_gyro}";
+        //GUI.skin.label.fontSize = 30;
+        //GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
     }
 }

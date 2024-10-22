@@ -9,13 +9,16 @@ public class ClientsManager : MonoBehaviour
 {
     private Coroutine _coroutineSpawnClient;
 
+    [SerializeField] private RecipesManager _recipesManager;
     [SerializeField] private GameObject _parentObject;
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
     [SerializeField] private GameObject _remainingQueuePosition;
+    [SerializeField] private GameObject _endPosition;
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
+    private MenuManager _menuManager;
     public List<Client> ClientsInQueue { get; private set; }
     public List<Client> ClientsInBackgroundQueue { get; private set; }
     public Client CurrentClient { get; private set; }
@@ -23,6 +26,7 @@ public class ClientsManager : MonoBehaviour
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
     public event Action<Client> OnClientWalkInForeground;
+    public event Action OnClientFailed;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -45,6 +49,11 @@ public class ClientsManager : MonoBehaviour
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
         AddNewClient(true); //For it to be accessible in the start of UIRecipes
+    }
+
+    void Start()
+    {
+        _menuManager = GameManager.MenuManager;
     }
 
     GameObject GetRandomClient()
@@ -91,7 +100,13 @@ public class ClientsManager : MonoBehaviour
 
     public IEnumerator RoutineAddClient()
     {
-        yield return new WaitForSeconds(_startingDurationBetweenClients);
+        float timer = 0f;
+        while (timer < _startingDurationBetweenClients)
+        {
+            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+            timer += Time.deltaTime;
+            yield return null;
+        }
         AddNewClient();
         if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
         {
@@ -104,7 +119,7 @@ public class ClientsManager : MonoBehaviour
         {
             for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
             {
-                ClientsInQueue[i].transform.position = _clientsPositions[i].transform.position;
+                ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
     }
@@ -116,20 +131,23 @@ public class ClientsManager : MonoBehaviour
         {
             GameObject newClientPrefab = GetRandomClient();
             Vector3 position;
-            
-            if (ClientsInQueue.Count < _nbClientsShown &&
-                ClientsInBackgroundQueue.Count == 0 && 
-                ClientsInQueue.Count < _clientsPositions.Count)
-            {
-                position = _clientsPositions[ClientsInQueue.Count].transform.position;
-            } else
-            {
-                position = _remainingQueuePosition.transform.position;
-            }
+
+            position = _remainingQueuePosition.transform.position;
+
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
+
+            if (ClientsInQueue.Count < _nbClientsShown &&
+                ClientsInBackgroundQueue.Count == 0 &&
+                ClientsInQueue.Count < _clientsPositions.Count)
+            {
+                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
+            }
             newClient.OnClientCompleted += OnClientCompleted;
-            newClient.LoadClient(waitEndlessly);
+            newClient.OnDrinkFailed += OnDrinkFailed;
+            Recipe recipe = _recipesManager?.GetRandomRecipe();
+            newClient.EndPosition = _endPosition;
+            newClient.LoadClient(recipe,waitEndlessly);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
@@ -149,51 +167,57 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
+    private void OnDrinkFailed(Client obj)
+    {
+        OnClientFailed?.Invoke();
+    }
+
     private void OnClientCompleted(Client client)
     {
         ChangeClient();
         UpdatePositionsClients();
         client.OnClientCompleted -= OnClientCompleted;
+        client.OnDrinkFailed -= OnDrinkFailed;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log("Client finished with success");
-            CurrentClient?.DrinkSuceeded();
-        }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Debug.Log("Client finished with fail");
-            CurrentClient?.DrinkFailed();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Debug.Log("Client added");
-            AddNewClient();
-        }
-    }
+    //private void Update()
+    //{
+    //    //if(Input.GetKeyDown(KeyCode.V))
+    //    //{
+    //    //    Debug.Log("Client finished with success");
+    //    //    CurrentClient?.DrinkSuceeded();
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.C))
+    //    //{
+    //    //    Debug.Log("Client finished with fail");
+    //    //    CurrentClient?.DrinkFailed();
+    //    //}
+    //    //if (Input.GetKeyDown(KeyCode.X))
+    //    //{
+    //    //    Debug.Log("Client added");
+    //    //    AddNewClient();
+    //    //}
+    //}
 
-    private void OnGUI()
-    {
+    //private void OnGUI()
+    //{
 
-        StringBuilder guiOutput = new StringBuilder("Clients visible: \n");
-        if (ClientsInQueue != null)
-        {
-            foreach (Client client in ClientsInQueue)
-            {
-                guiOutput.AppendLine(client.GetDebugString());
-            }
-        }
-        guiOutput.Append("Clients in background: \n");
-        if (ClientsInBackgroundQueue != null)
-        {
-            foreach (Client client in ClientsInBackgroundQueue)
-            {
-                guiOutput.AppendLine(client.GetDebugString());
-            }
-        }
-        GUILayout.Label(guiOutput.ToString());
-    }
+    //    StringBuilder guiOutput = new StringBuilder("Clients visible: \n");
+    //    if (ClientsInQueue != null)
+    //    {
+    //        foreach (Client client in ClientsInQueue)
+    //        {
+    //            guiOutput.AppendLine(client.GetDebugString());
+    //        }
+    //    }
+    //    guiOutput.Append("Clients in background: \n");
+    //    if (ClientsInBackgroundQueue != null)
+    //    {
+    //        foreach (Client client in ClientsInBackgroundQueue)
+    //        {
+    //            guiOutput.AppendLine(client.GetDebugString());
+    //        }
+    //    }
+    //    GUILayout.Label(guiOutput.ToString());
+    //}
 }
