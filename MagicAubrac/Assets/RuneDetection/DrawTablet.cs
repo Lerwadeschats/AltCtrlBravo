@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using NaughtyAttributes;
 using UnityEngine.InputSystem;
+using IIMEngine.SFX;
 using static UnityEngine.Rendering.DebugUI;
 
 public class DrawTablet : MonoBehaviour
@@ -40,7 +42,11 @@ public class DrawTablet : MonoBehaviour
     [SerializeField] GameObject tile;
     List<GameObject> _blackCases = new List<GameObject>();
 
-    
+    [Foldout("Audio")]
+    [SerializeField] string clipDrawing;
+    [Foldout("Audio")]
+    [SerializeField] string clipWrongRune;
+
     private void Awake()
     {
         _gridSprite = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -87,6 +93,7 @@ public class DrawTablet : MonoBehaviour
         {
             if (context.started)
             {
+                SFXsManager.Instance.PlaySound(clipDrawing);
                 _cursor.StartParticles();
 /*                _blackCasesPos.Clear();*/
                 _isDrawing = true;
@@ -98,6 +105,7 @@ public class DrawTablet : MonoBehaviour
             }
             else if (context.canceled)
             {
+                SFXsManager.Instance.StopSound(clipDrawing);
                 _cursor.StopParticles();
                 _isDrawing = false;
             }
@@ -135,6 +143,7 @@ public class DrawTablet : MonoBehaviour
         {
             DebugIsInSquare(blackCase);
         }
+        bool isGood = false;
         foreach (var rune in _allRunes)
         {
             if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
@@ -144,10 +153,14 @@ public class DrawTablet : MonoBehaviour
                     shaker.AddToShaker(rune);
                     _drawnRunes.Add(rune);
                     _uiRunes.UpdateUIRunes(_drawnRunes);
+                    isGood = true;
                 }
             }
         }
-
+        if (!isGood)
+        {
+            SFXsManager.Instance.PlaySound(clipWrongRune);   
+        }
         //Debug
         /*if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
         {
