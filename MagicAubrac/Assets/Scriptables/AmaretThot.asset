@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7438f5fa1f09624799737485ccc4adc, type: 3}
   m_Name: AmaretThot
   m_EditorClassIdentifier: 
-  Name: 
-  ActivationRunes: []
-  Steps: []
+  Name: AmaretThot
+  ActivationRunes:
+  - {fileID: 11400000, guid: 9abae93bae8faf047971e83f7e50d32b, type: 2}
+  - {fileID: 11400000, guid: da0d8cb3913e5c645b25c18cd91a8511, type: 2}
+  - {fileID: 11400000, guid: f537b45a20f84274489acfc3326aae4f, type: 2}
+  Steps:
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 3
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 2
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 2
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 4
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 4
+  - StepType: 0
+    ShakeDuration: 3
+    IngredientType: 4
   UIRecipeSprite: {fileID: 21300000, guid: e6fd2885459ab5342af4699e7f0998bd, type: 3}

@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7438f5fa1f09624799737485ccc4adc, type: 3}
   m_Name: SunSet
   m_EditorClassIdentifier: 
-  Name: 
-  ActivationRunes: []
-  Steps: []
+  Name: SunSet
+  ActivationRunes:
+  - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
+  - {fileID: 11400000, guid: 443d730dc40b4154991c0ce2292c0dbf, type: 2}
+  - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
+  Steps:
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 6
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 3
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 2
+  - StepType: 0
+    ShakeDuration: 3
+    IngredientType: 2
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 3
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 2
   UIRecipeSprite: {fileID: 21300000, guid: 74a6989691b95aa4496d43d23f0d88bb, type: 3}
