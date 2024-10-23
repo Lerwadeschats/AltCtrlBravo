@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UIRecipes : MonoBehaviour
 {
+    [SerializeField] GameObject[] _positions;
     [SerializeField] UIRecipe[] _uiRecipes;
     ClientsManager _clientsManager;
     private void Start()

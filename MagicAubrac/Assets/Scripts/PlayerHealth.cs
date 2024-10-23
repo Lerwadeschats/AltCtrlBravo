@@ -17,10 +17,15 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         _currentHealth = _health;
-        _inputs.OnDrinkFailed += OnDrinkFailed;
+        _inputs.OnDrinkFailed += OnDrinkFailed; // Wrong Runes and taste 
         _inputs.OnDrinkRunesOnly += OnDrinkRunesOnly; ;
         _inputs.OnDrinkTasteOnly += OnDrinkTasteOnly; ;
     }
+    private void Start()
+    {
+        GameManager.ClientsManager.OnClientTookTooLong += OnDrinkFailed; //Drink took too much time
+    } 
+
 
     private void OnDrinkTasteOnly()
     {
@@ -31,11 +36,6 @@ public class PlayerHealth : MonoBehaviour
     {
         LoseHealth(0.5f);
     }
-
-    private void Start()
-    {
-        GameManager.ClientsManager.OnClientFailed += OnDrinkFailed;
-    } 
 
     private void OnDrinkFailed()
     {

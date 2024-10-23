@@ -29,7 +29,8 @@ public class Client : MonoBehaviour
     private bool _waitEndlessly;
 
     public event Action<Client> OnClientCompleted;
-    public event Action<Client> OnDrinkFailed;
+    public event Action<Client> OnDrinkTookTooLong;
+    public event Action<Client> OnDrinkFailed; //Any kind of failure
     public event Action OnPositionReached;
 
     private void Start()
@@ -75,6 +76,7 @@ public class Client : MonoBehaviour
     public void DrinkTooLateFailed()
     {
         OnDrinkFailed?.Invoke(this);
+        OnDrinkTookTooLong?.Invoke(this);
         DrinkComplete();
     }
 
@@ -88,12 +90,20 @@ public class Client : MonoBehaviour
     {
         // jsp
         Debug.Log("FlopDrink");
+        OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
     public void DrinkTasteOnly()
     {
         // jsp
         Debug.Log("FlopRunes");
+        OnDrinkFailed?.Invoke(this);
+        DrinkComplete();
+    }
+
+    public void DrinkFullyFailed()
+    {
+        OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
 

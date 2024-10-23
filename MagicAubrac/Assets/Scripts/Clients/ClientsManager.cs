@@ -26,7 +26,7 @@ public class ClientsManager : MonoBehaviour
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
     public event Action<Client> OnClientWalkInForeground;
-    public event Action OnClientFailed;
+    public event Action OnClientTookTooLong;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -144,7 +144,7 @@ public class ClientsManager : MonoBehaviour
                 newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
             }
             newClient.OnClientCompleted += OnClientCompleted;
-            newClient.OnDrinkFailed += OnDrinkFailed;
+            newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
             Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.EndPosition = _endPosition;
             newClient.LoadClient(recipe,waitEndlessly);
@@ -167,9 +167,9 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
-    private void OnDrinkFailed(Client obj)
+    private void OnDrinkTookTooLong(Client obj)
     {
-        OnClientFailed?.Invoke();
+        OnClientTookTooLong?.Invoke();
     }
 
     private void OnClientCompleted(Client client)
@@ -177,7 +177,7 @@ public class ClientsManager : MonoBehaviour
         ChangeClient();
         UpdatePositionsClients();
         client.OnClientCompleted -= OnClientCompleted;
-        client.OnDrinkFailed -= OnDrinkFailed;
+        client.OnDrinkTookTooLong -= OnDrinkTookTooLong;
     }
 
     //private void Update()
