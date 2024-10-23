@@ -101,3 +101,5 @@ MonoBehaviour:
   _fullHeartSprite: {fileID: 21300000, guid: b6f12ff675a949b489084c760e98595d, type: 3}
   _midHeartSprite: {fileID: 21300000, guid: 06429ca988f3e9f49bef1fa85b3835f3, type: 3}
   _noHeartSprite: {fileID: 21300000, guid: 32fd00741cf094645987c4690f96ab82, type: 3}
+  _shakeDuration: 0.2
+  _shakeStrength: 0.2

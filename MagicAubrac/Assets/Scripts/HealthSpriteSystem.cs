@@ -17,7 +17,7 @@ public class HealthSpriteSystem : MonoBehaviour
         int indexSprite = Mathf.FloorToInt(newHealth);
         float decimalPart = newHealth % 1f;
 
-        if (indexSprite < _healthSprites.Length)
+        if (indexSprite >= 0 && indexSprite < _healthSprites.Length)
         {
             _healthSprites[indexSprite].ChangeSprite(decimalPart);
         }

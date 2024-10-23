@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ebdbd5b9470f344f90aff229974ee07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 2
   _waitingDuration: 10
   _floatingPointMovement: 0.1
   _heightPeriodMovement: 0.25
