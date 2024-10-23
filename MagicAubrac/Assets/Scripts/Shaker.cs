@@ -16,10 +16,10 @@ public class Shaker : MonoBehaviour
     [SerializeField] GameObject[] _ui;
 
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipPour;
+    [SerializeField] string clipPour;
 
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipEmpty;
+    [SerializeField] string clipEmpty;
     
 
     private bool[] _shakenAtStep = new bool[5];
@@ -41,7 +41,7 @@ public class Shaker : MonoBehaviour
 
     public void AddToShaker(IngredientType ingredient)
     {
-        SFXsManager.Instance?.PlaySound(clipPour.name);
+        SFXsManager.Instance?.PlaySound(clipPour);
         if (_currentLayerCocktail < 5)
         {
             _cocktail[_currentLayerCocktail] = ingredient;
@@ -56,7 +56,7 @@ public class Shaker : MonoBehaviour
 
     public void EmptyShaker()
     {
-        SFXsManager.Instance?.PlaySound(clipEmpty.name);
+        SFXsManager.Instance?.PlaySound(clipEmpty);
         for (int i = 0; i < _cocktail.Length; i++)
         {
             _cocktail[i] = IngredientType.INVALID;

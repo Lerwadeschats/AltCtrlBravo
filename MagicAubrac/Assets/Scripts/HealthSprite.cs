@@ -13,8 +13,8 @@ public class HealthSprite : MonoBehaviour
     [SerializeField] float _shakeDuration = 0.2f;
     [SerializeField] float _shakeStrength = 0.4f;
 
-    [SerializeField] AudioClip clipCracks;
-    [SerializeField] AudioClip clipShatter;
+    [SerializeField] string clipCracks;
+    [SerializeField] string clipShatter;
 
     private void Start()
     {
@@ -29,13 +29,13 @@ public class HealthSprite : MonoBehaviour
         if (heartHealth == 0f)
         {
             ChangeSpriteToNoHeart();
-            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=>SFXsManager.Instance.PlaySound(clipCracks.name));
+            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=>SFXsManager.Instance.PlaySound(clipCracks));
 
         }
         else
         {
             ChangeSpriteToMidHeart();
-            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=> SFXsManager.Instance.PlaySound(clipShatter.name));
+            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=> SFXsManager.Instance.PlaySound(clipShatter));
 
         }
 

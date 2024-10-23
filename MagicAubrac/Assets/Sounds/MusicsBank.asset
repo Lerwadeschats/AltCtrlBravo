@@ -27,7 +27,7 @@ MonoBehaviour:
     _introClip: {fileID: 0}
     _hasOutro: 0
     _outroClip: {fileID: 0}
-  - _name: OneGlassLeft
+  - _name: Loop
     _mainClip: {fileID: 8300000, guid: 6762f67a49c386f44b800c20cc70c64e, type: 3}
     _isLooping: 1
     _hasIntro: 0

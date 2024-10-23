@@ -26,13 +26,13 @@ public class InputPlayer : MonoBehaviour
     public event Action OnDrinkTasteOnly;
 
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipStartRune;
+    [SerializeField] string clipStartRune;
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipSendRune;
+    [SerializeField] string clipSendRune;
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipGoodCocktail;
+    [SerializeField] string clipGoodCocktail;
     [Foldout("Audio")]
-    [SerializeField] AudioClip clipBadCocktail;
+    [SerializeField] string clipBadCocktail;
 
     private void Awake()
 
@@ -73,7 +73,7 @@ public class InputPlayer : MonoBehaviour
                 {
                     if (_shaker.CompareRecipe() && _shaker.CompareRunes())
                     {
-                        SFXsManager.Instance.PlaySound(clipGoodCocktail.name);
+                        SFXsManager.Instance.PlaySound(clipGoodCocktail);
                         _shaker.CompletedFull++;
                         OnDrinkSucceeded?.Invoke();
                         _scoreUI.changeScoreP(_shaker.CompletedFull);
@@ -81,7 +81,7 @@ public class InputPlayer : MonoBehaviour
                     }
                     else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
                     {
-                            SFXsManager.Instance.PlaySound(clipBadCocktail.name);
+                            SFXsManager.Instance.PlaySound(clipBadCocktail);
                         _shaker.CompletedCocktail++;
                         OnDrinkTasteOnly?.Invoke();
                         _scoreUI.changeScoreD(_shaker.CompletedCocktail);
@@ -89,7 +89,7 @@ public class InputPlayer : MonoBehaviour
                     }
                     else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
                     {
-                        SFXsManager.Instance.PlaySound(clipBadCocktail.name);
+                        SFXsManager.Instance.PlaySound(clipBadCocktail);
                         _shaker.CompletedRune++;
                         OnDrinkRunesOnly?.Invoke();
                         _scoreUI.changeScoreR(_shaker.CompletedRune);
@@ -97,14 +97,14 @@ public class InputPlayer : MonoBehaviour
                     }
                     else
                     {
-                        SFXsManager.Instance.PlaySound(clipBadCocktail.name);
+                        SFXsManager.Instance.PlaySound(clipBadCocktail);
                         OnDrinkFailed?.Invoke();
                         GameManager.ClientsManager?.CurrentClient.DrinkComplete();
                     }
                 }
                 else
                 {
-                    SFXsManager.Instance.PlaySound(clipSendRune.name);
+                    SFXsManager.Instance.PlaySound(clipSendRune);
                     _tablet.ResetRuneDrawing();
                 }               
             }
@@ -115,7 +115,7 @@ public class InputPlayer : MonoBehaviour
     {
         if (context.started)
         {
-            SFXsManager.Instance.PlaySound(clipStartRune.name);
+            SFXsManager.Instance.PlaySound(clipStartRune);
             _tablet.enabled = true;
             
         }

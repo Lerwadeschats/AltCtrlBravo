@@ -6,8 +6,9 @@ using IIMEngine.Music;
 public class MusicPlayer : MonoBehaviour
 {
 
-    [SerializeField] AudioClip baseMusic;
-    [SerializeField] AudioClip loopMusic;
+    [SerializeField] string baseMusic;
+    [SerializeField] string loopMusic;
+    [SerializeField] AudioClip baseMusicClip;
     MusicsPlaylistManager playlistManager;
     private void Awake()
     {
@@ -20,9 +21,9 @@ public class MusicPlayer : MonoBehaviour
     }
     IEnumerator musicPlay()
     {
-        playlistManager.PlayMusic(baseMusic.name);
-        yield return new WaitForSeconds(baseMusic.length);
-        playlistManager.PlayMusic(loopMusic.name);
+        playlistManager.PlayMusic(baseMusic);
+        yield return new WaitForSeconds(baseMusicClip.length);
+        playlistManager.PlayMusic(loopMusic);
         yield return null;
     }
 }

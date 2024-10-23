@@ -45,5 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cocktail: 0000000000000000000000000000000000000000
-  _runes: 000000000000000000000000
+  _runes: []
   stepsDone: []
+  _shakeDurationMin: 3
+  _ui: []
+  clipPour: PourDrink
+  clipEmpty: EmptyShaker

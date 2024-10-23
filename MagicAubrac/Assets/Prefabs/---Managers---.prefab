@@ -83,6 +83,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68bbab039f0e8d8448b1c47f92bcac57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMusic: Main
+  loopMusic: Loop
+  baseMusicClip: {fileID: 8300000, guid: b8e6f545d112cde4c9bfe45eccbb33eb, type: 3}
 --- !u!1001 &1460402965740784540
 PrefabInstance:
   m_ObjectHideFlags: 0
