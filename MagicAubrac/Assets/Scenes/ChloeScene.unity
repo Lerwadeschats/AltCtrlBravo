@@ -302,6 +302,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4492001493441837125, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _recipes.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 17a2ecfbeb91eea4e837bdca47e3d651, type: 2}
+    - target: {fileID: 4492001493441837125, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _recipes.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 919618bc866a9c24eae0faa639845d50, type: 2}
     - target: {fileID: 4733928902804308621, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_ActionEvents.Array.data[9].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
