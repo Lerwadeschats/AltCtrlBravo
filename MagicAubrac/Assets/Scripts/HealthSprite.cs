@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class HealthSprite : MonoBehaviour
     [SerializeField] Sprite _fullHeartSprite;
     [SerializeField] Sprite _midHeartSprite;
     [SerializeField] Sprite _noHeartSprite;
+    [SerializeField] float _shakeDuration = 0.2f;
+    [SerializeField] float _shakeStrength = 0.4f;
 
     private void Start()
     {
@@ -26,6 +29,7 @@ public class HealthSprite : MonoBehaviour
         {
             ChangeSpriteToMidHeart();
         }
+        _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength);
     }
 
     void ChangeSpriteToNoHeart()

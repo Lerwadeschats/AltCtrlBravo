@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] InputPlayer _inputs;
     [SerializeField] float _health = 3f;
-    [SerializeField] float _healthStep = 0.5f;
     float _currentHealth;
 
     public float CurrentHealth { get => _currentHealth; }
