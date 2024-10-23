@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using IIMEngine.SFX;
 using UnityEngine;
 
 public class HealthSprite : MonoBehaviour
@@ -11,6 +12,9 @@ public class HealthSprite : MonoBehaviour
     [SerializeField] Sprite _noHeartSprite;
     [SerializeField] float _shakeDuration = 0.2f;
     [SerializeField] float _shakeStrength = 0.4f;
+
+    [SerializeField] AudioClip clipCracks;
+    [SerializeField] AudioClip clipShatter;
 
     private void Start()
     {
@@ -25,11 +29,16 @@ public class HealthSprite : MonoBehaviour
         if (heartHealth == 0f)
         {
             ChangeSpriteToNoHeart();
-        } else
+            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=>SFXsManager.Instance.PlaySound(clipCracks.name));
+
+        }
+        else
         {
             ChangeSpriteToMidHeart();
+            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=> SFXsManager.Instance.PlaySound(clipShatter.name));
+
         }
-        _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength);
+
     }
 
     void ChangeSpriteToNoHeart()
