@@ -306,6 +306,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1829849997959244772, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: tile
+      value: 
+      objectReference: {fileID: 3951316787532716805, guid: 55fc6719786c748448a51220624ff733, type: 3}
+    - target: {fileID: 1829849997959244772, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: _uiRunes
+      value: 
+      objectReference: {fileID: 3518405074674849794}
+    - target: {fileID: 1829849997959244772, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -337,6 +345,30 @@ PrefabInstance:
       propertyPath: _ui.Array.data[4]
       value: 
       objectReference: {fileID: 756215589403349094}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 6158914824332275605, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8051877645833047936, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
       propertyPath: _tireusesIngrA.Array.data[0]
       value: 1
@@ -571,6 +603,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4126474259516606840, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
   m_PrefabInstance: {fileID: 1549260906871856351}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3518405074674849794 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2689764226088699101, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+  m_PrefabInstance: {fileID: 1549260906871856351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b5e6424cdede44c8af5b55acf08545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4707837605690732128 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6112947984340939455, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}

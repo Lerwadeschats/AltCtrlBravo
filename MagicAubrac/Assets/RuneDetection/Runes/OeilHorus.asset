@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OeilHorus
   m_EditorClassIdentifier: 
   _runeDetectionMap: {fileID: 2800000, guid: 84f56513f3d8f884fa778bd78e38dc98, type: 3}
-  _runeSprite: {fileID: 21300000, guid: 58288dc2bab5928489c66c5995af0740, type: 3}
+  _runeSprite: {fileID: 21300000, guid: be89df208eff03a4592588070ada9db2, type: 3}
   _name: Oeil d'Horus
   _description: "En translitt\xE9ration de l'\xE9criture hi\xE9roglyphique, irt signifie
     \xAB \u0153il \xBB et w\u1E0F\u021D d\xE9signe soit le verbe signifiant \xAB
@@ -21,4 +21,3 @@ MonoBehaviour:
     commun\xE9ment oudjat, en transcription signifient donc \xAB \u0153il pr\xE9serv\xE9
     \xBB, l'\u0152il d'Horus en l'occurrence."
   _signification: 'Symbole protecteur '
-  _bravo: Bravo

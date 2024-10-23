@@ -89,6 +89,8 @@ public class Shaker : MonoBehaviour
     public void RemoveRune()
     {
         _runes.Clear();
+
+        
     }
     public void Shake(float duration)
     {
@@ -127,8 +129,7 @@ public class Shaker : MonoBehaviour
         Step[] steps = _clients.CurrentClient.Recipe.Steps;
         bool result = true;
         int j = 0;
-        Debug.Log(steps.Length);
-        Debug.Log(stepsDone.Count);
+        
         if (steps.Length != stepsDone.Count)
         {
             return false;
