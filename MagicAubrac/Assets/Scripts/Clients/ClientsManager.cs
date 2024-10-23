@@ -26,7 +26,7 @@ public class ClientsManager : MonoBehaviour
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
     public event Action<Client> OnClientWalkInForeground;
-    public event Action OnClientFailed;
+    public event Action OnClientTookTooLong;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -124,7 +124,7 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
-    public void AddNewClient(bool waitEndlessly = false)
+    public void AddNewClient(bool isTutorial = false)
     {
         if ((ClientsInQueue.Count < _nbClientsShown && ClientsInBackgroundQueue.Count == 0) || 
             ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
@@ -143,11 +143,12 @@ public class ClientsManager : MonoBehaviour
             {
                 newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
             }
-            newClient.OnClientCompleted += OnClientCompleted;
-            newClient.OnDrinkFailed += OnDrinkFailed;
             Recipe recipe = _recipesManager?.GetRandomRecipe();
+            
+            newClient.OnClientCompleted += OnClientCompleted;
+            newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
             newClient.EndPosition = _endPosition;
-            newClient.LoadClient(recipe,waitEndlessly);
+            newClient.LoadClient(recipe,isTutorial);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
@@ -167,17 +168,21 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
-    private void OnDrinkFailed(Client obj)
+    private void OnDrinkTookTooLong(Client obj)
     {
-        OnClientFailed?.Invoke();
+        OnClientTookTooLong?.Invoke();
     }
 
     private void OnClientCompleted(Client client)
     {
         ChangeClient();
+        if (client.IsTutorial)
+        {
+            AddNewClient();
+        }
         UpdatePositionsClients();
         client.OnClientCompleted -= OnClientCompleted;
-        client.OnDrinkFailed -= OnDrinkFailed;
+        client.OnDrinkTookTooLong -= OnDrinkTookTooLong;
     }
 
     //private void Update()

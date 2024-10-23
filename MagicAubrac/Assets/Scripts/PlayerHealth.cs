@@ -7,7 +7,6 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] InputPlayer _inputs;
     [SerializeField] float _health = 3f;
-    [SerializeField] float _healthStep = 0.5f;
     float _currentHealth;
 
     public float CurrentHealth { get => _currentHealth; }
@@ -18,10 +17,15 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         _currentHealth = _health;
-        _inputs.OnDrinkFailed += OnDrinkFailed;
+        _inputs.OnDrinkFailed += OnDrinkFailed; // Wrong Runes and taste 
         _inputs.OnDrinkRunesOnly += OnDrinkRunesOnly; ;
         _inputs.OnDrinkTasteOnly += OnDrinkTasteOnly; ;
     }
+    private void Start()
+    {
+        GameManager.ClientsManager.OnClientTookTooLong += OnDrinkFailed; //Drink took too much time
+    } 
+
 
     private void OnDrinkTasteOnly()
     {
@@ -32,11 +36,6 @@ public class PlayerHealth : MonoBehaviour
     {
         LoseHealth(0.5f);
     }
-
-    private void Start()
-    {
-        GameManager.ClientsManager.OnClientFailed += OnDrinkFailed;
-    } 
 
     private void OnDrinkFailed()
     {

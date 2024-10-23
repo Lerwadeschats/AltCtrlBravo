@@ -17,6 +17,7 @@ public class Client : MonoBehaviour
     private Coroutine _coroutineMovement; // Will be stopped if go is destroyed
     private MenuManager _menuManager;
     private bool _isComplete = false;
+    private bool _isTutorial;
 
     public float RemainingWaitingDuration { 
         get => _remainingWaitingDuration;
@@ -25,11 +26,11 @@ public class Client : MonoBehaviour
     public GameObject EndPosition { get; set; }
     public Recipe Recipe { get; private set; }
     public float WaitingDuration { get => _waitingDuration;}
-
-    private bool _waitEndlessly;
+    public bool IsTutorial { get => _isTutorial; }
 
     public event Action<Client> OnClientCompleted;
-    public event Action<Client> OnDrinkFailed;
+    public event Action<Client> OnDrinkTookTooLong;
+    public event Action<Client> OnDrinkFailed; //Any kind of failure
     public event Action OnPositionReached;
 
     private void Start()
@@ -39,16 +40,16 @@ public class Client : MonoBehaviour
     }
 
     //When client is instantiate in list
-    public void LoadClient(Recipe recipe, bool waitEndlessly = false)
+    public void LoadClient(Recipe recipe, bool isTutorial = false)
     {
         Recipe = recipe;
-        _waitEndlessly = waitEndlessly;
+        _isTutorial = isTutorial;
     }
 
     //When client is visible
     public void ClientStartWaiting()
     {
-        if (!_waitEndlessly)
+        if (!_isTutorial)
         {
             if (_coroutineWait != null)
             {
@@ -75,6 +76,7 @@ public class Client : MonoBehaviour
     public void DrinkTooLateFailed()
     {
         OnDrinkFailed?.Invoke(this);
+        OnDrinkTookTooLong?.Invoke(this);
         DrinkComplete();
     }
 
@@ -88,12 +90,20 @@ public class Client : MonoBehaviour
     {
         // jsp
         Debug.Log("FlopDrink");
+        OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
     public void DrinkTasteOnly()
     {
         // jsp
         Debug.Log("FlopRunes");
+        OnDrinkFailed?.Invoke(this);
+        DrinkComplete();
+    }
+
+    public void DrinkFullyFailed()
+    {
+        OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
 
