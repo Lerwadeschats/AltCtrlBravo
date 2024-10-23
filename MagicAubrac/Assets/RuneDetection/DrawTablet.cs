@@ -13,7 +13,7 @@ public class DrawTablet : MonoBehaviour
     bool _isDrawing;
 
     Vector2 _beginningPos;
-    Vector2 _currentPos;
+    [SerializeField] Vector2 _currentPos;
 
     [SerializeField] List<Vector2> _drawPos = new List<Vector2>();
 
@@ -31,13 +31,15 @@ public class DrawTablet : MonoBehaviour
 
     [SerializeField] GameObject _cursorPrefab;
 
-    GameObject _cursor;
+    CursorTablet _cursor;
+
     //Debug
     [Header("Debug variables")]
-    
-    List<Vector2> _blackCasesPos = new List<Vector2>();
+    [SerializeField] List<Vector2> _blackCasesPos = new List<Vector2>();
     RuneObject rune;
-    GameObject tile;
+    [SerializeField] GameObject tile;
+    List<GameObject> _blackCases = new List<GameObject>();
+
     
     private void Awake()
     {
@@ -50,7 +52,7 @@ public class DrawTablet : MonoBehaviour
     private void OnEnable()
     {
         
-        _cursor = Instantiate(_cursorPrefab, NewPosOnGrid(Pointer.current.position.ReadValue()), Quaternion.identity);
+        _cursor = Instantiate(_cursorPrefab, NewPosOnGrid(Pointer.current.position.ReadValue()), Quaternion.identity).GetComponent<CursorTablet>();
         Cursor.visible = false;
         _inputActions.DrawingMap.Draw.Enable();
 
@@ -58,9 +60,12 @@ public class DrawTablet : MonoBehaviour
         /*rune = _allRunes[Random.Range(0, _allRunes.Count)];
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
+        
         foreach (GridSquare blackCase in GridDetection.GetAllBlackCases(rune._runeDetectionMap, 50))
         {
-            Instantiate(tile, new Vector2(blackCase._posX * squareSizeGrid + originPos.x + squareSizeGrid / 2, blackCase._posY * squareSizeGrid + originPos.y + squareSizeGrid / 2), Quaternion.identity);
+            _blackCasesPos.Add(new Vector2(blackCase._posX, blackCase._posY));
+            _blackCases.Add(Instantiate(tile, new Vector2(blackCase._posX * squareSizeGrid + originPos.x + squareSizeGrid / 2, blackCase._posY * squareSizeGrid + originPos.y + squareSizeGrid / 2), Quaternion.identity));
+            
         }*/
         //
 
@@ -68,12 +73,12 @@ public class DrawTablet : MonoBehaviour
 
     private void OnDisable()
     {
-
-        Destroy(_cursor);
+        Destroy(_cursor.gameObject);
         Cursor.visible = true;
         shaker.RemoveRune();
         _drawnRunes.Clear();
         _inputActions.DrawingMap.Draw.Disable();
+        _uiRunes.ResetRunes();
     }
 
     public void OnDraw(InputAction.CallbackContext context)
@@ -82,6 +87,7 @@ public class DrawTablet : MonoBehaviour
         {
             if (context.started)
             {
+                _cursor.StartParticles();
 /*                _blackCasesPos.Clear();*/
                 _isDrawing = true;
                 _beginningPos = NewPosOnGrid(Pointer.current.position.ReadValue());
@@ -92,6 +98,7 @@ public class DrawTablet : MonoBehaviour
             }
             else if (context.canceled)
             {
+                _cursor.StopParticles();
                 _isDrawing = false;
             }
         }
@@ -121,29 +128,46 @@ public class DrawTablet : MonoBehaviour
     }
     void GetDrawnRune()
     {
+        
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
-        
+        foreach (var blackCase in _blackCases)
+        {
+            DebugIsInSquare(blackCase);
+        }
         foreach (var rune in _allRunes)
         {
             if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
             {
-                
                 if (_drawnRunes.Count < 3)
                 {
-                    
                     shaker.AddToShaker(rune);
                     _drawnRunes.Add(rune);
                     _uiRunes.UpdateUIRunes(_drawnRunes);
                 }
             }
         }
+
+        //Debug
+        /*if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
+        {
+            Debug.Log("Ca marche tsais");
+
+            if (_drawnRunes.Count < 3)
+            {
+
+                shaker.AddToShaker(rune);
+                _drawnRunes.Add(rune);
+                _uiRunes.UpdateUIRunes(_drawnRunes);
+            }
+        }*/
     }
 
     private void Update()
     {
         _currentPos = NewPosOnGrid(Pointer.current.position.ReadValue());
         _cursor.transform.position = _currentPos;
+
         if (_isDrawing)
         {
             if (!_drawPos.Contains(_currentPos))
@@ -151,7 +175,8 @@ public class DrawTablet : MonoBehaviour
                 _drawPos.Add(_currentPos);
             }
             
-            _currentTrail.transform.position = _currentPos;
+            if(_currentTrail != null)
+                _currentTrail.transform.position = _currentPos;
         }
     }
 
@@ -174,6 +199,18 @@ public class DrawTablet : MonoBehaviour
         newPosY += _gridSprite.bounds.min.y;
 
         return new Vector2(newPosX, newPosY);
+    }
+
+    void DebugIsInSquare(GameObject square)
+    {
+        SpriteRenderer sprite = square.GetComponent<SpriteRenderer>();
+        foreach(Vector2 pos in _drawPos)
+        {
+            if(pos.x > square.transform.position.x - sprite.bounds.size.x && pos.x < square.transform.position.x + sprite.bounds.size.x && pos.y > square.transform.position.y - sprite.bounds.size.y && pos.y < square.transform.position.y + sprite.bounds.size.y)
+            {
+                sprite.color = Color.green;
+            }
+        }
     }
 
     private void OnDrawGizmos()

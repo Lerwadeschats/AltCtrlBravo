@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Shen
   m_EditorClassIdentifier: 
   _runeDetectionMap: {fileID: 2800000, guid: 3958eb598ae482644b22d4ab290e0c7a, type: 3}
-  _runeSprite: {fileID: 21300000, guid: e427b8eafd1a7fc4e94084a8d75f78b6, type: 3}
+  _runeSprite: {fileID: 21300000, guid: 1a2e73620f47d5044bd47ed569dbf5e4, type: 3}
   _name: Shen
   _description: "Le shen est un cercle de corde, nou\xE9 pour former un cercle ininterrompu,
     symbolisant la compl\xE9tude, l'infini et servant de protection. Son nom vient
     du mot \xE9gyptien signifiant \"encercler\"."
   _signification: L'infini
-  _bravo: Bravo

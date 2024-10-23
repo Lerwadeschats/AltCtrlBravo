@@ -9,16 +9,24 @@ public class UIRunes : MonoBehaviour
 
     public void UpdateUIRunes(List<RuneObject> runes)
     {
-        for (int i = 0; i < runes.Count; i++)
+        for (int i = 0; i < _uiRunes.Length; i++)
         {
-            if (i <= runes.Count)
+            if (i >= runes.Count)
             {
-                _uiRunes[i].UpdateRuneUI(null);
+                _uiRunes[i].UpdateRuneUI(null); 
             }
             else
             {
                 _uiRunes[i].UpdateRuneUI(runes[i]);
             }
+        }
+    }
+
+    public void ResetRunes()
+    {
+        for (int i = 0; i < _uiRunes.Length; i++)
+        {
+            _uiRunes[i].UpdateRuneUI(null);
         }
     }
 

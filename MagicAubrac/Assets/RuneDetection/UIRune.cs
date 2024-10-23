@@ -9,12 +9,14 @@ public class UIRune : MonoBehaviour
 
     public void UpdateRuneUI(RuneObject rune)
     {
+        
         if(rune == null)
         {
-            _image.sprite = null;
+            _image.enabled = false;
         }
         else
         {
+            _image.enabled = true;
             _image.sprite = rune._runeSprite;
         }
     }

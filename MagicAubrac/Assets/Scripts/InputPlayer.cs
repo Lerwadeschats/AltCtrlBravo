@@ -92,9 +92,7 @@ public class InputPlayer : MonoBehaviour
                 }
                 else
                 {
-
                     _tablet.ValidateRuneDrawing();
-                    
                 }
                 
             }
