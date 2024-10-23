@@ -1,8 +1,10 @@
+using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using IIMEngine.SFX;
 
 public class Shaker : MonoBehaviour
 {
@@ -12,7 +14,13 @@ public class Shaker : MonoBehaviour
     ClientsManager _clients;
     [SerializeField] float _shakeDurationMin = 3;
     [SerializeField] GameObject[] _ui;
-     
+
+    [Foldout("Audio")]
+    [SerializeField] AudioClip clipPour;
+
+    [Foldout("Audio")]
+    [SerializeField] AudioClip clipEmpty;
+    
 
     private bool[] _shakenAtStep = new bool[5];
     int _currentLayerCocktail;
@@ -33,6 +41,7 @@ public class Shaker : MonoBehaviour
 
     public void AddToShaker(IngredientType ingredient)
     {
+        SFXsManager.Instance?.PlaySound(clipPour.name);
         if (_currentLayerCocktail < 5)
         {
             _cocktail[_currentLayerCocktail] = ingredient;
@@ -47,6 +56,7 @@ public class Shaker : MonoBehaviour
 
     public void EmptyShaker()
     {
+        SFXsManager.Instance?.PlaySound(clipEmpty.name);
         for (int i = 0; i < _cocktail.Length; i++)
         {
             _cocktail[i] = IngredientType.INVALID;

@@ -193,7 +193,13 @@ namespace IIMEngine.SFX
             }
             return null;
         }
-
+        public void StopSound(string name)
+        {
+            if (_playingInstancesDict.ContainsKey(name))
+            {
+                _poolInstancesDict[name][0].AudioSource.Stop();
+            }
+        }
         private void _LoadAllAudiosData()
         {
             //AudioClips are not load by default

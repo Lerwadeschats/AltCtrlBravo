@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IIMEngine.SFX;
 
 public class InputJoycon : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class InputJoycon : MonoBehaviour
     private float _timerShake = 0f;
     private float _timerShakeExtension = 0f;
     private Coroutine _coroutineShakeExtension;
+
+    [SerializeField] AudioClip clipShake;
 
     public event Action OnStartShaking;
     public event Action<float> OnStopShaking;
@@ -55,7 +58,9 @@ public class InputJoycon : MonoBehaviour
                         _isInShakeExtension = false;
                     } else
                     {
+                        SFXsManager.Instance?.PlaySound(clipShake.name);
                         _timerShake = 0f;
+
                     }
                 }
             }
@@ -89,6 +94,7 @@ public class InputJoycon : MonoBehaviour
 
     IEnumerator RoutineShakeExtension()
     {
+        SFXsManager.Instance.StopSound(clipShake.name);
         _timerShakeExtension = 0f;
         while (_timerShakeExtension < _shakeExtensionDuration)
         {
