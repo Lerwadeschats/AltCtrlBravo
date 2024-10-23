@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7438f5fa1f09624799737485ccc4adc, type: 3}
   m_Name: PinaColadHathor
   m_EditorClassIdentifier: 
-  Name: 
-  ActivationRunes: []
-  Steps: []
+  Name: Pina ColadHator
+  ActivationRunes:
+  - {fileID: 11400000, guid: 59db035394bebaa4693744d724f16812, type: 2}
+  - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
+  - {fileID: 11400000, guid: f537b45a20f84274489acfc3326aae4f, type: 2}
+  Steps:
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 4
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 3
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 5
+  - StepType: 0
+    ShakeDuration: 3
+    IngredientType: 5
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 4
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 5
   UIRecipeSprite: {fileID: 21300000, guid: 1d8db43d3150f8b4f9c2c6c682746dd9, type: 3}

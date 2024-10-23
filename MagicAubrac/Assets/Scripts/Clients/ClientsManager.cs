@@ -124,7 +124,7 @@ public class ClientsManager : MonoBehaviour
         }
     }
 
-    public void AddNewClient(bool waitEndlessly = false)
+    public void AddNewClient(bool isTutorial = false)
     {
         if ((ClientsInQueue.Count < _nbClientsShown && ClientsInBackgroundQueue.Count == 0) || 
             ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
@@ -143,11 +143,12 @@ public class ClientsManager : MonoBehaviour
             {
                 newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
             }
+            Recipe recipe = _recipesManager?.GetRandomRecipe();
+            
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
-            Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.EndPosition = _endPosition;
-            newClient.LoadClient(recipe,waitEndlessly);
+            newClient.LoadClient(recipe,isTutorial);
             
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
@@ -175,6 +176,10 @@ public class ClientsManager : MonoBehaviour
     private void OnClientCompleted(Client client)
     {
         ChangeClient();
+        if (client.IsTutorial)
+        {
+            AddNewClient();
+        }
         UpdatePositionsClients();
         client.OnClientCompleted -= OnClientCompleted;
         client.OnDrinkTookTooLong -= OnDrinkTookTooLong;

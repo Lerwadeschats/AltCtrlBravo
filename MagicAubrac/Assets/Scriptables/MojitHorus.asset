@@ -12,7 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7438f5fa1f09624799737485ccc4adc, type: 3}
   m_Name: MojitHorus
   m_EditorClassIdentifier: 
-  Name: 
-  ActivationRunes: []
-  Steps: []
+  Name: MojitHorus
+  ActivationRunes:
+  - {fileID: 11400000, guid: cbf9371ed2df60840a71d2785490a78f, type: 2}
+  - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
+  - {fileID: 11400000, guid: 9abae93bae8faf047971e83f7e50d32b, type: 2}
+  Steps:
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 2
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 5
+  - StepType: 1
+    ShakeDuration: 0
+    IngredientType: 1
+  - StepType: 0
+    ShakeDuration: 3
+    IngredientType: 1
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 1
+  - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 1
   UIRecipeSprite: {fileID: 21300000, guid: 9c5008156b3cbbb46a6e8845e9b88f00, type: 3}
