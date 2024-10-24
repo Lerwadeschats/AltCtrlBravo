@@ -15,56 +15,56 @@ MonoBehaviour:
   _datasList:
   - _name: EmptyShaker
     _clip: {fileID: 8300000, guid: b05982634af97d949a9273340df89f2c, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: IncorrectRune
     _clip: {fileID: 8300000, guid: b44870ced9b55be4fb41ca8a76f8859d, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: PourDrink
     _clip: {fileID: 8300000, guid: ada9de89d0d637744aa24abda26391b7, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: CocktailCheckGood
     _clip: {fileID: 8300000, guid: 83a79cd71fcc03848bdc0c0f02905c2f, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: RuneActivate
     _clip: {fileID: 8300000, guid: 7e7769c376cd81b49ba0d945ff2ea9a7, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: RuneCircleActivation
     _clip: {fileID: 8300000, guid: a872f4adbcad2534ca0bfb55161aa624, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: Shaking
     _clip: {fileID: 8300000, guid: 357ba85be8e9dfb4a96c24014a7b6c41, type: 3}
-    _sizeMax: 0
-    _isLooping: 0
+    _sizeMax: 1
+    _isLooping: 1
     _overflowOperation: 0
   - _name: GlassBreaking
     _clip: {fileID: 8300000, guid: e3c8c10144602ee4eba8b929e1084e88, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: GlassCrackling
     _clip: {fileID: 8300000, guid: bad5276a1d1a6df4faa44d6151def103, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: WrongCoktail
     _clip: {fileID: 8300000, guid: f8e15263314d40041b95b4831e8e12b7, type: 3}
-    _sizeMax: 0
+    _sizeMax: 1
     _isLooping: 0
     _overflowOperation: 0
   - _name: TraceRuneInSand
     _clip: {fileID: 8300000, guid: 908406f9f1a54074a892ed98d9f7507d, type: 3}
-    _sizeMax: 0
-    _isLooping: 0
+    _sizeMax: 1
+    _isLooping: 1
     _overflowOperation: 0

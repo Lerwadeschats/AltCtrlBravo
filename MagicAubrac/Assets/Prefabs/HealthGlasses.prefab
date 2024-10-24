@@ -61,6 +61,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1815902358578870714}
     m_Modifications:
     - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipCracks
+      value: GlassCracking
+      objectReference: {fileID: 0}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipShatter
+      value: GlassBreaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
       propertyPath: _noHeartSprite
       value: 
       objectReference: {fileID: 21300000, guid: 11a7f582585c56546bde957ed1b03fce, type: 3}
@@ -150,6 +158,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1815902358578870714}
     m_Modifications:
     - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipCracks
+      value: GlassCracking
+      objectReference: {fileID: 0}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipShatter
+      value: GlassBreaking
+      objectReference: {fileID: 0}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
       propertyPath: _noHeartSprite
       value: 
       objectReference: {fileID: 21300000, guid: 28d97251e3033d3408b92f90bfbc88eb, type: 3}
@@ -238,6 +254,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1815902358578870714}
     m_Modifications:
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipCracks
+      value: GlassCracking
+      objectReference: {fileID: 0}
+    - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
+      propertyPath: clipShatter
+      value: GlassBreaking
+      objectReference: {fileID: 0}
     - target: {fileID: 521058740580665559, guid: 8c45a76b4ba353449b5e94f5edcaaed8, type: 3}
       propertyPath: _noHeartSprite
       value: 
