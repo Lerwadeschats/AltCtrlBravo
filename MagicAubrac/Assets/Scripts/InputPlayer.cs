@@ -123,6 +123,7 @@ public class InputPlayer : MonoBehaviour
         }
         if (context.canceled)
         {
+            SFXsManager.Instance.StopSound(clipStartRune);
             _shaker.RemoveRune();
             _tablet.ResetDrawing();
             _tablet.enabled = false;

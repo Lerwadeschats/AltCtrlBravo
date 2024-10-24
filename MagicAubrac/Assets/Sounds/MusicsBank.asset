@@ -30,7 +30,7 @@ MonoBehaviour:
     _outroClip: {fileID: 0}
     _isPlayedSolo: 0
   - _name: Loop
-    _mainClip: {fileID: 8300000, guid: f8e15263314d40041b95b4831e8e12b7, type: 3}
+    _mainClip: {fileID: 8300000, guid: 6762f67a49c386f44b800c20cc70c64e, type: 3}
     _isLooping: 1
     _hasIntro: 0
     _introClip: {fileID: 0}

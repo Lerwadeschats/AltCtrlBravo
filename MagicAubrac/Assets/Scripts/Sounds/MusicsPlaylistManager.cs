@@ -13,7 +13,7 @@ namespace IIMEngine.Music
         private Dictionary<string, MusicInstance> _musicInstancesDict = new Dictionary<string, MusicInstance>();
         private Dictionary<string, MusicData> _musicDataDict = new Dictionary<string, MusicData>();
 
-        private MusicInstance _currentMusicInstance = null;
+        private List<MusicInstance> _currentMusicInstances;
 
         public bool IsPaused { get; private set; } = false;
         
@@ -22,7 +22,7 @@ namespace IIMEngine.Music
         private void Awake()
         {
             MusicsGlobals.PlaylistManager = this;
-            
+            _currentMusicInstances = new List<MusicInstance>();
             _InitInstancesDict();
             _InitDatasDict();
             _LoadAllAudiosData();
@@ -31,42 +31,46 @@ namespace IIMEngine.Music
         private void Update()
         {
             if (IsPaused) return;
-            if (_currentMusicInstance == null) return;
-            
+            //if (_currentMusicInstance == null) return;
+            if (_currentMusicInstances.Count == 0) return;
             //TODO: Update Current Music Instance
-            
+
             //Check Music Instance State
-            switch (_currentMusicInstance.CurrentState)
+            for (int i = _currentMusicInstances.Count - 1; i >= 0; i--)
             {
-                case MusicInstance.State.Intro:
-                    if (!_currentMusicInstance.AudioSource.isPlaying)
-                    {
-                        _currentMusicInstance.AudioSource.clip = _musicDataDict[_currentMusicInstance.Name].MainClip;
-                        _currentMusicInstance.AudioSource.loop = _musicDataDict[_currentMusicInstance.Name].IsLooping;
-                        _currentMusicInstance.AudioSource.Play();
-                        _currentMusicInstance.CurrentState = MusicInstance.State.Loop;
-                    }
-                    break;
-                case MusicInstance.State.Loop:
-                    //_currentMusicInstance.
-                    if (!_currentMusicInstance.AudioSource.isPlaying &&
-                        !_musicDataDict[_currentMusicInstance.Name].IsLooping &&
-                        _musicDataDict[_currentMusicInstance.Name].HasOutro)
-                    {
-                        _currentMusicInstance.AudioSource.loop = false;
-                        _currentMusicInstance.AudioSource.clip = _musicDataDict[_currentMusicInstance.Name].OutroClip;
-                        _currentMusicInstance.AudioSource.Play();
-                        _currentMusicInstance.CurrentState = MusicInstance.State.Outro;
-                    }
-                    break;
-                case MusicInstance.State.Outro:
-                    if (!_currentMusicInstance.AudioSource.isPlaying)
-                    {
-                        _currentMusicInstance.AudioSource.loop = false;
-                        _currentMusicInstance.AudioSource.Stop();
-                        _currentMusicInstance = null;
-                    }
-                    break;
+                MusicInstance musicInstance = _currentMusicInstances[i];
+                switch (musicInstance.CurrentState)
+                {
+                    case MusicInstance.State.Intro:
+                        if (!musicInstance.AudioSource.isPlaying)
+                        {
+                            musicInstance.AudioSource.clip = _musicDataDict[musicInstance.Name].MainClip;
+                            musicInstance.AudioSource.loop = _musicDataDict[musicInstance.Name].IsLooping;
+                            musicInstance.AudioSource.Play();
+                            musicInstance.CurrentState = MusicInstance.State.Loop;
+                        }
+                        break;
+                    case MusicInstance.State.Loop:
+                        //_currentMusicInstance.
+                        if (!musicInstance.AudioSource.isPlaying &&
+                            !_musicDataDict[musicInstance.Name].IsLooping &&
+                            _musicDataDict[musicInstance.Name].HasOutro)
+                        {
+                            musicInstance.AudioSource.loop = false;
+                            musicInstance.AudioSource.clip = _musicDataDict[musicInstance.Name].OutroClip;
+                            musicInstance.AudioSource.Play();
+                            musicInstance.CurrentState = MusicInstance.State.Outro;
+                        }
+                        break;
+                    case MusicInstance.State.Outro:
+                        if (!musicInstance.AudioSource.isPlaying)
+                        {
+                            musicInstance.AudioSource.loop = false;
+                            musicInstance.AudioSource.Stop();
+                            _currentMusicInstances.Remove(musicInstance);
+                        }
+                        break;
+                }
             }
             //If State is "Intro"
                 //Wait if audio source is playing
@@ -134,49 +138,81 @@ namespace IIMEngine.Music
 
         public void PlayMusic(string name, bool forceReset = false)
         {
+
             //Find Music Instance From _musicInstancesDict
             //(Be careful to check if there is an instance is found)
-            if (_musicInstancesDict[name] != null && _currentMusicInstance != _musicInstancesDict[name])
+            if (_musicInstancesDict.ContainsKey(name) && _musicInstancesDict[name] != null)
             {
-                _currentMusicInstance?.AudioSource.Stop();
-                _currentMusicInstance = _musicInstancesDict[name];
-                _currentMusicInstance.AudioSource.Play();
+                MusicInstance newMusicInstance = _musicInstancesDict[name];
+                newMusicInstance.AudioSource.Play();
+
+                _currentMusicInstances.Add(newMusicInstance);
             }
-            //Do not replay MusicInstance if _currentMusicInstance is musicInstanceFound
-            
             //Stop _currentMusicInstance
-            
+
             //Set _currentMusicInstance with musicInstanceFound
-            
+
             //Play musicInstanceFound
         }
 
         public void PauseMusic()
         {
+            if (_currentMusicInstances.Count == 0) return;
             //Do nothing if there is no _currentMusicInstance
-            if (_currentMusicInstance == null) return;
+            //if (_currentMusicInstance == null) return;
             IsPaused = true;
             //Pause _currentMusicInstance AudioSource
-            _currentMusicInstance.AudioSource.Pause();
+            //_currentMusicInstance.AudioSource.Pause();
+            foreach (var musicInstance in _currentMusicInstances)
+            {
+                musicInstance.AudioSource.Pause();
+            }
         }
 
         public void ResumeMusic()
         {
+            if (_currentMusicInstances.Count == 0) return;
             //Do nothing if there is no _currentMusicInstance
-            if (_currentMusicInstance == null) return;
+            //if (_currentMusicInstance == null) return;
             IsPaused = false;
             //Play _currentMusicInstance AudioSource
-            _currentMusicInstance.AudioSource.Play();
+            //_currentMusicInstance.AudioSource.Play();
+            foreach (var musicInstance in _currentMusicInstances)
+            {
+                musicInstance.AudioSource.Play();
+            }
         }
 
-        public void StopMusic()
+        public void StopMusic(string name)
         {
-            //Do nothing if there is no _currentMusicInstance
-            if (_currentMusicInstance == null) return;
-            //Stop _currentMusicInstance AudioSource
-            _currentMusicInstance.AudioSource.Stop();
-            //Don't forget to remove current reference to _currentMusicInstance
-            _currentMusicInstance = null;
+            ////Do nothing if there is no _currentMusicInstance
+            //if (_currentMusicInstance == null) return;
+            ////Stop _currentMusicInstance AudioSource
+            //_currentMusicInstance.AudioSource.Stop();
+            ////Don't forget to remove current reference to _currentMusicInstance
+            //_currentMusicInstance = null;
+
+            if (_currentMusicInstances.Count == 0) return;
+
+            if (_musicInstancesDict.ContainsKey(name) && _musicInstancesDict[name] != null && _currentMusicInstances.Contains(_musicInstancesDict[name]))
+            {
+                int index = _currentMusicInstances.IndexOf(_musicInstancesDict[name]);
+                if (index >= 0)
+                {
+                    MusicInstance musicInstance = _currentMusicInstances[index];
+                    musicInstance.AudioSource.Stop();
+                    _currentMusicInstances.Remove(musicInstance);
+                }
+            }
+        }
+        public void StopAllMusics() 
+        {
+            if (_currentMusicInstances.Count == 0) return;
+            foreach(var musicInstance in _currentMusicInstances)
+            {
+                musicInstance.AudioSource.Stop();
+            }
+            _currentMusicInstances.Clear();
         }
     }
 }

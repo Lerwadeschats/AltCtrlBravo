@@ -85,6 +85,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMusic: Main
   loopMusic: Loop
+  croudMusic: Ambiance_bar
+  windMusic: Ambiance_vent
   baseMusicClip: {fileID: 8300000, guid: b8e6f545d112cde4c9bfe45eccbb33eb, type: 3}
 --- !u!1001 &1460402965740784540
 PrefabInstance:
