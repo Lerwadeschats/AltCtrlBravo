@@ -81,10 +81,8 @@ public class DrawTablet : MonoBehaviour
     {
         Destroy(_cursor.gameObject);
         Cursor.visible = true;
-        shaker.RemoveRune();
-        _drawnRunes.Clear();
+        ResetRunes();
         _inputActions.DrawingMap.Draw.Disable();
-        _uiRunes.ResetRunes();
     }
 
     public void OnDraw(InputAction.CallbackContext context)
@@ -111,6 +109,13 @@ public class DrawTablet : MonoBehaviour
             }
         }
         
+    }
+
+    public void ResetRunes()
+    {
+        shaker.RemoveRune();
+        _drawnRunes.Clear();
+        _uiRunes.ResetRunes();
     }
 
     public void ValidateRuneDrawing()
