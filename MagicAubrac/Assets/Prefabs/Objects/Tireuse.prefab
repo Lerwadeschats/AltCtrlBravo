@@ -45,4 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tireuses: 000000000000000000000000
+  _tireusesIngrA: 010000000300000005000000
+  _tireusesIngrB: 020000000400000006000000
   _shaker: {fileID: 0}
