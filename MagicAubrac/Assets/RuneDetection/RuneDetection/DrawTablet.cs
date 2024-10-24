@@ -144,10 +144,10 @@ public class DrawTablet : MonoBehaviour
         
         float squareSizeGrid = _gridSprite.bounds.size.x / 8;
         Vector2 originPos = new Vector2(_gridSprite.bounds.min.x, _gridSprite.bounds.min.y);
-        foreach (var blackCase in _blackCases)
+        /*foreach (var blackCase in _blackCases)
         {
             DebugIsInSquare(blackCase);
-        }
+        }*/
         bool isGood = false;
         foreach (var rune in _allRunes)
         {

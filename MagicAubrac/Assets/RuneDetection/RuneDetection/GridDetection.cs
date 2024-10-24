@@ -58,13 +58,13 @@ public static class GridDetection
         {
             for (int i = 0; i < blackCases.Count; i++)
             {
-                GridSquare square = blackCases[i];
-                if (square.DoesContainPoint(point, margin, newSquareSize, originPoint))
+                
+                if (blackCases[i].DoesContainPoint(point, margin, newSquareSize, originPoint))
                 {
                     if (!blackCases[i].isOccupied)
                     {
                         //Debug.Log($"Square occupied {square._posX} {square._posY}");
-                        square.isOccupied = true;
+                        blackCases[i].isOccupied = true;
                     }
                     break;
                 }
@@ -74,7 +74,7 @@ public static class GridDetection
                     if (i == blackCases.Count - 1)
                     {
 
-                        return false;
+                        break;
                     }
                 }
 
