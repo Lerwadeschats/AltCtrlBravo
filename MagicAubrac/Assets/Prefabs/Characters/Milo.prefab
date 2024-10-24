@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 729071555263431501, guid: 9ce3272e97da60f479a1c8366b7913c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8e817e7bcb93c9c4ca3866b3b2a2fa1c, type: 3}
+      objectReference: {fileID: 21300000, guid: de6daf4c3f7bd754db61e2ab5042e365, type: 3}
     - target: {fileID: 729071555263431501, guid: 9ce3272e97da60f479a1c8366b7913c4, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7597178493887830715, guid: 9ce3272e97da60f479a1c8366b7913c4, type: 3}
       propertyPath: m_Name
-      value: CharacterTest1
+      value: Milo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
