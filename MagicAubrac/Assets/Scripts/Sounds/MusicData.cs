@@ -31,5 +31,9 @@ namespace IIMEngine.Music
 
         public bool HasOutro => _hasOutro;
         public AudioClip OutroClip => _outroClip;
+
+        [SerializeField] private bool _isPlayedSolo = false;
+
+        public bool IsPlayedSolo => _isPlayedSolo;
     }
 }

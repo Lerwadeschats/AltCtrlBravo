@@ -42,6 +42,7 @@ namespace IIMEngine.Music
                     if (!_currentMusicInstance.AudioSource.isPlaying)
                     {
                         _currentMusicInstance.AudioSource.clip = _musicDataDict[_currentMusicInstance.Name].MainClip;
+                        _currentMusicInstance.AudioSource.loop = _musicDataDict[_currentMusicInstance.Name].IsLooping;
                         _currentMusicInstance.AudioSource.Play();
                         _currentMusicInstance.CurrentState = MusicInstance.State.Loop;
                     }
@@ -52,6 +53,7 @@ namespace IIMEngine.Music
                         !_musicDataDict[_currentMusicInstance.Name].IsLooping &&
                         _musicDataDict[_currentMusicInstance.Name].HasOutro)
                     {
+                        _currentMusicInstance.AudioSource.loop = false;
                         _currentMusicInstance.AudioSource.clip = _musicDataDict[_currentMusicInstance.Name].OutroClip;
                         _currentMusicInstance.AudioSource.Play();
                         _currentMusicInstance.CurrentState = MusicInstance.State.Outro;
@@ -60,6 +62,7 @@ namespace IIMEngine.Music
                 case MusicInstance.State.Outro:
                     if (!_currentMusicInstance.AudioSource.isPlaying)
                     {
+                        _currentMusicInstance.AudioSource.loop = false;
                         _currentMusicInstance.AudioSource.Stop();
                         _currentMusicInstance = null;
                     }

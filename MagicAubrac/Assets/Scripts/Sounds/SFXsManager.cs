@@ -98,6 +98,7 @@ namespace IIMEngine.SFX
                 {
                     var audioInstance = Instantiate(_audioSourceTemplate, _audioSourceTemplate.transform.parent.transform);
                     audioInstance.clip = sfx.Clip;
+                    audioInstance.loop = sfx.IsLooping;
                     sfxInstances.Add(new SFXInstance() 
                     {  
                         SFXName = sfx.Name,
@@ -196,7 +197,7 @@ namespace IIMEngine.SFX
         }
         public void StopSound(string name)
         {
-            if (_playingInstancesDict.ContainsKey(name))
+            if (_playingInstancesDict.ContainsKey(name) && _poolInstancesDict[name].Count > 0)
             {
                 _poolInstancesDict[name][0].AudioSource.Stop();
             }
