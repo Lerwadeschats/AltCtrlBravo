@@ -1323,6 +1323,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIScore 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2698681156328855936, guid: c88a1546d28e48240bef0da402c4b361, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4209909967522934782, guid: c88a1546d28e48240bef0da402c4b361, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
