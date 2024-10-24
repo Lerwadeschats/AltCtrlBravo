@@ -52,6 +52,7 @@ public static class GridDetection
 
     public static bool IsDrawingInBlackCases(List<Vector2> points, Texture2D texture, float newSquareSize, Vector2 originPoint, float margin = 0.1f)
     {
+        
         List<GridSquare> blackCases = GetAllBlackCases(texture, 50);
         foreach (Vector2 point in points)
         {
@@ -60,17 +61,24 @@ public static class GridDetection
                 GridSquare square = blackCases[i];
                 if (square.DoesContainPoint(point, margin, newSquareSize, originPoint))
                 {
-                    square.isOccupied = true;
+                    if (!blackCases[i].isOccupied)
+                    {
+                        //Debug.Log($"Square occupied {square._posX} {square._posY}");
+                        square.isOccupied = true;
+                    }
                     break;
                 }
                 else
                 {
+                    //Debug.Log(square._posX + " , " + square._posY + " est hors du chemin");
                     if (i == blackCases.Count - 1)
                     {
-                        //Debug.Log(point + " est hors du chemin");
+
                         return false;
                     }
                 }
+
+
             }
             
         }
@@ -109,9 +117,9 @@ public class GridSquare
         float maxX = (_posX + 1/* + margin*/) * newSquareSize + originPoint.x;
         
         float minY = (_posY/* - margin*/) * newSquareSize + originPoint.y;
-        float maxY = ((_posY + 1 /*+ margin*/) * newSquareSize + +originPoint.y);
+        float maxY = ((_posY + 1 /*+ margin*/) * newSquareSize +  originPoint.y);
 
-        //Debug.Log(minX + " < " + point.x + " < " + maxX + " || " + "(" + _posY  + "-" + margin + ") * " + newSquareSize + " + " + originPoint.y + " = " + minY + " < " + point.y + " < " + maxY);
+        
 
         if (point.x > minX && 
             point.x < maxX && 
@@ -120,6 +128,7 @@ public class GridSquare
         {
             return true;
         }
+        //Debug.Log("Cube " + new Vector2(_posX, _posY) + " : \n " + minX + " < " + point.x + " < " + maxX + " \n -------------------------------------------- \n " + minY + " < " + point.y + " < " + maxY);
         return false;
     }
 

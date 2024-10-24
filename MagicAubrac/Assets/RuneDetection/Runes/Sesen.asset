@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Sesen
   m_EditorClassIdentifier: 
   _runeDetectionMap: {fileID: 2800000, guid: fb04ff5fd130ecf4fa274eb4f2004fed, type: 3}
-  _runeSprite: {fileID: 21300000, guid: 2a9fc85339b09ae43b0868c22ca1218b, type: 3}
+  _runeSprite: {fileID: 21300000, guid: 1aa1e254949c267459a8eb8a075f3183, type: 3}
   _name: Sesen
   _description: "Ce symbole remonte au d\xE9but de la p\xE9riode dynastique, mais
     il devint plus populaire \xE0 partir de l'Ancien Empire."
   _signification: La vie
-  _bravo: Bravo
