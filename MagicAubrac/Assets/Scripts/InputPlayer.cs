@@ -102,6 +102,7 @@ public class InputPlayer : MonoBehaviour
                         GameManager.ClientsManager?.CurrentClient.DrinkComplete();
                     }
                     _tablet.ResetRunes();
+                    _tablet.ResetDrawing();
                 }
                 else
                 {
