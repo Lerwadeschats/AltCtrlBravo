@@ -197,9 +197,9 @@ namespace IIMEngine.SFX
         }
         public void StopSound(string name)
         {
-            if (_playingInstancesDict.ContainsKey(name) && _poolInstancesDict[name].Count > 0)
+            if (_playingInstancesDict.ContainsKey(name) && _playingInstancesDict[name].Count > 0)
             {
-                _poolInstancesDict[name][0].AudioSource.Stop();
+                _playingInstancesDict[name][0].AudioSource.Stop();
             }
         }
         private void _LoadAllAudiosData()

@@ -20,7 +20,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnLose()
     {
-        IsInMenu = false;
+        IsInMenu = true;
         _uiMenu?.SetActive(true);
     }
 }

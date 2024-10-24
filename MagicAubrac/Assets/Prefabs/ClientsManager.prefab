@@ -56,7 +56,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _remainingQueuePosition: {fileID: 0}
+  _endPosition: {fileID: 0}
   _nbClientsShown: 3
   _nbClientsMax: 8
-  _startingDurationBetweenClients: 3
+  _startingDurationBetweenClients: 20
   _activateAutoFill: 1

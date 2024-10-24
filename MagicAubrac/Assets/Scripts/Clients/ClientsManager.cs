@@ -103,7 +103,10 @@ public class ClientsManager : MonoBehaviour
         float timer = 0f;
         while (timer < _startingDurationBetweenClients)
         {
-            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+            if (_menuManager != null)
+            {
+                yield return new WaitUntil(() => !_menuManager.IsInMenu);
+            }
             timer += Time.deltaTime;
             yield return null;
         }
