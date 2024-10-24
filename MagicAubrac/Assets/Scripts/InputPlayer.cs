@@ -101,6 +101,7 @@ public class InputPlayer : MonoBehaviour
                         OnDrinkFailed?.Invoke();
                         GameManager.ClientsManager?.CurrentClient.DrinkComplete();
                     }
+                    _tablet.ResetRunes();
                 }
                 else
                 {
