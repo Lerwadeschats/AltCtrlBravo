@@ -139,6 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447062f647a60324cb3c69a664eff3e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _positions: []
   _uiRecipes:
   - {fileID: 1419424931511821540}
   - {fileID: 2218320336878560754}
@@ -786,6 +787,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _uiMenu: {fileID: 1398543759845728992}
+  _shaker: {fileID: 0}
+  _scoreText: {fileID: 2468958436122911143}
 --- !u!1001 &2105912681296795161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -977,6 +980,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3461047133698619906, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
   m_PrefabInstance: {fileID: 2549244252207765730}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2468958436122911143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 81975986790578501, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
+  m_PrefabInstance: {fileID: 2549244252207765730}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6365448377551868343 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8878320785112697173, guid: beeff25c3a338f940b0e0f07ac5db383, type: 3}
