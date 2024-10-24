@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ---GameScene----
       objectReference: {fileID: 0}
+    - target: {fileID: 253772687724099058, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_Name
+      value: ScoreText
+      objectReference: {fileID: 0}
     - target: {fileID: 497846452233354815, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -188,7 +192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: _startingDurationBetweenClients
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 767166151383848838, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_Name
@@ -365,30 +369,6 @@ PrefabInstance:
     - target: {fileID: 7166578965771286976, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrA.Array.data[0]
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrA.Array.data[1]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrA.Array.data[2]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrB.Array.data[0]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrB.Array.data[1]
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7601733893769030157, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _tireusesIngrB.Array.data[2]
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7805585737234409410, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_LocalPosition.x

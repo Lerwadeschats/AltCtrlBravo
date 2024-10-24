@@ -1,3 +1,4 @@
+using IIMEngine.Music;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,11 +12,13 @@ public class UIMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        MusicsGlobals.PlaylistManager.StopAllMusics();
         SceneManager.LoadScene(_mainScene);
     }
 
     public void GoToMenu()
     {
+        MusicsGlobals.PlaylistManager.StopAllMusics();
         SceneManager.LoadScene(_menuScene);
     }
 

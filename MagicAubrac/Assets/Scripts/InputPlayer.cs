@@ -24,6 +24,7 @@ public class InputPlayer : MonoBehaviour
     public event Action OnDrinkFailed;
     public event Action OnDrinkRunesOnly;
     public event Action OnDrinkTasteOnly;
+    public event Action<Recipe> OnDrinkFinished;
 
     [Foldout("Audio")]
     [SerializeField] string clipStartRune;
@@ -71,6 +72,7 @@ public class InputPlayer : MonoBehaviour
             {
                 if (_shaker.IsDrawnRunesFull())
                 {
+                    OnDrinkFinished?.Invoke(GameManager.ClientsManager?.CurrentClient.Recipe);
                     if (_shaker.CompareRecipe() && _shaker.CompareRunes())
                     {
                         SFXsManager.Instance.PlaySound(clipGoodCocktail);
@@ -81,7 +83,7 @@ public class InputPlayer : MonoBehaviour
                     }
                     else if (_shaker.CompareRecipe() && !_shaker.CompareRunes())
                     {
-                            SFXsManager.Instance.PlaySound(clipBadCocktail);
+                        SFXsManager.Instance.PlaySound(clipBadCocktail);
                         _shaker.CompletedCocktail++;
                         OnDrinkTasteOnly?.Invoke();
                         _scoreUI?.changeScoreD(_shaker.CompletedCocktail);
@@ -124,6 +126,7 @@ public class InputPlayer : MonoBehaviour
         }
         if (context.canceled)
         {
+            SFXsManager.Instance.StopSound(clipStartRune);
             _shaker.RemoveRune();
             _tablet.ResetDrawing();
             _tablet.enabled = false;

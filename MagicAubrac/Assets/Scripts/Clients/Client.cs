@@ -65,7 +65,10 @@ public class Client : MonoBehaviour
     {
         while (_remainingWaitingDuration > 0f)
         {
-            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+            if (_menuManager != null)
+            {
+                yield return new WaitUntil(() => !_menuManager.IsInMenu);
+            }
             _remainingWaitingDuration -= Time.deltaTime;
             yield return null;
         }
@@ -129,7 +132,10 @@ public class Client : MonoBehaviour
     {
         while (Mathf.Abs(transform.position.x - destination.x) > _floatingPointMovement)
         {
-            yield return new WaitUntil(() => _menuManager == null || !_menuManager.IsInMenu);
+            if (_menuManager != null)
+            {
+                yield return new WaitUntil(() => !_menuManager.IsInMenu);
+            }
 
             _timerMovement += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * _speed);
