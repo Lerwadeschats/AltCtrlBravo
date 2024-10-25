@@ -322,6 +322,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4701305913749448186}
     - target: {fileID: 5232128793653111721, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
+      propertyPath: _UIshakerGO
+      value: 
+      objectReference: {fileID: 70667234905668809}
+    - target: {fileID: 5232128793653111721, guid: 69e1e8ce12cbac1479702df3b8d58046, type: 3}
       propertyPath: _ui.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -559,6 +563,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+--- !u!1 &70667234905668809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547861614197252118, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+  m_PrefabInstance: {fileID: 1549260906871856351}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &756215589403349094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2305432360033766585, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}

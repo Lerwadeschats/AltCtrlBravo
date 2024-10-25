@@ -58,7 +58,8 @@ public class InputPlayer : MonoBehaviour
     {
         if (_joycon != null)
         {
-            //_joycon.OnStopShaking += OnJoyconStopShaking;
+            _joycon.OnStartShaking += OnStartShaking;
+            _joycon.OnStopShaking += OnStopShaking;
             _joycon.OnShaking += OnJoyconShake;
         }
     }
@@ -228,6 +229,16 @@ public class InputPlayer : MonoBehaviour
     private void OnJoyconShake(float shakeDuration)
     {
         _shaker?.Shake(shakeDuration);
+    }
+
+    private void OnStartShaking()
+    {
+        _shaker?.StartShake();
+    }
+
+    private void OnStopShaking(float duration)
+    {
+        _shaker?.StopShake();
     }
 
     public void OnShake(InputAction.CallbackContext context)

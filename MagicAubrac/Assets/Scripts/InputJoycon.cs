@@ -55,11 +55,10 @@ public class InputJoycon : MonoBehaviour
                             StopCoroutine(_coroutineShakeExtension);
                             _coroutineShakeExtension = null;
                         }
-                        OnStartShaking?.Invoke();
                         _isInShakeExtension = false;
                     } else
                     {
-                        Debug.Log("START");
+                        OnStartShaking?.Invoke();
                         SFXsManager.Instance?.PlaySound(clipShake);
                         _timerShake = 0f;
 

@@ -48,6 +48,10 @@ MonoBehaviour:
   _runes: []
   stepsDone: []
   _shakeDurationMin: 3
+  _UIshakerGO: {fileID: 0}
   _ui: []
   clipPour: PourDrink
   clipEmpty: EmptyShaker
+  _shakeForcePosition: 10
+  _shakeForceRotation: 10
+  _shakeDuration: 0.5
