@@ -21,6 +21,11 @@ public class HealthSpriteSystem : MonoBehaviour
         {
             _healthSprites[indexSprite].ChangeSprite(decimalPart);
         }
+        int nextSprite = indexSprite + 1;
+        if (nextSprite >= 0 && nextSprite < _healthSprites.Length)
+        {
+            _healthSprites[nextSprite].ChangeSprite(0f);
+        }
     }
 
 }
