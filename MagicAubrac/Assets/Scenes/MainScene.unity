@@ -234,6 +234,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9070617971516683271, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 33
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7848005529581243869, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
