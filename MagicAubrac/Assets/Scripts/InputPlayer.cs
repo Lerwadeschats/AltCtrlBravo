@@ -105,6 +105,7 @@ public class InputPlayer : MonoBehaviour
                     }
                     _tablet.ResetRunes();
                     _tablet.ResetDrawing();
+                    _shaker.EmptyShaker();
                 }
                 else
                 {
