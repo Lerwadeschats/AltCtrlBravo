@@ -18,6 +18,13 @@ public class ClientsManager : MonoBehaviour
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
+
+    [Header("Waiting time")]
+    [SerializeField] private float _startWaitingDuration = 180f;
+    [SerializeField] private float _minWaitingDuration = 60f;
+    [SerializeField] private float _waitingDecreasePerClient = 3f;
+    private float _currentWaitingDuration;
+
     private MenuManager _menuManager;
     public List<Client> ClientsInQueue { get; private set; }
     public List<Client> ClientsInBackgroundQueue { get; private set; }
@@ -45,6 +52,7 @@ public class ClientsManager : MonoBehaviour
 
     private void Awake()
     {
+        _currentWaitingDuration = _startWaitingDuration;
         GameManager.ClientsManager = this;
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
@@ -151,8 +159,10 @@ public class ClientsManager : MonoBehaviour
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
             newClient.EndPosition = _endPosition;
-            newClient.LoadClient(recipe,isTutorial);
-            
+            newClient.LoadClient(recipe, _currentWaitingDuration, isTutorial);
+
+            _currentWaitingDuration = Mathf.Max(_currentWaitingDuration - _waitingDecreasePerClient,_minWaitingDuration);
+
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0)
             {

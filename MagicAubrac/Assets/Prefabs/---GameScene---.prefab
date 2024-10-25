@@ -431,7 +431,7 @@ MonoBehaviour:
   _colorTasteOnly: {r: 0.3882353, g: 0.27058825, b: 0.5411765, a: 1}
   _colorRunesOnly: {r: 0.38039216, g: 0.60784316, b: 0.41568628, a: 1}
   _spriteRenderer: {fileID: 2676714235964461735}
-  _imageDisappear: 2
+  _imageDisappear: 1
 --- !u!1 &6303750373837333995
 GameObject:
   m_ObjectHideFlags: 0

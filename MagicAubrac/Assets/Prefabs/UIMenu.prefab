@@ -142,7 +142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cocktails done :'
+  m_text: 'Perfect cocktails :'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 616ba74878bcbe7408bc623122e53e1e, type: 2}
   m_sharedMaterial: {fileID: 4989632323886611487, guid: 616ba74878bcbe7408bc623122e53e1e, type: 2}

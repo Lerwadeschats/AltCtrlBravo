@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7597178493887830715, guid: 9ce3272e97da60f479a1c8366b7913c4, type: 3}
       propertyPath: m_Name
-      value: CharacterTest2
+      value: Toutankhamone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

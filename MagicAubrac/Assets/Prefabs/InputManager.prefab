@@ -194,13 +194,13 @@ MonoBehaviour:
     m_ActionName: DrawingMap/DrinkPour3
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6779144159095017000}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnEmpty
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -257,7 +257,19 @@ MonoBehaviour:
     m_ActionId: 4ca6f9df-4624-4b15-bcce-9377da54aa07
     m_ActionName: DrawingMap/DrinkSelectA3[/Keyboard/t]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2598715183995938732}
+        m_TargetAssemblyTypeName: InputPlayer, Assembly-CSharp
+        m_MethodName: OnShake
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 996a5ae4-7c0f-428b-b119-e565cb4572d8
     m_ActionName: DrawingMap/Shake[/Keyboard/z]
   m_NeverAutoSwitchControlSchemes: 0

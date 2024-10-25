@@ -5,19 +5,24 @@ using UnityEngine;
 public class Client : MonoBehaviour
 {
     [SerializeField] private float _speed = 30f; 
-    [SerializeField] private float _waitingDuration = 10f;
 
     [SerializeField] private float _floatingPointMovement = 0.001f;
     [SerializeField] private float _heightPeriodMovement = 0.2f;
     [SerializeField] private float _widthPeriodMovement = 0.2f;
-    private float _timerMovement = 0f;
-    
+
+    private float _waitingDuration;
     private float _remainingWaitingDuration;
+
     private Coroutine _coroutineWait; // Will be stopped if go is destroyed
     private Coroutine _coroutineMovement; // Will be stopped if go is destroyed
     private MenuManager _menuManager;
     private bool _isComplete = false;
     private bool _isTutorial;
+
+    public float WaitingDuration
+    {
+        get => _waitingDuration;
+    }
 
     public float RemainingWaitingDuration { 
         get => _remainingWaitingDuration;
@@ -25,7 +30,6 @@ public class Client : MonoBehaviour
 
     public GameObject EndPosition { get; set; }
     public Recipe Recipe { get; private set; }
-    public float WaitingDuration { get => _waitingDuration;}
     public bool IsTutorial { get => _isTutorial; }
 
     public event Action<Client> OnClientCompleted;
@@ -40,8 +44,9 @@ public class Client : MonoBehaviour
     }
 
     //When client is instantiate in list
-    public void LoadClient(Recipe recipe, bool isTutorial = false)
+    public void LoadClient(Recipe recipe, float waitingDuration,  bool isTutorial = false)
     {
+        _waitingDuration = waitingDuration;
         Recipe = recipe;
         _isTutorial = isTutorial;
     }
@@ -72,7 +77,7 @@ public class Client : MonoBehaviour
             _remainingWaitingDuration -= Time.deltaTime;
             yield return null;
         }
-        Debug.Log("Wait for too long");
+        //Debug.Log("Wait for too long");
         DrinkTooLateFailed();
     }
 
@@ -86,20 +91,20 @@ public class Client : MonoBehaviour
     public void DrinkSuceeded()
     {
         // + score
-        Debug.Log("Yes");
+        //Debug.Log("Yes");
         DrinkComplete();
     }
     public void DrinkRunesOnly()
     {
         // jsp
-        Debug.Log("FlopDrink");
+        //Debug.Log("FlopDrink");
         OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
     public void DrinkTasteOnly()
     {
         // jsp
-        Debug.Log("FlopRunes");
+        //Debug.Log("FlopRunes");
         OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
@@ -137,7 +142,6 @@ public class Client : MonoBehaviour
                 yield return new WaitUntil(() => !_menuManager.IsInMenu);
             }
 
-            _timerMovement += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * _speed);
 
             yield return null;
