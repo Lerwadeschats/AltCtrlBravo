@@ -94,9 +94,9 @@ public class Shaker : MonoBehaviour
     }
     public void Shake(float duration)
     {
-        Debug.Log("Shakey");
         if (_currentLayerCocktail != 0 && duration >= _shakeDurationMin)
         {
+            Debug.Log("Shakey");
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
             {
@@ -104,21 +104,22 @@ public class Shaker : MonoBehaviour
                 step.StepType = StepType.SHAKE;
                 stepsDone.Add(step);
             }
+            float r = 0;
+            float g = 0;
+            float b = 0;
+            int i;
+            for (i = 0; i < _currentLayerCocktail; i++)
+            {
+                r += _ui[i].GetComponent<ShakerUI>().Image.color.r;
+                g += _ui[i].GetComponent<ShakerUI>().Image.color.g;
+                b += _ui[i].GetComponent<ShakerUI>().Image.color.b;
+            }
+            for (int j = 0; j < _currentLayerCocktail; j++)
+            {
+                _ui[j].GetComponent<ShakerUI>().ChangeColor(new Color(r / i, g / i, b / i));
+            }
         }
-        float r=0;
-        float g=0;
-        float b=0;
-        int i;
-        for (i=0;i  < _currentLayerCocktail;i++)
-        {
-            r += _ui[i].GetComponent<ShakerUI>().Image.color.r;
-            g += _ui[i].GetComponent<ShakerUI>().Image.color.g;
-            b += _ui[i].GetComponent<ShakerUI>().Image.color.b;
-        }
-        for (int j=0; j < _currentLayerCocktail; j++)
-        {
-            _ui[j].GetComponent<ShakerUI>().ChangeColor(new Color(r / i, g / i, b / i));
-        }
+        
     }
 
     public bool CompareRecipe()
