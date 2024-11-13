@@ -176,8 +176,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _startingDurationBetweenClients
+      propertyPath: _minWaitingDuration
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _startWaitingDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _startWithTutorialClient
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _startingDurationBetweenClients
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 756215589403349094, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_IsActive

@@ -1,11 +1,11 @@
 using NaughtyAttributes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using IIMEngine.SFX;
 using DG.Tweening;
+using System.Collections;
 
 public class Shaker : MonoBehaviour
 {
@@ -23,11 +23,6 @@ public class Shaker : MonoBehaviour
     [Foldout("Audio")]
     [SerializeField] string clipEmpty;
 
-    [Foldout("Shake data")]
-    [SerializeField] float _shakeForcePosition = 0.2f;
-    [SerializeField] float _shakeForceRotation = 0.2f;
-    [SerializeField] float _shakeDuration = 1f;
-
     private bool[] _shakenAtStep = new bool[5];
     int _currentLayerCocktail;
     int _completedFull;
@@ -39,13 +34,16 @@ public class Shaker : MonoBehaviour
     public int CompletedCocktail { get => _completedCocktail; set => _completedCocktail = value; }
     public int CompletedRune{ get => _completedRune; set => _completedRune = value; }
 
+    public event Action OnShakeStarted;
+    public event Action OnShakePaused;
+
     private void Start()
     {
-        _sequenceShake = DOTween.Sequence();
-        _sequenceShake.Append(_UIshakerGO.transform.DOShakePosition(_shakeDuration, _shakeForcePosition));
-        _sequenceShake.Join(_UIshakerGO.transform.DOShakeRotation(_shakeDuration, _shakeForceRotation,10,20));
-        _sequenceShake.SetLoops(-1);
-        _sequenceShake.Pause();
+        //_sequenceShake = DOTween.Sequence();
+        //_sequenceShake.Append(_UIshakerGO.transform.DOShakePosition(_shakeDuration, _shakeForcePosition));
+        //_sequenceShake.Join(_UIshakerGO.transform.DOShakeRotation(_shakeDuration, _shakeForceRotation,10,20));
+        //_sequenceShake.SetLoops(-1);
+        //_sequenceShake.Pause();
 
         _currentLayerCocktail = 0;
         _clients = GameManager.ClientsManager;
@@ -137,12 +135,12 @@ public class Shaker : MonoBehaviour
 
     public void StartShake()
     {
-        _sequenceShake.Play();
+        OnShakeStarted?.Invoke();
     }
 
     public void StopShake()
     {
-        _sequenceShake.Pause();
+        OnShakePaused?.Invoke();
     }
 
     public bool CompareRecipe()

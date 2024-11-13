@@ -10,6 +10,9 @@ public class Client : MonoBehaviour
     [SerializeField] private float _heightPeriodMovement = 0.2f;
     [SerializeField] private float _widthPeriodMovement = 0.2f;
 
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private int _orderLayerFinished = 10;
+
     private float _waitingDuration;
     private float _remainingWaitingDuration;
 
@@ -118,6 +121,10 @@ public class Client : MonoBehaviour
     //Use if drink is finished 
     public void DrinkComplete()
     {
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sortingOrder = _orderLayerFinished;
+        }
         OnClientCompleted?.Invoke(this);
         MoveTo(EndPosition == null ? Vector3.zero:EndPosition.transform.position);
         _isComplete = true;
@@ -161,5 +168,13 @@ public class Client : MonoBehaviour
     public string GetDebugString()
     {
         return Recipe?.GetDebugString();
+    }
+
+    internal void UpdateOrder(int index)
+    {
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.sortingOrder = index;
+        }
     }
 }
