@@ -15,7 +15,8 @@ public class Shaker : MonoBehaviour
     ClientsManager _clients;
     [SerializeField] float _shakeDurationMin = 3;
     [SerializeField] GameObject _UIshakerGO;
-    [SerializeField] GameObject[] _ui;
+    [SerializeField] GameObject _ui;
+    [SerializeField] LiquidSpawner _liquidSpawner;
 
     [Foldout("Audio")]
     [SerializeField] string clipPour;
@@ -58,7 +59,8 @@ public class Shaker : MonoBehaviour
         if (_currentLayerCocktail < 5)
         {
             _cocktail[_currentLayerCocktail] = ingredient;
-            _ui[ _currentLayerCocktail].GetComponent<ShakerUI>().Change(ingredient);
+            Color c=_ui.GetComponent<ShakerUI>().GetColor(ingredient);
+            _liquidSpawner.Serve(c);
             Step step = new Step();
             step.StepType = StepType.INGREDIENT;
             step.IngredientType = ingredient;
@@ -78,10 +80,6 @@ public class Shaker : MonoBehaviour
         for (int i = 0; i < _shakenAtStep.Length; i++)
         {
             _shakenAtStep[i] = false;
-        }
-        for (int i = 0; i < _ui.Length; i++)
-        {
-            _ui[i].GetComponent<ShakerUI>().Change(IngredientType.INVALID);
         }
         stepsDone.Clear();
     }
@@ -117,20 +115,13 @@ public class Shaker : MonoBehaviour
                 step.StepType = StepType.SHAKE;
                 stepsDone.Add(step);
             }
-            float r = 0;
-            float g = 0;
-            float b = 0;
-            int i;
-            for (i = 0; i < _currentLayerCocktail; i++)
-            {
-                r += _ui[i].GetComponent<ShakerUI>().Image.color.r;
-                g += _ui[i].GetComponent<ShakerUI>().Image.color.g;
-                b += _ui[i].GetComponent<ShakerUI>().Image.color.b;
-            }
+            List<IngredientType> ingredients = new List<IngredientType>();
             for (int j = 0; j < _currentLayerCocktail; j++)
             {
-                _ui[j].GetComponent<ShakerUI>().ChangeColor(new Color(r / i, g / i, b / i));
+                ingredients.Add(_cocktail[j]);
             }
+            Color c = _ui.GetComponent<ShakerUI>().GetMixColor(ingredients);
+            _liquidSpawner.Mix(c);
         }
         
     }
