@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: SunSet
   m_EditorClassIdentifier: 
   Name: SunSet
-  ActivationRunes:
-  - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
-  - {fileID: 11400000, guid: 443d730dc40b4154991c0ce2292c0dbf, type: 2}
-  - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
+  ActivationRune: {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
   Steps:
   - StepType: 1
     ShakeDuration: 0

@@ -152,7 +152,8 @@ public class DrawTablet : MonoBehaviour
         foreach (var rune in _allRunes)
         {
             if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f))
-            {
+            { 
+                
                 if (_drawnRune == null)
                 {
                     shaker.AddToShaker(rune);

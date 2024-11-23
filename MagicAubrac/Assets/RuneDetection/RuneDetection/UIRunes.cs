@@ -9,14 +9,8 @@ public class UIRunes : MonoBehaviour
 
     public void UpdateUIRunes(RuneObject rune)
     {
-        if (rune = null)
-        {
-            _uiRune.UpdateRuneUI(null);
-        }
-        else
-        {
-            _uiRune.UpdateRuneUI(rune);
-        }
+        print(rune);
+        _uiRune.UpdateRuneUI(rune);
     }
 
     public void ResetRune()
