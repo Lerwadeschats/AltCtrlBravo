@@ -99,7 +99,7 @@ public class InputPlayer : MonoBehaviour
                         _shaker.CompletedCocktail++;
                         OnDrinkTasteOnly?.Invoke();
                         _scoreUI?.changeScoreD(_shaker.CompletedCocktail);
-                        GameManager.ClientsManager?.CurrentClient.DrinkTasteOnly();
+                        currentClient.DrinkTasteOnly();
                     }
                     else if (!_shaker.CompareRecipe() && _shaker.CompareRunes())
                     {
@@ -107,13 +107,13 @@ public class InputPlayer : MonoBehaviour
                         _shaker.CompletedRune++;
                         OnDrinkRunesOnly?.Invoke();
                         _scoreUI?.changeScoreR(_shaker.CompletedRune);
-                        GameManager.ClientsManager?.CurrentClient.DrinkRunesOnly();
+                        currentClient.DrinkRunesOnly();
                     }
                     else
                     {
                         SFXsManager.Instance.PlaySound(clipBadCocktail);
                         OnDrinkFailed?.Invoke();
-                        GameManager.ClientsManager?.CurrentClient.DrinkComplete();
+                        currentClient.DrinkComplete();
                     }
                     _tablet.ResetRunes();
                     _tablet.ResetDrawing();

@@ -120,6 +120,7 @@ public class Client : MonoBehaviour
     //Use if drink is finished 
     public void DrinkComplete()
     {
+        
         if (_spriteRenderer != null)
         {
             _spriteRenderer.sortingOrder = _orderLayerFinished;
@@ -127,6 +128,10 @@ public class Client : MonoBehaviour
         OnClientCompleted?.Invoke(this);
         MoveTo(EndPosition == null ? Vector3.zero:EndPosition.transform.position);
         _isComplete = true;
+        if (_isTutorial)
+        {
+            GameManager.ClientsManager.StartGlobalTimer();
+        }
     }
 
     public void MoveTo(Vector3 destination)

@@ -10,6 +10,7 @@ public class ClientsManager : MonoBehaviour
     private Coroutine _coroutineSpawnClient;
 
     [SerializeField] private RecipesManager _recipesManager;
+    [SerializeField] private GlobalTimer _globalTimer;
     [SerializeField] private GameObject _parentObject;
     [SerializeField] private List<GameObject> _clientsPossible;
     [SerializeField] private List<GameObject> _clientsPositions;
@@ -207,6 +208,11 @@ public class ClientsManager : MonoBehaviour
         client.OnClientCompleted -= OnClientCompleted;
         client.OnDrinkTookTooLong -= OnDrinkTookTooLong;
         client.OnClientStartWaiting -= OnClientStartWaitingDelegate;
+    }
+
+    public void StartGlobalTimer()
+    {
+        _globalTimer.StartTimer();
     }
 
     #region Debug

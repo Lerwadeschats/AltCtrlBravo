@@ -488,6 +488,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2222913757040847502}
     m_Modifications:
+    - target: {fileID: 1150388740173058117, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1150388740173058117, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1396509219909282933, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
       propertyPath: _shaker
       value: 
@@ -608,6 +616,14 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8242072477068740504, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8242072477068740504, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571714650447176991, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -638,6 +654,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1547861614197252118, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
   m_PrefabInstance: {fileID: 1549260906871856351}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &572352466362601895 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1328969942059683192, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+  m_PrefabInstance: {fileID: 1549260906871856351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a16624f2d99f74c9093b73e15d17e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3518405074674849794 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2689764226088699101, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
@@ -686,6 +713,10 @@ PrefabInstance:
       propertyPath: _endPosition
       value: 
       objectReference: {fileID: 8814560021993816352}
+    - target: {fileID: 2512340926353586414, guid: 85f5d2f6ed2fc674aab15ba355b961e6, type: 3}
+      propertyPath: _globalTimer
+      value: 
+      objectReference: {fileID: 572352466362601895}
     - target: {fileID: 2512340926353586414, guid: 85f5d2f6ed2fc674aab15ba355b961e6, type: 3}
       propertyPath: _parentObject
       value: 
