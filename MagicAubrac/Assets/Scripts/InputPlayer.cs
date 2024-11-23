@@ -39,7 +39,8 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] string clipGoodCocktail;
     [Foldout("Audio")]
     [SerializeField] string clipBadCocktail;
-
+    [Foldout("Audio")]
+    [SerializeField] string clipLeverPulled;
     private void Awake()
 
     {
@@ -63,7 +64,9 @@ public class InputPlayer : MonoBehaviour
     {
         if (_joycon != null)
         {
-            _joycon.OnStopShaking += OnJoyconStopShaking;
+            _joycon.OnStartShaking += OnStartShaking;
+            _joycon.OnStopShaking += OnStopShaking;
+            _joycon.OnShaking += OnJoyconShake;
         }
         if (_materialBackgroundTablet != null)
         {
@@ -79,7 +82,7 @@ public class InputPlayer : MonoBehaviour
             
             if (currentClient != null)
             {
-                if (_shaker.IsDrawnRunesFull())
+                if (_shaker.IsDrawnRuneNotNull())
                 {
                     OnDrinkFinished?.Invoke(GameManager.ClientsManager?.CurrentClient.Recipe);
                     if (_shaker.CompareRecipe() && _shaker.CompareRunes())
@@ -146,7 +149,7 @@ public class InputPlayer : MonoBehaviour
         if (context.canceled)
         {
             SFXsManager.Instance.StopSound(clipStartRune);
-            _shaker.RemoveRune();
+            _shaker.DeleteRune();
             _tablet.ResetDrawing();
             _tablet.enabled = false;
             _tablet.gameObject.SetActive(false);
@@ -201,6 +204,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.PlaySound(clipLeverPulled);
             _tireuse.ChangeLiquid(i, true);
         }
         if (context.canceled)
@@ -218,6 +222,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.StopSound(clipLeverPulled);
             _tireuse.ResetLiquid(i);
         }
     }
@@ -238,6 +243,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.PlaySound(clipLeverPulled);
             _tireuse.ChangeLiquid(i, false);           
         }
         if (context.canceled)
@@ -255,6 +261,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.StopSound(clipLeverPulled);
             _tireuse.ResetLiquid(i);
         }
     }
@@ -263,9 +270,19 @@ public class InputPlayer : MonoBehaviour
         _shaker.EmptyShaker();
     }
 
-    private void OnJoyconStopShaking(float shakeDuration)
+    private void OnJoyconShake(float shakeDuration)
     {
         _shaker?.Shake(shakeDuration);
+    }
+
+    private void OnStartShaking()
+    {
+        _shaker?.StartShake();
+    }
+
+    private void OnStopShaking(float duration)
+    {
+        _shaker?.StopShake();
     }
 
     public void OnShake(InputAction.CallbackContext context)

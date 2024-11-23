@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: SufferingBastet
   m_EditorClassIdentifier: 
   Name: Suffering Bastet
-  ActivationRunes:
-  - {fileID: 11400000, guid: 078c464814b92fb4fa67b148e810b8f9, type: 2}
-  - {fileID: 11400000, guid: 9abae93bae8faf047971e83f7e50d32b, type: 2}
-  - {fileID: 11400000, guid: f537b45a20f84274489acfc3326aae4f, type: 2}
+  ActivationRune: {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
   Steps:
   - StepType: 1
     ShakeDuration: 0

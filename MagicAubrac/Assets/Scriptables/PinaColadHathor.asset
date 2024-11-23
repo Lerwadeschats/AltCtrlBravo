@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: PinaColadHathor
   m_EditorClassIdentifier: 
   Name: Pina ColadHator
-  ActivationRunes:
-  - {fileID: 11400000, guid: 59db035394bebaa4693744d724f16812, type: 2}
-  - {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
-  - {fileID: 11400000, guid: f537b45a20f84274489acfc3326aae4f, type: 2}
+  ActivationRune: {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
   Steps:
   - StepType: 1
     ShakeDuration: 0

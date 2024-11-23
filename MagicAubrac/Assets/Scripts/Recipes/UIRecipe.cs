@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,8 @@ using UnityEngine.UI;
 public class UIRecipe : MonoBehaviour
 {
     [SerializeField] Image _image;
+    [SerializeField] float _shakeForcePosition = 1f;
+    [SerializeField] float _shakeForceRotation = 15f;
 
     [SerializeField] Slider _slider;
     [SerializeField] Gradient _gradient;
@@ -12,6 +15,8 @@ public class UIRecipe : MonoBehaviour
 
     private Client _client;
     private Coroutine _coroutineTimer;
+    private bool _hasStartedShaking = false;
+    private float _thresholdStartShaking = 0.2f;
 
     public Client Client {
         get => _client;
@@ -42,13 +47,22 @@ public class UIRecipe : MonoBehaviour
             }
         }
         UpdateSliderValueAndColor(1f);
+        _hasStartedShaking = false;
+        _slider.transform.DOKill();
     }
 
     IEnumerator StartTimerRecipe()
     {
         while (Client.RemainingWaitingDuration > 0f)
         {
-            UpdateSliderValueAndColor(Client.RemainingWaitingDuration / Client.WaitingDuration);
+            float ratio = Client.RemainingWaitingDuration / Client.WaitingDuration;
+            if (!_hasStartedShaking && ratio <= _thresholdStartShaking) 
+            {
+                _hasStartedShaking = true;
+                _slider.transform.DOShakePosition(1f, _shakeForcePosition).SetLoops(-1);
+                _slider.transform.DOShakeRotation(1f, _shakeForceRotation).SetLoops(-1);
+            }
+            UpdateSliderValueAndColor(ratio);
             yield return null;
         }
         UpdateSliderValueAndColor(0f);

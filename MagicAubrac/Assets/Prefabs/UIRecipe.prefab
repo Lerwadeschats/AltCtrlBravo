@@ -478,6 +478,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _image: {fileID: 4832999392250184849}
+  _shakeForcePosition: 2
+  _shakeForceRotation: 3
   _slider: {fileID: 6394895476297241679}
   _gradient:
     serializedVersion: 2

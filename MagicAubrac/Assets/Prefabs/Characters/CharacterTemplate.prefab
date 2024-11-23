@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
-  _waitingDuration: 180
   _floatingPointMovement: 0.1
   _heightPeriodMovement: 0.25
   _widthPeriodMovement: 3
+  _spriteRenderer: {fileID: 729071555263431501}
+  _orderLayerFinished: 10

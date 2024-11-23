@@ -10,7 +10,7 @@ public class Recipe : ScriptableObject
 {
     [Description("Used for debug")]
     public string Name;
-    public RuneObject[] ActivationRunes;
+    public RuneObject ActivationRune;
     public Step[] Steps;
     public Sprite UIRecipeSprite;
     public string GetDebugString()

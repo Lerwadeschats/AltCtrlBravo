@@ -21,6 +21,7 @@ public class InputJoycon : MonoBehaviour
 
     public event Action OnStartShaking;
     public event Action<float> OnStopShaking;
+    public event Action<float> OnShaking;
 
     void Start()
     {
@@ -54,10 +55,10 @@ public class InputJoycon : MonoBehaviour
                             StopCoroutine(_coroutineShakeExtension);
                             _coroutineShakeExtension = null;
                         }
-                        OnStartShaking?.Invoke();
                         _isInShakeExtension = false;
                     } else
                     {
+                        OnStartShaking?.Invoke();
                         SFXsManager.Instance?.PlaySound(clipShake);
                         _timerShake = 0f;
 
@@ -79,6 +80,7 @@ public class InputJoycon : MonoBehaviour
         if (_isShaking || _isInShakeExtension)
         {
             _timerShake += Time.deltaTime;
+            OnShaking?.Invoke(_timerShake);
         }
     }
 
@@ -94,39 +96,50 @@ public class InputJoycon : MonoBehaviour
 
     IEnumerator RoutineShakeExtension()
     {
-        SFXsManager.Instance.StopSound(clipShake);
         _timerShakeExtension = 0f;
         while (_timerShakeExtension < _shakeExtensionDuration)
         {
-            _timerShakeExtension += Time.deltaTime; 
+            _timerShakeExtension += Time.deltaTime;
             yield return null;
         }
+        SFXsManager.Instance.StopSound(clipShake);
         _isInShakeExtension = false;
+        Debug.Log($"FINISH SHAKING {_timerShake}");
         OnStopShaking?.Invoke(_timerShake);
     }
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
+//    private void OnGUI()
+//    {
+//        string debug;
+//        if (_isShaking && !_isInShakeExtension)
+//        {
+//            debug = $"SHAKING {_timerShake}";
+//        }
+//        else if (!_isShaking && _isInShakeExtension)
+//        {
+//            debug = $"SHAKING EXTENSION {_timerShake}";
+//        }
+//        else if (!_isShaking && !_isInShakeExtension)
+//        {
+//            debug = "NOT SHAKING";
+//        }
+//        else
+//        {
+//            debug = "??? ";
+//        }
+//        debug += $" {_gyro}";
+//        GUI.skin.label.fontSize = 30;
+//        GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+//    }
+//#endif
     private void OnGUI()
     {
-        string debug;
+        string debug = string.Empty;
         if (_isShaking && !_isInShakeExtension)
         {
-            debug = $"SHAKING {_timerShake}";
+            debug = $"SHAKING";
         }
-        else if (!_isShaking && _isInShakeExtension)
-        {
-            debug = $"SHAKING EXTENSION {_timerShake}";
-        }
-        else if (!_isShaking && !_isInShakeExtension)
-        {
-            debug = "NOT SHAKING";
-        }
-        else
-        {
-            debug = "??? ";
-        }
-        debug += $" {_gyro}";
         GUI.skin.label.fontSize = 30;
         GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
     }
-#endif
 }

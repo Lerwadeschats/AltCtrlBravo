@@ -1,39 +1,51 @@
 using NaughtyAttributes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using IIMEngine.SFX;
+using DG.Tweening;
+using System.Collections;
 
 public class Shaker : MonoBehaviour
 {
     [SerializeField] private IngredientType[] _cocktail = new IngredientType[5];
-    [SerializeField] private List<RuneObject> _runes = new List<RuneObject>();
+    [SerializeField] private RuneObject _rune;
     [SerializeField] private List<Step> stepsDone = new List<Step>();
     ClientsManager _clients;
     [SerializeField] float _shakeDurationMin = 3;
-    [SerializeField] GameObject[] _ui;
+    [SerializeField] GameObject _UIshakerGO;
+    [SerializeField] GameObject _ui;
+    [SerializeField] LiquidSpawner _liquidSpawner;
 
     [Foldout("Audio")]
     [SerializeField] string clipPour;
 
     [Foldout("Audio")]
     [SerializeField] string clipEmpty;
-    
 
     private bool[] _shakenAtStep = new bool[5];
     int _currentLayerCocktail;
     int _completedFull;
     int _completedCocktail;
     int _completedRune;
+    Sequence _sequenceShake;
 
     public int CompletedFull { get => _completedFull; set => _completedFull = value; }
     public int CompletedCocktail { get => _completedCocktail; set => _completedCocktail = value; }
     public int CompletedRune{ get => _completedRune; set => _completedRune = value; }
 
+    public event Action OnShakeStarted;
+    public event Action OnShakePaused;
+
     private void Start()
     {
+        //_sequenceShake = DOTween.Sequence();
+        //_sequenceShake.Append(_UIshakerGO.transform.DOShakePosition(_shakeDuration, _shakeForcePosition));
+        //_sequenceShake.Join(_UIshakerGO.transform.DOShakeRotation(_shakeDuration, _shakeForceRotation,10,20));
+        //_sequenceShake.SetLoops(-1);
+        //_sequenceShake.Pause();
+
         _currentLayerCocktail = 0;
         _clients = GameManager.ClientsManager;
     }
@@ -45,7 +57,8 @@ public class Shaker : MonoBehaviour
         if (_currentLayerCocktail < 5)
         {
             _cocktail[_currentLayerCocktail] = ingredient;
-            _ui[ _currentLayerCocktail].GetComponent<ShakerUI>().Change(ingredient);
+            Color c=_ui.GetComponent<ShakerUI>().GetColor(ingredient);
+            _liquidSpawner.Serve(c);
             Step step = new Step();
             step.StepType = StepType.INGREDIENT;
             step.IngredientType = ingredient;
@@ -66,37 +79,33 @@ public class Shaker : MonoBehaviour
         {
             _shakenAtStep[i] = false;
         }
-        for (int i = 0; i < _ui.Length; i++)
-        {
-            _ui[i].GetComponent<ShakerUI>().Change(IngredientType.INVALID);
-        }
         stepsDone.Clear();
     }
     public void AddToShaker(RuneObject rune)
     {
-        _runes.Add(rune);
+        _rune = rune;
 
     }
 
-    public bool IsDrawnRunesFull()
+    public bool IsDrawnRuneNotNull()
     {
-        if(_runes.Count == 3)
+        if(_rune != null)
         {
             return true;
         }
         return false;
     }
-    public void RemoveRune()
+    public void DeleteRune()
     {
-        _runes.Clear();
+        _rune = null;
 
         
     }
     public void Shake(float duration)
     {
-        Debug.Log("Shakey");
         if (_currentLayerCocktail != 0 && duration >= _shakeDurationMin)
         {
+            Debug.Log("Shakey");
             _shakenAtStep[_currentLayerCocktail - 1]=true;
             if (stepsDone[stepsDone.Count - 1].StepType != StepType.SHAKE)
             {
@@ -104,21 +113,25 @@ public class Shaker : MonoBehaviour
                 step.StepType = StepType.SHAKE;
                 stepsDone.Add(step);
             }
+            List<IngredientType> ingredients = new List<IngredientType>();
+            for (int j = 0; j < _currentLayerCocktail; j++)
+            {
+                ingredients.Add(_cocktail[j]);
+            }
+            Color c = _ui.GetComponent<ShakerUI>().GetMixColor(ingredients);
+            _liquidSpawner.Mix(c);
         }
-        float r=0;
-        float g=0;
-        float b=0;
-        int i;
-        for (i=0;i  < _currentLayerCocktail;i++)
-        {
-            r += _ui[i].GetComponent<ShakerUI>().Image.color.r;
-            g += _ui[i].GetComponent<ShakerUI>().Image.color.g;
-            b += _ui[i].GetComponent<ShakerUI>().Image.color.b;
-        }
-        for (int j=0; j < _currentLayerCocktail; j++)
-        {
-            _ui[j].GetComponent<ShakerUI>().ChangeColor(new Color(r / i, g / i, b / i));
-        }
+        
+    }
+
+    public void StartShake()
+    {
+        OnShakeStarted?.Invoke();
+    }
+
+    public void StopShake()
+    {
+        OnShakePaused?.Invoke();
     }
 
     public bool CompareRecipe()
@@ -159,17 +172,10 @@ public class Shaker : MonoBehaviour
 
     public bool CompareRunes()
     {
-        RuneObject[] runes = _clients.CurrentClient.Recipe.ActivationRunes;
-        if(_runes.Count < runes.Length)
+        RuneObject runeRecipe = _clients.CurrentClient.Recipe.ActivationRune;
+        if(_rune == null || runeRecipe != _rune)
         {
             return false;
-        }
-        foreach (RuneObject drawRune in _runes)
-        {
-            if (!runes.Contains(drawRune))
-            {
-                return false;
-            }
         }
         return true;
         

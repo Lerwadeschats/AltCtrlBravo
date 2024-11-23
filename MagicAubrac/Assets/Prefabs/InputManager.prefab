@@ -302,6 +302,7 @@ MonoBehaviour:
   clipSendRune: RuneActivate
   clipGoodCocktail: CocktailCheckGood
   clipBadCocktail: WrongCoktail
+  clipLeverPulled: LeverPulled
 --- !u!114 &8562558801245228882
 MonoBehaviour:
   m_ObjectHideFlags: 0

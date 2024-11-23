@@ -5,29 +5,17 @@ using UnityEngine.UI;
 
 public class UIRunes : MonoBehaviour
 {
-    [SerializeField] UIRune[] _uiRunes;
+    [SerializeField] UIRune _uiRune;
 
-    public void UpdateUIRunes(List<RuneObject> runes)
+    public void UpdateUIRunes(RuneObject rune)
     {
-        for (int i = 0; i < _uiRunes.Length; i++)
-        {
-            if (i >= runes.Count)
-            {
-                _uiRunes[i].UpdateRuneUI(null); 
-            }
-            else
-            {
-                _uiRunes[i].UpdateRuneUI(runes[i]);
-            }
-        }
+        print(rune);
+        _uiRune.UpdateRuneUI(rune);
     }
 
-    public void ResetRunes()
+    public void ResetRune()
     {
-        for (int i = 0; i < _uiRunes.Length; i++)
-        {
-            _uiRunes[i].UpdateRuneUI(null);
-        }
+        _uiRune.UpdateRuneUI(null);
     }
 
 }
