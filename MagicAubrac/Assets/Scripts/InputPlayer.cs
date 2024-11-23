@@ -1,11 +1,9 @@
 using NaughtyAttributes;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using IIMEngine.SFX;
-using static Unity.Collections.Unicode;
 
 public class InputPlayer : MonoBehaviour
 {
@@ -18,6 +16,13 @@ public class InputPlayer : MonoBehaviour
     [HorizontalLine]
     [Header("Rune drawing")]
     [SerializeField] DrawTablet _tablet;
+    [SerializeField] Material _materialBackgroundTablet;
+    [SerializeField] float _maxValueMaterial = 5f;
+    [SerializeField] float _speedPowerTransition = 40f;
+    [SerializeField] string _tagVignettePower = "_VignettePower";
+    int _indexVignettePower = 0;
+    Coroutine _routineBackgroundTransition;
+
     ScoreDisplay _scoreUI;
 
     public event Action OnDrinkSucceeded;
@@ -62,6 +67,10 @@ public class InputPlayer : MonoBehaviour
             _joycon.OnStartShaking += OnStartShaking;
             _joycon.OnStopShaking += OnStopShaking;
             _joycon.OnShaking += OnJoyconShake;
+        }
+        if (_materialBackgroundTablet != null)
+        {
+            _indexVignettePower = _materialBackgroundTablet.shader.FindPropertyIndex(_tagVignettePower);
         }
     }
 
@@ -126,7 +135,16 @@ public class InputPlayer : MonoBehaviour
             SFXsManager.Instance.PlaySound(clipStartRune);
             _tablet.gameObject.SetActive(true);
             _tablet.enabled = true;
-            
+
+            //if (_materialBackgroundTablet != null)
+            //{
+            //    if (_routineBackgroundTransition  != null)
+            //    {
+            //        StopCoroutine(_routineBackgroundTransition);
+            //        _routineBackgroundTransition = null;
+            //    }
+            //    _routineBackgroundTransition = StartCoroutine(RoutineChangeMaterialPower(0f));
+            //}
         }
         if (context.canceled)
         {
@@ -135,8 +153,29 @@ public class InputPlayer : MonoBehaviour
             _tablet.ResetDrawing();
             _tablet.enabled = false;
             _tablet.gameObject.SetActive(false);
+            //if (_materialBackgroundTablet != null)
+            //{
+            //    if (_routineBackgroundTransition != null)
+            //    {
+            //        StopCoroutine(_routineBackgroundTransition);
+            //        _routineBackgroundTransition = null;
+            //    }
+            //    _routineBackgroundTransition = StartCoroutine(RoutineChangeMaterialPower(_maxValueMaterial));
+            //}
         }
     }
+
+    IEnumerator RoutineChangeMaterialPower(float endPower)
+    {
+        float currentPower = _materialBackgroundTablet.GetFloat(_tagVignettePower);
+        while (currentPower != endPower)
+        {
+            currentPower = Mathf.Lerp(currentPower, endPower, Time.deltaTime * _speedPowerTransition);
+            _materialBackgroundTablet.SetFloat(_tagVignettePower, currentPower);
+            yield return null; 
+        }
+    }
+
     public void OnPour(InputAction.CallbackContext context)
     {
         if (context.started)

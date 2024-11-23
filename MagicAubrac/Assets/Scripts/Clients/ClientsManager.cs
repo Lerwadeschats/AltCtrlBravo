@@ -33,6 +33,7 @@ public class ClientsManager : MonoBehaviour
 
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
+    public event Action<Client> OnClientStartCommand;
     public event Action<Client> OnClientWalkInForeground;
     public event Action OnClientTookTooLong;
 
@@ -87,7 +88,6 @@ public class ClientsManager : MonoBehaviour
                 ClientsInQueue.Add(clientMovedToForeground);
                 ClientsInBackgroundQueue.RemoveAt(0);
                 OnClientWalkInForeground?.Invoke(clientMovedToForeground);
-                clientMovedToForeground.ClientStartWaiting();
             }
 
             if (ClientsInQueue.Count > 0)
@@ -133,7 +133,8 @@ public class ClientsManager : MonoBehaviour
             for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
             {
                 int index = _initOrder + _nbClientsShown - i;
-                ClientsInQueue[i].UpdateOrder(index);
+                //ClientsInQueue[i].UpdateOrder(index);
+                Debug.Log("MOVE UPDATE");
                 ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
@@ -152,12 +153,6 @@ public class ClientsManager : MonoBehaviour
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
             
-            if (ClientsInQueue.Count < _nbClientsShown &&
-                ClientsInBackgroundQueue.Count == 0 &&
-                ClientsInQueue.Count < _clientsPositions.Count)
-            {
-                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
-            }
             Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
@@ -167,16 +162,20 @@ public class ClientsManager : MonoBehaviour
             _currentWaitingDuration = Mathf.Max(_currentWaitingDuration - _waitingDecreasePerClient,_minWaitingDuration);
 
             if (ClientsInQueue.Count < _nbClientsShown && 
-                ClientsInBackgroundQueue.Count == 0)
+                ClientsInBackgroundQueue.Count == 0 &&
+                 ClientsInQueue.Count < _clientsPositions.Count)
             {
                 if (ClientsInQueue.Count == 0)
                 {
                     CurrentClient = newClient;
                 }
+                Debug.Log("MOVEADD");
+                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
+                
                 ClientsInQueue.Add(newClient);
-                newClient.ClientStartWaiting();
+
                 int index = _initOrder + _nbClientsShown - ClientsInQueue.Count;
-                newClient.UpdateOrder(index);
+                //newClient.UpdateOrder(index);
                 OnClientWalkInForeground?.Invoke(newClient);
             } else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
             {

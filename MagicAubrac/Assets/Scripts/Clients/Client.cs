@@ -21,6 +21,7 @@ public class Client : MonoBehaviour
     private MenuManager _menuManager;
     private bool _isComplete = false;
     private bool _isTutorial;
+    private bool _hasStartedWaiting = false;
 
     public float WaitingDuration
     {
@@ -34,6 +35,7 @@ public class Client : MonoBehaviour
     public GameObject EndPosition { get; set; }
     public Recipe Recipe { get; private set; }
     public bool IsTutorial { get => _isTutorial; }
+    public bool IsWaiting { get => _hasStartedWaiting; }
 
     public event Action<Client> OnClientCompleted;
     public event Action<Client> OnDrinkTookTooLong;
@@ -80,7 +82,6 @@ public class Client : MonoBehaviour
             _remainingWaitingDuration -= Time.deltaTime;
             yield return null;
         }
-        //Debug.Log("Wait for too long");
         DrinkTooLateFailed();
     }
 
@@ -94,20 +95,17 @@ public class Client : MonoBehaviour
     public void DrinkSuceeded()
     {
         // + score
-        //Debug.Log("Yes");
         DrinkComplete();
     }
     public void DrinkRunesOnly()
     {
         // jsp
-        //Debug.Log("FlopDrink");
         OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
     public void DrinkTasteOnly()
     {
         // jsp
-        //Debug.Log("FlopRunes");
         OnDrinkFailed?.Invoke(this);
         DrinkComplete();
     }
@@ -126,6 +124,7 @@ public class Client : MonoBehaviour
             _spriteRenderer.sortingOrder = _orderLayerFinished;
         }
         OnClientCompleted?.Invoke(this);
+        Debug.Log("MOVE UPDATE");
         MoveTo(EndPosition == null ? Vector3.zero:EndPosition.transform.position);
         _isComplete = true;
     }
@@ -150,15 +149,22 @@ public class Client : MonoBehaviour
             }
 
             transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * _speed);
-
+            //Debug.Log($"Distance {Mathf.Abs(transform.position.x - destination.x)}");
             yield return null;
         }
-
+        //Debug.Log("COUCOU");
         OnPositionReached?.Invoke();
     }
 
     private void PositionReached()
     {
+        if (!_hasStartedWaiting)
+        {
+            _hasStartedWaiting = true;
+            //Debug.Log("START WAITING");
+            ClientStartWaiting();
+
+        }
         if (_isComplete)
         {
             Destroy(gameObject);

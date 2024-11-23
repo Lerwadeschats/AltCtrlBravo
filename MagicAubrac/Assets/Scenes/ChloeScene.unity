@@ -189,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 727471495755564014, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: _startingDurationBetweenClients
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 756215589403349094, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_IsActive
@@ -327,6 +327,14 @@ PrefabInstance:
       propertyPath: _timerPulled
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4186512722205447517, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _maxValueMaterial
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186512722205447517, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: _speedPowerTransition
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4371459507747489007, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -395,6 +403,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8122101773321116469, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.09
+      objectReference: {fileID: 0}
     - target: {fileID: 8226104566846078149, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -447,6 +459,7 @@ PrefabInstance:
     - {fileID: 4009786978771095930, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8501877099311915370, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+    - {fileID: 4391650373468850657, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}

@@ -500,6 +500,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5403904254598778220, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
+      propertyPath: _playerHealth
+      value: 
+      objectReference: {fileID: 4701305913749448186}
     - target: {fileID: 6193190413255989088, guid: 4a2813e8e905e21428d5041f20115f4a, type: 3}
       propertyPath: m_Color.a
       value: 0
