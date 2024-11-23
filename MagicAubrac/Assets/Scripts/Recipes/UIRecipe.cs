@@ -21,8 +21,10 @@ public class UIRecipe : MonoBehaviour
     public Client Client {
         get => _client;
         set {
-            _client = value;
-            UpdateUIRecipe();
+            if (_client != value) { 
+                _client = value;
+                UpdateUIRecipe();
+            }
         }
     }
 
@@ -53,6 +55,7 @@ public class UIRecipe : MonoBehaviour
 
     IEnumerator StartTimerRecipe()
     {
+        Debug.Log($"{Client.RemainingWaitingDuration}");
         while (Client.RemainingWaitingDuration > 0f)
         {
             float ratio = Client.RemainingWaitingDuration / Client.WaitingDuration;

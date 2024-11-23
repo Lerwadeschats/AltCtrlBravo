@@ -107,31 +107,33 @@ public class InputJoycon : MonoBehaviour
         Debug.Log($"FINISH SHAKING {_timerShake}");
         OnStopShaking?.Invoke(_timerShake);
     }
-//#if UNITY_EDITOR
-//    private void OnGUI()
-//    {
-//        string debug;
-//        if (_isShaking && !_isInShakeExtension)
-//        {
-//            debug = $"SHAKING {_timerShake}";
-//        }
-//        else if (!_isShaking && _isInShakeExtension)
-//        {
-//            debug = $"SHAKING EXTENSION {_timerShake}";
-//        }
-//        else if (!_isShaking && !_isInShakeExtension)
-//        {
-//            debug = "NOT SHAKING";
-//        }
-//        else
-//        {
-//            debug = "??? ";
-//        }
-//        debug += $" {_gyro}";
-//        GUI.skin.label.fontSize = 30;
-//        GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
-//    }
-//#endif
+    //#if UNITY_EDITOR
+    //    private void OnGUI()
+    //    {
+    //        string debug;
+    //        if (_isShaking && !_isInShakeExtension)
+    //        {
+    //            debug = $"SHAKING {_timerShake}";
+    //        }
+    //        else if (!_isShaking && _isInShakeExtension)
+    //        {
+    //            debug = $"SHAKING EXTENSION {_timerShake}";
+    //        }
+    //        else if (!_isShaking && !_isInShakeExtension)
+    //        {
+    //            debug = "NOT SHAKING";
+    //        }
+    //        else
+    //        {
+    //            debug = "??? ";
+    //        }
+    //        debug += $" {_gyro}";
+    //        GUI.skin.label.fontSize = 30;
+    //        GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
+    //    }
+    //#endif
+
+    #if UNITY_EDITOR
     private void OnGUI()
     {
         string debug = string.Empty;
@@ -142,4 +144,5 @@ public class InputJoycon : MonoBehaviour
         GUI.skin.label.fontSize = 30;
         GUILayout.Label(debug, GUILayout.Width(300), GUILayout.Height(150));
     }
+    #endif
 }

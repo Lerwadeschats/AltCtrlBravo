@@ -33,7 +33,7 @@ public class ClientsManager : MonoBehaviour
 
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
-    public event Action<Client> OnClientStartCommand;
+    public event Action<Client> OnClientStartWaiting;
     public event Action<Client> OnClientWalkInForeground;
     public event Action OnClientTookTooLong;
 
@@ -133,7 +133,7 @@ public class ClientsManager : MonoBehaviour
             for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
             {
                 int index = _initOrder + _nbClientsShown - i;
-                //ClientsInQueue[i].UpdateOrder(index);
+                ClientsInQueue[i].UpdateOrder(index);
                 Debug.Log("MOVE UPDATE");
                 ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
@@ -156,6 +156,7 @@ public class ClientsManager : MonoBehaviour
             Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
+            newClient.OnClientStartWaiting += OnClientStartWaitingDelegate;
             newClient.EndPosition = _endPosition;
             newClient.LoadClient(recipe, _currentWaitingDuration, isTutorial);
 
@@ -169,13 +170,12 @@ public class ClientsManager : MonoBehaviour
                 {
                     CurrentClient = newClient;
                 }
-                Debug.Log("MOVEADD");
                 newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
                 
                 ClientsInQueue.Add(newClient);
 
                 int index = _initOrder + _nbClientsShown - ClientsInQueue.Count;
-                //newClient.UpdateOrder(index);
+                newClient.UpdateOrder(index);
                 OnClientWalkInForeground?.Invoke(newClient);
             } else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
             {
@@ -183,6 +183,11 @@ public class ClientsManager : MonoBehaviour
             }
             OnNewClientInList?.Invoke(newClient);
         }
+    }
+
+    private void OnClientStartWaitingDelegate(Client obj)
+    {
+        OnClientStartWaiting?.Invoke(obj);
     }
 
     private void OnDrinkTookTooLong(Client obj)
@@ -198,8 +203,10 @@ public class ClientsManager : MonoBehaviour
             AddNewClient();
         }
         UpdatePositionsClients();
+
         client.OnClientCompleted -= OnClientCompleted;
         client.OnDrinkTookTooLong -= OnDrinkTookTooLong;
+        client.OnClientStartWaiting -= OnClientStartWaitingDelegate;
     }
 
     #region Debug

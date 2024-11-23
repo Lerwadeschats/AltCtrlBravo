@@ -10,9 +10,21 @@ public class UIRecipes : MonoBehaviour
     private void Start()
     {
         _clientsManager = GameManager.ClientsManager;
-        _clientsManager.OnClientChange += UpdateUIDelegate;
-        _clientsManager.OnClientWalkInForeground += UpdateUIDelegate;
-        UpdateRecipesUI();
+        if (_clientsManager != null)
+        {
+            _clientsManager.OnClientChange += UpdateUIDelegate;
+            _clientsManager.OnClientStartWaiting += UpdateUIDelegate;
+        }
+        InitRecipes();
+    }
+
+    private void OnDestroy()
+    {
+        if ( _clientsManager != null)
+        {
+            _clientsManager.OnClientChange -= UpdateUIDelegate;
+            _clientsManager.OnClientStartWaiting -= UpdateUIDelegate;
+        }
     }
 
     private void UpdateUIDelegate(Client client)
@@ -20,12 +32,27 @@ public class UIRecipes : MonoBehaviour
         UpdateRecipesUI();
     }
 
+    void InitRecipes()
+    {
+        for (int i = 0; i < _uiRecipes.Length; i++)
+        {
+            _uiRecipes[i].gameObject.SetActive(false);
+        }
+    }
+
     void UpdateRecipesUI()
     {
         int nbClientsWaiting = _clientsManager.ClientsInQueue.Count;
+
         for (int i = 0; i < _uiRecipes.Length; i++)
         {
-            if (i < nbClientsWaiting && _clientsManager.ClientsInQueue[i] != null)
+            Client client = null;
+            if (i < nbClientsWaiting)
+            {
+                client = _clientsManager.ClientsInQueue[i];
+            }
+            
+            if (client != null && client.IsWaiting)
             {
                 _uiRecipes[i].gameObject.SetActive(true);
                 _uiRecipes[i].Client = _clientsManager.ClientsInQueue[i];

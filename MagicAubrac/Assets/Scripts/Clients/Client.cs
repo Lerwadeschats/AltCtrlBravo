@@ -41,6 +41,7 @@ public class Client : MonoBehaviour
     public event Action<Client> OnDrinkTookTooLong;
     public event Action<Client> OnDrinkFailed; //Any kind of failure
     public event Action OnPositionReached;
+    public event Action<Client> OnClientStartWaiting;
 
     private void Start()
     {
@@ -124,7 +125,6 @@ public class Client : MonoBehaviour
             _spriteRenderer.sortingOrder = _orderLayerFinished;
         }
         OnClientCompleted?.Invoke(this);
-        Debug.Log("MOVE UPDATE");
         MoveTo(EndPosition == null ? Vector3.zero:EndPosition.transform.position);
         _isComplete = true;
     }
@@ -149,10 +149,9 @@ public class Client : MonoBehaviour
             }
 
             transform.position = Vector3.Lerp(transform.position, destination, Time.deltaTime * _speed);
-            //Debug.Log($"Distance {Mathf.Abs(transform.position.x - destination.x)}");
             yield return null;
         }
-        //Debug.Log("COUCOU");
+
         OnPositionReached?.Invoke();
     }
 
@@ -161,8 +160,8 @@ public class Client : MonoBehaviour
         if (!_hasStartedWaiting)
         {
             _hasStartedWaiting = true;
-            //Debug.Log("START WAITING");
             ClientStartWaiting();
+            OnClientStartWaiting?.Invoke(this);
 
         }
         if (_isComplete)
