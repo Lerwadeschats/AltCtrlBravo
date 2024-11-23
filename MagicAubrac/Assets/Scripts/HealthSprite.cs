@@ -1,12 +1,12 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
 using IIMEngine.SFX;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthSprite : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] Image _image;
     [SerializeField] Sprite _fullHeartSprite;
     [SerializeField] Sprite _midHeartSprite;
     [SerializeField] Sprite _noHeartSprite;
@@ -20,7 +20,10 @@ public class HealthSprite : MonoBehaviour
     {
         if (_fullHeartSprite != null)
         {
-            _spriteRenderer.sprite = _fullHeartSprite;
+            if (_spriteRenderer != null)
+                _spriteRenderer.sprite = _fullHeartSprite;
+            if (_image != null)
+                _image.sprite = _fullHeartSprite;
         }
     }
 
@@ -29,25 +32,36 @@ public class HealthSprite : MonoBehaviour
         if (heartHealth == 0f)
         {
             ChangeSpriteToNoHeart();
-            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=>SFXsManager.Instance.PlaySound(clipCracks));
+            if (_spriteRenderer != null)
+                _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=>SFXsManager.Instance.PlaySound(clipCracks));
+            if (_image != null)
+                _image.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(() => SFXsManager.Instance.PlaySound(clipCracks));
 
         }
         else
         {
             ChangeSpriteToMidHeart();
-            _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=> SFXsManager.Instance.PlaySound(clipShatter));
-
+            if (_spriteRenderer != null)
+                _spriteRenderer.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(()=> SFXsManager.Instance.PlaySound(clipShatter));
+            if (_image != null)
+                _image.gameObject.transform.DOShakePosition(_shakeDuration, _shakeStrength).OnComplete(() => SFXsManager.Instance.PlaySound(clipShatter));
         }
 
     }
 
     void ChangeSpriteToNoHeart()
     {
-        _spriteRenderer.sprite = _noHeartSprite;
+        if (_spriteRenderer != null)
+            _spriteRenderer.sprite = _noHeartSprite;
+        if (_image != null)
+            _image.sprite = _noHeartSprite;
     }
 
     void ChangeSpriteToMidHeart()
     {
-        _spriteRenderer.sprite = _midHeartSprite;
+        if (_spriteRenderer != null)
+            _spriteRenderer.sprite = _midHeartSprite;
+        if (_image != null)
+            _image.sprite = _midHeartSprite;
     }
 }

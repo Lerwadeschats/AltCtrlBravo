@@ -18,6 +18,7 @@ public class ClientsManager : MonoBehaviour
     [SerializeField] private int _nbClientsShown = 3;
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
+    [SerializeField] private int _initOrder = 3;
 
     [Header("Waiting time")]
     [SerializeField] private float _startWaitingDuration = 180f;
@@ -32,11 +33,13 @@ public class ClientsManager : MonoBehaviour
 
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
+    public event Action<Client> OnClientStartCommand;
     public event Action<Client> OnClientWalkInForeground;
     public event Action OnClientTookTooLong;
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
+    [SerializeField] private bool _startWithTutorialClient = true;
 
 
     private void OnValidate()
@@ -56,7 +59,7 @@ public class ClientsManager : MonoBehaviour
         GameManager.ClientsManager = this;
         ClientsInQueue = new List<Client>(_nbClientsShown);
         ClientsInBackgroundQueue = new List<Client>();
-        AddNewClient(true); //For it to be accessible in the start of UIRecipes
+        AddNewClient(_startWithTutorialClient); //For it to be accessible in the start of UIRecipes
     }
 
     void Start()
@@ -85,7 +88,6 @@ public class ClientsManager : MonoBehaviour
                 ClientsInQueue.Add(clientMovedToForeground);
                 ClientsInBackgroundQueue.RemoveAt(0);
                 OnClientWalkInForeground?.Invoke(clientMovedToForeground);
-                clientMovedToForeground.ClientStartWaiting();
             }
 
             if (ClientsInQueue.Count > 0)
@@ -130,6 +132,9 @@ public class ClientsManager : MonoBehaviour
         {
             for (int i = 0; i < ClientsInQueue.Count && i < _nbClientsShown && i < _clientsPositions.Count; i++)
             {
+                int index = _initOrder + _nbClientsShown - i;
+                //ClientsInQueue[i].UpdateOrder(index);
+                Debug.Log("MOVE UPDATE");
                 ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
@@ -147,15 +152,8 @@ public class ClientsManager : MonoBehaviour
 
             GameObject newClientGO = Instantiate(newClientPrefab, position, Quaternion.identity, _parentObject.transform);
             Client newClient = newClientGO.GetComponent<Client>();
-
-            if (ClientsInQueue.Count < _nbClientsShown &&
-                ClientsInBackgroundQueue.Count == 0 &&
-                ClientsInQueue.Count < _clientsPositions.Count)
-            {
-                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
-            }
-            Recipe recipe = _recipesManager?.GetRandomRecipe();
             
+            Recipe recipe = _recipesManager?.GetRandomRecipe();
             newClient.OnClientCompleted += OnClientCompleted;
             newClient.OnDrinkTookTooLong += OnDrinkTookTooLong;
             newClient.EndPosition = _endPosition;
@@ -164,14 +162,20 @@ public class ClientsManager : MonoBehaviour
             _currentWaitingDuration = Mathf.Max(_currentWaitingDuration - _waitingDecreasePerClient,_minWaitingDuration);
 
             if (ClientsInQueue.Count < _nbClientsShown && 
-                ClientsInBackgroundQueue.Count == 0)
+                ClientsInBackgroundQueue.Count == 0 &&
+                 ClientsInQueue.Count < _clientsPositions.Count)
             {
                 if (ClientsInQueue.Count == 0)
                 {
                     CurrentClient = newClient;
                 }
+                Debug.Log("MOVEADD");
+                newClient.MoveTo(_clientsPositions[ClientsInQueue.Count].transform.position);
+                
                 ClientsInQueue.Add(newClient);
-                newClient.ClientStartWaiting();
+
+                int index = _initOrder + _nbClientsShown - ClientsInQueue.Count;
+                //newClient.UpdateOrder(index);
                 OnClientWalkInForeground?.Invoke(newClient);
             } else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
             {
@@ -198,6 +202,7 @@ public class ClientsManager : MonoBehaviour
         client.OnDrinkTookTooLong -= OnDrinkTookTooLong;
     }
 
+    #region Debug
     //private void Update()
     //{
     //    //if(Input.GetKeyDown(KeyCode.V))
@@ -238,4 +243,5 @@ public class ClientsManager : MonoBehaviour
     //    }
     //    GUILayout.Label(guiOutput.ToString());
     //}
+    #endregion
 }

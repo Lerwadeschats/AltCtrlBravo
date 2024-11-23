@@ -294,6 +294,10 @@ MonoBehaviour:
   _timerPulled: 0
   _joycon: {fileID: 3602713124213415418}
   _tablet: {fileID: 0}
+  _materialBackgroundTablet: {fileID: 2100000, guid: 1315fd319d941444b8a3e19910922d41, type: 2}
+  _maxValueMaterial: 5
+  _speedPowerTransition: 10
+  _tagVignettePower: _VignettePower
   clipStartRune: RuneCircleActivation
   clipSendRune: RuneActivate
   clipGoodCocktail: CocktailCheckGood
