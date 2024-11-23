@@ -52,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
             if (_currentHealth <= 0f)
             {
                 OnLose?.Invoke();
+                //???
                 GameManager.LoseWinManager?.Lose();
             }
         }
