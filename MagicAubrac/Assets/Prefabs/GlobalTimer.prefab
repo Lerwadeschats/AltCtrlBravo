@@ -290,7 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a16624f2d99f74c9093b73e15d17e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalTimer: 180
+  _totalTimer: 300
   _topSlider: {fileID: 3490038961810496646}
   _bottomSlider: {fileID: 4306460193207632519}
 --- !u!1 &5949215949318764626

@@ -332,11 +332,11 @@ RectTransform:
   m_Children:
   - {fileID: 5165953161560019043}
   - {fileID: 6912606751774053346}
+  - {fileID: 5909830466068520902}
+  - {fileID: 5249930097280985443}
   - {fileID: 5866570769261192310}
   - {fileID: 6365448377551868343}
   - {fileID: 1936704579558464788}
-  - {fileID: 5909830466068520902}
-  - {fileID: 5249930097280985443}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -142,10 +142,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 572352466362601895, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
-      propertyPath: _totalTimer
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 601298218233039703, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -50
