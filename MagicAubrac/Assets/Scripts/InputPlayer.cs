@@ -34,7 +34,8 @@ public class InputPlayer : MonoBehaviour
     [SerializeField] string clipGoodCocktail;
     [Foldout("Audio")]
     [SerializeField] string clipBadCocktail;
-
+    [Foldout("Audio")]
+    [SerializeField] string clipLeverPulled;
     private void Awake()
 
     {
@@ -164,6 +165,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.PlaySound(clipLeverPulled);
             _tireuse.ChangeLiquid(i, true);
         }
         if (context.canceled)
@@ -181,6 +183,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.StopSound(clipLeverPulled);
             _tireuse.ResetLiquid(i);
         }
     }
@@ -201,6 +204,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.PlaySound(clipLeverPulled);
             _tireuse.ChangeLiquid(i, false);           
         }
         if (context.canceled)
@@ -218,6 +222,7 @@ public class InputPlayer : MonoBehaviour
             {
                 i = 2;
             }
+            SFXsManager.Instance.StopSound(clipLeverPulled);
             _tireuse.ResetLiquid(i);
         }
     }
