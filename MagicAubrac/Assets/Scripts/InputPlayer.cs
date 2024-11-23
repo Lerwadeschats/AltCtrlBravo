@@ -73,7 +73,7 @@ public class InputPlayer : MonoBehaviour
             
             if (currentClient != null)
             {
-                if (_shaker.IsDrawnRunesFull())
+                if (_shaker.IsDrawnRuneNotNull())
                 {
                     OnDrinkFinished?.Invoke(GameManager.ClientsManager?.CurrentClient.Recipe);
                     if (_shaker.CompareRecipe() && _shaker.CompareRunes())
@@ -131,7 +131,7 @@ public class InputPlayer : MonoBehaviour
         if (context.canceled)
         {
             SFXsManager.Instance.StopSound(clipStartRune);
-            _shaker.RemoveRune();
+            _shaker.DeleteRune();
             _tablet.ResetDrawing();
             _tablet.enabled = false;
             _tablet.gameObject.SetActive(false);

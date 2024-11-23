@@ -23,7 +23,7 @@ public class DrawTablet : MonoBehaviour
 
     [SerializeField] List<RuneObject> _allRunes = new List<RuneObject>();
     [SerializeField] UIRunes _uiRunes;
-    public List<RuneObject> _drawnRunes = new List<RuneObject>();
+    public RuneObject _drawnRune;
 
     List<TrailRenderer> _drawingTrail = new List<TrailRenderer>();
     TrailRenderer _currentTrail;
@@ -113,9 +113,9 @@ public class DrawTablet : MonoBehaviour
 
     public void ResetRunes()
     {
-        shaker.RemoveRune();
-        _drawnRunes.Clear();
-        _uiRunes.ResetRunes();
+        shaker.DeleteRune();
+        _drawnRune = null;
+        _uiRunes.ResetRune();
     }
 
     public void ValidateRuneDrawing()
@@ -151,13 +151,13 @@ public class DrawTablet : MonoBehaviour
         bool isGood = false;
         foreach (var rune in _allRunes)
         {
-            if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f) && !_drawnRunes.Contains(rune))
+            if (GridDetection.IsDrawingInBlackCases(_drawPos, rune._runeDetectionMap, squareSizeGrid, originPos, 0.2f))
             {
-                if (_drawnRunes.Count < 3)
+                if (_drawnRune == null)
                 {
                     shaker.AddToShaker(rune);
-                    _drawnRunes.Add(rune);
-                    _uiRunes.UpdateUIRunes(_drawnRunes);
+                    _drawnRune = rune;
+                    _uiRunes.UpdateUIRunes(_drawnRune);
                     isGood = true;
                 }
             }

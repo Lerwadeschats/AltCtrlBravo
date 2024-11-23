@@ -10,7 +10,7 @@ using System.Collections;
 public class Shaker : MonoBehaviour
 {
     [SerializeField] private IngredientType[] _cocktail = new IngredientType[5];
-    [SerializeField] private List<RuneObject> _runes = new List<RuneObject>();
+    [SerializeField] private RuneObject _rune;
     [SerializeField] private List<Step> stepsDone = new List<Step>();
     ClientsManager _clients;
     [SerializeField] float _shakeDurationMin = 3;
@@ -83,21 +83,21 @@ public class Shaker : MonoBehaviour
     }
     public void AddToShaker(RuneObject rune)
     {
-        _runes.Add(rune);
+        _rune = rune;
 
     }
 
-    public bool IsDrawnRunesFull()
+    public bool IsDrawnRuneNotNull()
     {
-        if(_runes.Count == 3)
+        if(_rune != null)
         {
             return true;
         }
         return false;
     }
-    public void RemoveRune()
+    public void DeleteRune()
     {
-        _runes.Clear();
+        _rune = null;
 
         
     }
@@ -172,17 +172,10 @@ public class Shaker : MonoBehaviour
 
     public bool CompareRunes()
     {
-        RuneObject[] runes = _clients.CurrentClient.Recipe.ActivationRunes;
-        if(_runes.Count < runes.Length)
+        RuneObject runeRecipe = _clients.CurrentClient.Recipe.ActivationRune;
+        if(_rune == null || runeRecipe != _rune)
         {
             return false;
-        }
-        foreach (RuneObject drawRune in _runes)
-        {
-            if (!runes.Contains(drawRune))
-            {
-                return false;
-            }
         }
         return true;
         
