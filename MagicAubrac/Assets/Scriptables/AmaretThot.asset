@@ -23,7 +23,7 @@ MonoBehaviour:
     IngredientType: 2
   - StepType: 1
     ShakeDuration: 0
-    IngredientType: 2
+    IngredientType: 1
   - StepType: 1
     ShakeDuration: 3
     IngredientType: 4

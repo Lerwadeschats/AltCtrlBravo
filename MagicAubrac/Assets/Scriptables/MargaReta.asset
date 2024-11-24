@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MargaReta
   m_EditorClassIdentifier: 
   Name: MargaReta
-  ActivationRune: {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
+  ActivationRune: {fileID: 11400000, guid: 59db035394bebaa4693744d724f16812, type: 2}
   Steps:
   - StepType: 1
     ShakeDuration: 0
@@ -26,11 +26,14 @@ MonoBehaviour:
     IngredientType: 0
   - StepType: 1
     ShakeDuration: 3
-    IngredientType: 2
+    IngredientType: 6
   - StepType: 1
     ShakeDuration: 3
     IngredientType: 3
   - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 3
+  - StepType: 0
     ShakeDuration: 3
     IngredientType: 3
   UIRecipeSprite: {fileID: 21300000, guid: 5023ec0eb21e2f344adf8ba6610b1038, type: 3}

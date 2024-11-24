@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PinaColadHathor
   m_EditorClassIdentifier: 
   Name: Pina ColadHator
-  ActivationRune: {fileID: 11400000, guid: 7c3bab3dadfacf0448d4cbdf37479883, type: 2}
+  ActivationRune: {fileID: 11400000, guid: da0d8cb3913e5c645b25c18cd91a8511, type: 2}
   Steps:
   - StepType: 1
     ShakeDuration: 0
@@ -31,6 +31,9 @@ MonoBehaviour:
     ShakeDuration: 3
     IngredientType: 4
   - StepType: 1
+    ShakeDuration: 3
+    IngredientType: 5
+  - StepType: 0
     ShakeDuration: 3
     IngredientType: 5
   UIRecipeSprite: {fileID: 21300000, guid: 1d8db43d3150f8b4f9c2c6c682746dd9, type: 3}
