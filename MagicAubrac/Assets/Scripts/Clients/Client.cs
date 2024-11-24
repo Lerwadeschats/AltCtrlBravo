@@ -80,7 +80,7 @@ public class Client : MonoBehaviour
             {
                 yield return new WaitUntil(() => !_menuManager.IsInMenu);
             }
-            _remainingWaitingDuration -= Time.deltaTime;
+            _remainingWaitingDuration = Mathf.Max(0f,_remainingWaitingDuration - Time.deltaTime);
             yield return null;
         }
         DrinkTooLateFailed();

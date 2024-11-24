@@ -56,6 +56,7 @@ public class UIRecipes : MonoBehaviour
             {
                 _uiRecipes[i].gameObject.SetActive(true);
                 _uiRecipes[i].Client = _clientsManager.ClientsInQueue[i];
+                Debug.Log($"{i} {_uiRecipes[i].Client} {_uiRecipes[i].Client?.RemainingWaitingDuration}");
             }
             else
             {

@@ -135,7 +135,6 @@ public class ClientsManager : MonoBehaviour
             {
                 int index = _initOrder + _nbClientsShown - i;
                 ClientsInQueue[i].UpdateOrder(index);
-                Debug.Log("MOVE UPDATE");
                 ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
