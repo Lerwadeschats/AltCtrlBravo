@@ -20,6 +20,7 @@ public class ClientsManager : MonoBehaviour
     [SerializeField] private int _nbClientsMax = 8;
     [SerializeField] private float _startingDurationBetweenClients = 1f; //Currently only duration
     [SerializeField] private int _initOrder = 3;
+    [SerializeField] private Vector3 _offsetClientInQueue = Vector3.right;
 
     [Header("Waiting time")]
     [SerializeField] private float _startWaitingDuration = 180f;
@@ -28,15 +29,18 @@ public class ClientsManager : MonoBehaviour
     private float _currentWaitingDuration;
 
     private MenuManager _menuManager;
+
     public List<Client> ClientsInQueue { get; private set; }
     public List<Client> ClientsInBackgroundQueue { get; private set; }
     public Client CurrentClient { get; private set; }
 
+    #region Events
     public event Action<Client> OnNewClientInList;
     public event Action<Client> OnClientChange;
     public event Action<Client> OnClientStartWaiting;
     public event Action<Client> OnClientWalkInForeground;
     public event Action OnClientTookTooLong;
+    #endregion
 
     [Header("Debug")]
     [SerializeField] private bool _activateAutoFill = true;
@@ -138,6 +142,14 @@ public class ClientsManager : MonoBehaviour
                 ClientsInQueue[i].MoveTo(_clientsPositions[i].transform.position);
             }
         }
+        if (ClientsInBackgroundQueue != null)
+        {
+            for (int i = 0; i < ClientsInBackgroundQueue.Count; i++)
+            {
+                ClientsInBackgroundQueue[i].transform.position = _remainingQueuePosition.transform.position + i * _offsetClientInQueue;
+            }
+
+        }
     }
 
     public void AddNewClient(bool isTutorial = false)
@@ -162,6 +174,7 @@ public class ClientsManager : MonoBehaviour
 
             _currentWaitingDuration = Mathf.Max(_currentWaitingDuration - _waitingDecreasePerClient,_minWaitingDuration);
 
+            //Add client in visible que
             if (ClientsInQueue.Count < _nbClientsShown && 
                 ClientsInBackgroundQueue.Count == 0 &&
                  ClientsInQueue.Count < _clientsPositions.Count)
@@ -177,10 +190,15 @@ public class ClientsManager : MonoBehaviour
                 int index = _initOrder + _nbClientsShown - ClientsInQueue.Count;
                 newClient.UpdateOrder(index);
                 OnClientWalkInForeground?.Invoke(newClient);
-            } else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
+
+            //Add client in background queue
+            }
+            else if (ClientsInBackgroundQueue.Count < (_nbClientsMax - _nbClientsShown))
             {
+                newClient.transform.position += _offsetClientInQueue * ClientsInBackgroundQueue.Count;
                 ClientsInBackgroundQueue.Add(newClient);
             }
+
             OnNewClientInList?.Invoke(newClient);
         }
     }

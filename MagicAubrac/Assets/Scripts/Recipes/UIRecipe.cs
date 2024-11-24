@@ -1,4 +1,5 @@
 using DG.Tweening;
+using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,26 +14,52 @@ public class UIRecipe : MonoBehaviour
     [SerializeField] Gradient _gradient;
     [SerializeField] Image _fillAreaImage;
 
+    [Header("Animation")]
+    [SerializeField] bool _activateAnimation = true;
+    [SerializeField] float _timeSlideTransition = 0.5f;
+    [SerializeField] float _shakeForceSlideTransition = 0.5f;
+    [SerializeField] Vector3 _offsetPosition;
+    Vector3 _originalPosition;
+    Coroutine _coroutineSlide;
+
+
     private Client _client;
     private Coroutine _coroutineTimer;
     private bool _hasStartedShaking = false;
     private float _thresholdStartShaking = 0.2f;
 
+    private void Awake()
+    {
+        _originalPosition = transform.position;
+    }
+
     public Client Client {
         get => _client;
         set {
-            if (_client != value) { 
+            
+            if (value != _client && 
+                (value == null || value.IsWaiting))
+            {
+                Client oldClient = _client;
                 _client = value;
-                UpdateUIRecipe();
+                UpdateUIRecipe(oldClient);
             }
         }
     }
 
-    private void UpdateUIRecipe()
+    private void UpdateUIRecipe(Client oldClient)
     {
         if (Client != null)
         {
             _image.sprite = Client.Recipe.UIRecipeSprite;
+            if ((oldClient == null || !oldClient.IsWaiting) && _activateAnimation)
+            {
+                if (_coroutineSlide == null)
+                {
+                    _coroutineSlide = StartCoroutine(SlideCommand());
+                }
+            } 
+
             if (_coroutineTimer != null)
             {
                 StopCoroutine(_coroutineTimer);
@@ -55,7 +82,6 @@ public class UIRecipe : MonoBehaviour
 
     IEnumerator StartTimerRecipe()
     {
-        Debug.Log($"{Client.RemainingWaitingDuration}");
         while (Client.RemainingWaitingDuration > 0f)
         {
             float ratio = Client.RemainingWaitingDuration / Client.WaitingDuration;
@@ -75,5 +101,22 @@ public class UIRecipe : MonoBehaviour
     {
         _slider.value = value;
         _fillAreaImage.color = _gradient.Evaluate(value);
+    }
+
+    IEnumerator SlideCommand()
+    {
+        float timer = 0f;
+        Vector3 startPosition = _originalPosition + _offsetPosition;
+        Vector3 endPosition = _originalPosition;
+
+        transform.DOShakePosition(1f, _shakeForceSlideTransition).SetLoops(-1);
+        while (timer < _timeSlideTransition)
+        {
+            timer += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPosition, endPosition, timer / _timeSlideTransition);
+            yield return null;
+        }
+        transform.position = endPosition;
+        transform.DOKill();
     }
 }

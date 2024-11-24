@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIRecipes : MonoBehaviour
@@ -13,7 +11,7 @@ public class UIRecipes : MonoBehaviour
         if (_clientsManager != null)
         {
             _clientsManager.OnClientChange += UpdateUIDelegate;
-            _clientsManager.OnClientStartWaiting += UpdateUIDelegate;
+            _clientsManager.OnClientStartWaiting += UpdateUIDelegateStartWaiting;
         }
         InitRecipes();
     }
@@ -23,8 +21,13 @@ public class UIRecipes : MonoBehaviour
         if ( _clientsManager != null)
         {
             _clientsManager.OnClientChange -= UpdateUIDelegate;
-            _clientsManager.OnClientStartWaiting -= UpdateUIDelegate;
+            _clientsManager.OnClientStartWaiting -= UpdateUIDelegateStartWaiting;
         }
+    }
+
+    private void UpdateUIDelegateStartWaiting(Client client)
+    {
+        UpdateRecipesUI();
     }
 
     private void UpdateUIDelegate(Client client)
@@ -43,7 +46,6 @@ public class UIRecipes : MonoBehaviour
     void UpdateRecipesUI()
     {
         int nbClientsWaiting = _clientsManager.ClientsInQueue.Count;
-
         for (int i = 0; i < _uiRecipes.Length; i++)
         {
             Client client = null;
@@ -51,16 +53,15 @@ public class UIRecipes : MonoBehaviour
             {
                 client = _clientsManager.ClientsInQueue[i];
             }
-            
             if (client != null && client.IsWaiting)
             {
                 _uiRecipes[i].gameObject.SetActive(true);
                 _uiRecipes[i].Client = _clientsManager.ClientsInQueue[i];
-                Debug.Log($"{i} {_uiRecipes[i].Client} {_uiRecipes[i].Client?.RemainingWaitingDuration}");
             }
             else
             {
                 _uiRecipes[i].gameObject.SetActive(false);
+                _uiRecipes[i].Client = client;
             }
         }
     }
