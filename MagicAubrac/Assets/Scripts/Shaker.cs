@@ -79,6 +79,7 @@ public class Shaker : MonoBehaviour
         {
             _shakenAtStep[i] = false;
         }
+        _liquidSpawner.KillWater();
         stepsDone.Clear();
     }
     public void AddToShaker(RuneObject rune)

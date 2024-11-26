@@ -10,7 +10,6 @@ public class InputPlayer : MonoBehaviour
     private DrawingAction _inputActions;
     [SerializeField] private Shaker _shaker;
     [SerializeField] private Tireuse _tireuse;
-    [SerializeField] private float _timerPulled;
     [HorizontalLine]
     [SerializeField] private InputJoycon _joycon;
     [HorizontalLine]
@@ -295,12 +294,8 @@ public class InputPlayer : MonoBehaviour
     }
     IEnumerator Pour(InputAction.CallbackContext context)
     {
-        float timer = 0;
         while (!context.canceled)
         {
-            if (timer >= _timerPulled)
-            {
-                timer = 0;
                 int i;
                 if (context.action.name == "DrinkPour1")
                 {
@@ -315,10 +310,10 @@ public class InputPlayer : MonoBehaviour
                     i = 2;
                 }
                 _tireuse.AddLiquidToShaker(i);
-            }
-            timer += Time.deltaTime;
+            
             yield return null;
         }
+        _tireuse.ResetTimer(); 
         yield return null;
     }
 

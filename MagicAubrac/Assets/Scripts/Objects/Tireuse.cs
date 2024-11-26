@@ -8,15 +8,25 @@ public class Tireuse : MonoBehaviour
     [SerializeField]private IngredientType[] _tireusesIngrA = new IngredientType[3];
     [SerializeField]private IngredientType[] _tireusesIngrB = new IngredientType[3];
     [SerializeField] private Shaker _shaker;
+    [SerializeField] private float _timerPulled;
+    private float timer=0;
 
     public void AddLiquidToShaker(int tireuse)
     {
         if (_tireuses[tireuse] != IngredientType.INVALID)
         {
-            _shaker.AddToShaker(_tireuses[tireuse]);
+            timer += Time.deltaTime;
+            if (timer > _timerPulled)
+            {
+                _shaker.AddToShaker(_tireuses[tireuse]);
+                timer = 0;
+            }
         }
     }
-
+    public void ResetTimer()
+    {
+        timer = 0;
+    }
     public void ChangeLiquid(int tireuse,bool isA) 
     {
         if (isA)
