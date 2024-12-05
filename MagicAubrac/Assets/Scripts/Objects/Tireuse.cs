@@ -37,6 +37,7 @@ public class Tireuse : MonoBehaviour
         {
             _tireuses[tireuse] = _tireusesIngrB[tireuse];
         }
+        ResetTimer();
     }
     public void ResetLiquid(int tireuse)
     {

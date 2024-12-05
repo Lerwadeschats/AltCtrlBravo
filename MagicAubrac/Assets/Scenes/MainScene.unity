@@ -242,6 +242,10 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6032590235724515864, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6149846937741066900, guid: 7f6bf94875d90eb40996113a5693f79d, type: 3}
       propertyPath: y_min
       value: -8

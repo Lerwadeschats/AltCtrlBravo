@@ -183,6 +183,8 @@ public class InputPlayer : MonoBehaviour
         }
         if (context.canceled)
         {
+            _tireuse.ResetTimer();
+            Debug.Log("t");
             StopAllCoroutines();
         }
     }
@@ -313,8 +315,8 @@ public class InputPlayer : MonoBehaviour
             
             yield return null;
         }
-        _tireuse.ResetTimer(); 
-        yield return null;
+            yield return null;
+
     }
 
     void EnableDrawing()
