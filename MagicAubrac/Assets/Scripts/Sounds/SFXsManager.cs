@@ -157,7 +157,6 @@ namespace IIMEngine.SFX
                 _poolInstancesDict[name].Remove(instance);
                 if (_playingInstancesDict.ContainsKey(name))
                 {
-                    Debug.Log(name);
                     _playingInstancesDict[name].Add(instance);
                 }
                 return instance;

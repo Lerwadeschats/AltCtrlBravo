@@ -48,4 +48,18 @@ public class LiquidSpawner : MonoBehaviour
         }
         yield return null;
     }
+    public void KillWater()
+    {
+        List<GameObject> particles = new List<GameObject>();
+        int particlesListLength = _particlesRend.Count;
+        for(int i=0;i<_particlesRend.Count;i=0)
+        {
+            particles.Add(_particlesRend[i].gameObject);
+            _particlesRend.Remove(_particlesRend[i]);
+        }
+        foreach(GameObject gO in particles)
+        {
+            Destroy(gO);
+        }
+    }
 }
